@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="security" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:comp/env/jdbc/main</jta-data-source>
+        <class>security.entity.Permission</class>
+        <class>security.entity.User</class>
+        <class>security.entity.Role</class>
+        <class>security.entity.UserRole</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:~/f73bedde2dc342a8970e350d5000e627;DATABASE_TO_UPPER=false;ALIAS_COLUMN_NAME=true;AUTO_SERVER=TRUE"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="com.in9midia.studio.data" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:comp/env/jdbc/neonews</jta-data-source>
+        <class>com.in9midia.studio.data.entity.City</class>
+        <class>com.in9midia.studio.data.entity.NeonewsUser</class>
+        <class>com.in9midia.studio.data.entity.Download</class>
+        <class>com.in9midia.studio.data.entity.Commissioned</class>
+        <class>com.in9midia.studio.data.entity.CampaignTemplate</class>
+        <class>com.in9midia.studio.data.entity.Category</class>
+        <class>com.in9midia.studio.data.entity.TerminalAltRoute</class>
+        <class>com.in9midia.studio.data.entity.ExpressionEx</class>
+        <class>com.in9midia.studio.data.entity.CampaignPerson</class>
+        <class>com.in9midia.studio.data.entity.NwsChannel</class>
+        <class>com.in9midia.studio.data.entity.TvType</class>
+        <class>com.in9midia.studio.data.entity.XtraIntBoolean</class>
+        <class>com.in9midia.studio.data.entity.Company</class>
+        <class>com.in9midia.studio.data.entity.Sga</class>
+        <class>com.in9midia.studio.data.entity.Software</class>
+        <class>com.in9midia.studio.data.entity.ModuleProperty</class>
+        <class>com.in9midia.studio.data.entity.Patrimony</class>
+        <class>com.in9midia.studio.data.entity.UserTerminal</class>
+        <class>com.in9midia.studio.data.entity.Content</class>
+        <class>com.in9midia.studio.data.entity.ExchangesRates</class>
+        <class>com.in9midia.studio.data.entity.HelpName</class>
+        <class>com.in9midia.studio.data.entity.OriginDestination</class>
+        <class>com.in9midia.studio.data.entity.Terminal</class>
+        <class>com.in9midia.studio.data.entity.HelpContent</class>
+        <class>com.in9midia.studio.data.entity.ProfileTv</class>
+        <class>com.in9midia.studio.data.entity.Region</class>
+        <class>com.in9midia.studio.data.entity.XtraBoolean</class>
+        <class>com.in9midia.studio.data.entity.Route</class>
+        <class>com.in9midia.studio.data.entity.Employer</class>
+        <class>com.in9midia.studio.data.entity.SgaPurchased</class>
+        <class>com.in9midia.studio.data.entity.Module</class>
+        <class>com.in9midia.studio.data.entity.Person</class>
+        <class>com.in9midia.studio.data.entity.ForecastingConst</class>
+        <class>com.in9midia.studio.data.entity.ContentTerminal</class>
+        <class>com.in9midia.studio.data.entity.State</class>
+        <class>com.in9midia.studio.data.entity.XtraTerminalStatus</class>
+        <class>com.in9midia.studio.data.entity.CampaignBlock</class>
+        <class>com.in9midia.studio.data.entity.ContentUpdate</class>
+        <class>com.in9midia.studio.data.entity.Resolution</class>
+        <class>com.in9midia.studio.data.entity.TerminalType</class>
+        <class>com.in9midia.studio.data.entity.ExtensionVideo</class>
+        <class>com.in9midia.studio.data.entity.PatrimonyRemote</class>
+        <class>com.in9midia.studio.data.entity.Usuario</class>
+        <class>com.in9midia.studio.data.entity.ChannelTypeCustom</class>
+        <class>com.in9midia.studio.data.entity.File</class>
+        <class>com.in9midia.studio.data.entity.SchedulePredicateTerminal</class>
+        <class>com.in9midia.studio.data.entity.TerminalMovementStop</class>
+        <class>com.in9midia.studio.data.entity.Themes</class>
+        <class>com.in9midia.studio.data.entity.CampaignLog</class>
+        <class>com.in9midia.studio.data.entity.TerminalAudience</class>
+        <class>com.in9midia.studio.data.entity.ChannelType</class>
+        <class>com.in9midia.studio.data.entity.TerminalLog</class>
+        <class>com.in9midia.studio.data.entity.SchedulePredicate</class>
+        <class>com.in9midia.studio.data.entity.ReportCampaignSchedule</class>
+        <class>com.in9midia.studio.data.entity.Schedule</class>
+        <class>com.in9midia.studio.data.entity.ChannelPerson</class>
+        <class>com.in9midia.studio.data.entity.CampaignRegion</class>
+        <class>com.in9midia.studio.data.entity.FileType</class>
+        <class>com.in9midia.studio.data.entity.PatrimonySituation</class>
+        <class>com.in9midia.studio.data.entity.Theme</class>
+        <class>com.in9midia.studio.data.entity.UserCompany</class>
+        <class>com.in9midia.studio.data.entity.ContentAnswerReport</class>
+        <class>com.in9midia.studio.data.entity.Participant</class>
+        <class>com.in9midia.studio.data.entity.ScheduleTime</class>
+        <class>com.in9midia.studio.data.entity.Profile</class>
+        <class>com.in9midia.studio.data.entity.Folder</class>
+        <class>com.in9midia.studio.data.entity.TerminalMovement</class>
+        <class>com.in9midia.studio.data.entity.CommandParam</class>
+        <class>com.in9midia.studio.data.entity.Rss</class>
+        <class>com.in9midia.studio.data.entity.I18n</class>
+        <class>com.in9midia.studio.data.entity.Wrapper</class>
+        <class>com.in9midia.studio.data.entity.Config</class>
+        <class>com.in9midia.studio.data.entity.CampaignProperty</class>
+        <class>com.in9midia.studio.data.entity.Country</class>
+        <class>com.in9midia.studio.data.entity.Command</class>
+        <class>com.in9midia.studio.data.entity.PatrimonyType</class>
+        <class>com.in9midia.studio.data.entity.StockExchanges</class>
+        <class>com.in9midia.studio.data.entity.CampaignCampaignBlock</class>
+        <class>com.in9midia.studio.data.entity.StatusPagseg</class>
+        <class>com.in9midia.studio.data.entity.HelpDocument</class>
+        <class>com.in9midia.studio.data.entity.Temp</class>
+        <class>com.in9midia.studio.data.entity.Log</class>
+        <class>com.in9midia.studio.data.entity.PropertyType</class>
+        <class>com.in9midia.studio.data.entity.RouteStop</class>
+        <class>com.in9midia.studio.data.entity.ContentAnswerQuiz</class>
+        <class>com.in9midia.studio.data.entity.Account</class>
+        <class>com.in9midia.studio.data.entity.CampaignTerminal</class>
+        <class>com.in9midia.studio.data.entity.SchedulePredicateRegion</class>
+        <class>com.in9midia.studio.data.entity.CampaignDate</class>
+        <class>com.in9midia.studio.data.entity.Campaign</class>
+        <class>com.in9midia.studio.data.entity.Address</class>
+        <class>com.in9midia.studio.data.entity.Agency</class>
+        <class>com.in9midia.studio.data.entity.CampaignCategory</class>
+        <class>com.in9midia.studio.data.entity.Channel</class>
+        <class>com.in9midia.studio.data.entity.FileExtension</class>
+        <class>com.in9midia.studio.data.entity.Template</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.1.2:1433;DatabaseName=neonews_develop;SelectMethod=cursor"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value="sqlserver123br"/>
+            <property name="eclipselink.ddl-generation" value="none"/>
+            <property name="multitenancy.tenant-id" value="9A59F97E-08E0-40B7-8408-4FCCEBC78C86"/>
+        </properties>
+    </persistence-unit>
+</persistence>
