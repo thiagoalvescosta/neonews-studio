@@ -66,7 +66,7 @@ public class RegionREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Region post(@Validated @RequestBody final Region entity) throws Exception {
-        regionBusiness.getRepository().save(entity);
+        regionBusiness.post(entity);
         return entity;
     }
 
@@ -77,7 +77,7 @@ public class RegionREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Region entity = regionBusiness.getRepository().findOne(id);
+        Region entity = regionBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -88,7 +88,7 @@ public class RegionREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Region entity) throws Exception {
-        return ResponseEntity.ok( regionBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(regionBusiness.put(entity));
     }
 
     /**
@@ -98,7 +98,7 @@ public class RegionREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Region put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Region entity) throws Exception {
-        return regionBusiness.getRepository().saveAndFlush(entity);
+        return regionBusiness.put(entity);
     }
 
 
@@ -109,7 +109,7 @@ public class RegionREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         regionBusiness.getRepository().delete(id);
+        regionBusiness.delete(id);
     }
 
 
@@ -120,7 +120,7 @@ public class RegionREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Region> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return regionBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return regionBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -141,7 +141,7 @@ public class RegionREST {
   , value="/{instanceId}/CampaignRegion/{relationId}")    
   public ResponseEntity<?> deleteCampaignRegion(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.campaignRegionBusiness.getRepository().delete(relationId);
+        this.campaignRegionBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -166,7 +166,7 @@ public class RegionREST {
   , value="/{instanceId}/SchedulePredicateRegion/{relationId}")    
   public ResponseEntity<?> deleteSchedulePredicateRegion(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.schedulePredicateRegionBusiness.getRepository().delete(relationId);
+        this.schedulePredicateRegionBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -191,15 +191,15 @@ public class RegionREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Campaign")
-  public ResponseEntity<?> postCampaign(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postCampaign(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       CampaignRegion newCampaignRegion = new CampaignRegion();
 
-      Region instance = this.regionBusiness.getRepository().findOne(instanceId);
+      Region instance = this.regionBusiness.get(instanceId);
 
       newCampaignRegion.setCampaign(entity);
       newCampaignRegion.setRegion(instance);
       
-      this.campaignRegionBusiness.getRepository().saveAndFlush(newCampaignRegion);
+      this.campaignRegionBusiness.post(newCampaignRegion);
 
       return ResponseEntity.ok(newCampaignRegion.getRegion());
   }   
@@ -232,15 +232,15 @@ public class RegionREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/SchedulePredicate")
-  public ResponseEntity<?> postSchedulePredicate(@Validated @RequestBody final SchedulePredicate entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postSchedulePredicate(@Validated @RequestBody final SchedulePredicate entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       SchedulePredicateRegion newSchedulePredicateRegion = new SchedulePredicateRegion();
 
-      Region instance = this.regionBusiness.getRepository().findOne(instanceId);
+      Region instance = this.regionBusiness.get(instanceId);
 
       newSchedulePredicateRegion.setSchedulePredicate(entity);
       newSchedulePredicateRegion.setRegion(instance);
       
-      this.schedulePredicateRegionBusiness.getRepository().saveAndFlush(newSchedulePredicateRegion);
+      this.schedulePredicateRegionBusiness.post(newSchedulePredicateRegion);
 
       return ResponseEntity.ok(newSchedulePredicateRegion.getRegion());
   }   

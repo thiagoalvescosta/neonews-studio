@@ -42,7 +42,7 @@ public class ConfigREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Config post(@Validated @RequestBody final Config entity) throws Exception {
-        configBusiness.getRepository().save(entity);
+        configBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ConfigREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Config entity = configBusiness.getRepository().findOne(id);
+        Config entity = configBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ConfigREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Config entity) throws Exception {
-        return ResponseEntity.ok( configBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(configBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ConfigREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Config put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Config entity) throws Exception {
-        return configBusiness.getRepository().saveAndFlush(entity);
+        return configBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ConfigREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         configBusiness.getRepository().delete(id);
+        configBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ConfigREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Config> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return configBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return configBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

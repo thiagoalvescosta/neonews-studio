@@ -48,7 +48,7 @@ public class ChannelTypeREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ChannelType post(@Validated @RequestBody final ChannelType entity) throws Exception {
-        channelTypeBusiness.getRepository().save(entity);
+        channelTypeBusiness.post(entity);
         return entity;
     }
 
@@ -59,7 +59,7 @@ public class ChannelTypeREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ChannelType entity = channelTypeBusiness.getRepository().findOne(id);
+        ChannelType entity = channelTypeBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -70,7 +70,7 @@ public class ChannelTypeREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ChannelType entity) throws Exception {
-        return ResponseEntity.ok( channelTypeBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(channelTypeBusiness.put(entity));
     }
 
     /**
@@ -80,7 +80,7 @@ public class ChannelTypeREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ChannelType put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ChannelType entity) throws Exception {
-        return channelTypeBusiness.getRepository().saveAndFlush(entity);
+        return channelTypeBusiness.put(entity);
     }
 
 
@@ -91,7 +91,7 @@ public class ChannelTypeREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         channelTypeBusiness.getRepository().delete(id);
+        channelTypeBusiness.delete(id);
     }
 
 
@@ -102,7 +102,7 @@ public class ChannelTypeREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ChannelType> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return channelTypeBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return channelTypeBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -123,7 +123,7 @@ public class ChannelTypeREST {
   , value="/{instanceId}/ChannelTypeCustom/{relationId}")    
   public ResponseEntity<?> deleteChannelTypeCustom(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.channelTypeCustomBusiness.getRepository().delete(relationId);
+        this.channelTypeCustomBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();

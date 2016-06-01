@@ -29,15 +29,97 @@ public class CampaignDateBusiness {
     @Qualifier("CampaignDateDAO")
     protected CampaignDateDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao CampaignDateDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public CampaignDateDAO getRepository() {
-        return repository;
+    public CampaignDate post(final CampaignDate entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public CampaignDate get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       CampaignDate result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public CampaignDate put(final CampaignDate entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public CampaignDate put(final java.lang.String id,final CampaignDate entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<CampaignDate> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<CampaignDate> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
 
 
 }
+

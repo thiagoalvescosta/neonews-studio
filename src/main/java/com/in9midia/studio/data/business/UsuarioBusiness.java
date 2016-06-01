@@ -29,17 +29,99 @@ public class UsuarioBusiness {
     @Qualifier("UsuarioDAO")
     protected UsuarioDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao UsuarioDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public UsuarioDAO getRepository() {
-        return repository;
+    public Usuario post(final Usuario entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Usuario get(java.lang.Integer codigo) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Usuario result = repository.findOne(codigo);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Usuario put(final Usuario entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Usuario put(final java.lang.Integer id,final Usuario entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.Integer codigo) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(codigo);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Usuario> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Usuario> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<NeonewsUser> findNeonewsUser(java.lang.Integer codigo,  Pageable pageable) {
       // begin-user-code
@@ -52,50 +134,5 @@ public class UsuarioBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<Address> listAddress(java.lang.Integer codigo,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Address> result = repository.listAddress(codigo,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteAddress(java.lang.Integer instanceCodigo, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteAddress(instanceCodigo, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Company> listCompany(java.lang.Integer codigo,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany(codigo,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany(java.lang.Integer instanceCodigo, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany(instanceCodigo, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

@@ -29,17 +29,99 @@ public class ChannelTypeBusiness {
     @Qualifier("ChannelTypeDAO")
     protected ChannelTypeDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao ChannelTypeDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public ChannelTypeDAO getRepository() {
-        return repository;
+    public ChannelType post(final ChannelType entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public ChannelType get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       ChannelType result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public ChannelType put(final ChannelType entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public ChannelType put(final java.lang.String id,final ChannelType entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<ChannelType> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<ChannelType> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ChannelTypeCustom> findChannelTypeCustom(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -53,3 +135,4 @@ public class ChannelTypeBusiness {
 
 
 }
+

@@ -29,17 +29,99 @@ public class CampaignBusiness {
     @Qualifier("CampaignDAO")
     protected CampaignDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao CampaignDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public CampaignDAO getRepository() {
-        return repository;
+    public Campaign post(final Campaign entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Campaign get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Campaign result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Campaign put(final Campaign entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Campaign put(final java.lang.String id,final Campaign entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Campaign> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Campaign> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Account> findAccount(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,6 +134,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignCampaignBlock> findCampaignCampaignBlock(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -64,6 +147,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignDate> findCampaignDate(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -76,6 +160,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignLog> findCampaignLog(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -88,6 +173,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignPerson> findCampaignPerson(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -100,6 +186,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignProperty> findCampaignProperty(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -112,6 +199,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignRegion> findCampaignRegion(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -124,6 +212,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Log> findLog(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -136,6 +225,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Profile> findProfile(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -148,6 +238,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Profile> findProfile_2(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -160,6 +251,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Profile> findProfile_3(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -172,6 +264,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Profile> findProfile_4(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -184,6 +277,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ReportCampaignSchedule> findReportCampaignSchedule(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -196,11 +290,12 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
-  public List<Terminal> findTerminal_5(java.lang.String id,  Pageable pageable) {
+  public List<Terminal> findTerminal_4(java.lang.String id,  Pageable pageable) {
       // begin-user-code
       // end-user-code  
-      List<Terminal> result = repository.findTerminal_5(id,  pageable );
+      List<Terminal> result = repository.findTerminal_4(id,  pageable );
       // begin-user-code  
       // end-user-code        
       return result;	  
@@ -210,75 +305,7 @@ public class CampaignBusiness {
 
   /**
    * @generated modifiable
-   */  
-  public List<Company> listCompany(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Person> listPerson(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Person> result = repository.listPerson(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deletePerson(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deletePerson(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Terminal> listTerminal(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Terminal> result = repository.listTerminal(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteTerminal(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteTerminal(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<CampaignBlock> listCampaignBlock(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -291,6 +318,7 @@ public class CampaignBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteCampaignBlock(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -302,11 +330,12 @@ public class CampaignBusiness {
   }
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
-  public List<Terminal> listTerminal_2(java.lang.String id,  Pageable pageable ) {
+  public List<Terminal> listTerminal(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
       // end-user-code  
-      List<Terminal> result = repository.listTerminal_2(id,  pageable );
+      List<Terminal> result = repository.listTerminal(id,  pageable );
       // begin-user-code
       // end-user-code
       return result;        	  
@@ -314,22 +343,24 @@ public class CampaignBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
-  public int deleteTerminal_2(java.lang.String instanceId, java.lang.String relationId) {
+  public int deleteTerminal(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
       // end-user-code  
-      int result = repository.deleteTerminal_2(instanceId, relationId);
+      int result = repository.deleteTerminal(instanceId, relationId);
       // begin-user-code
       // end-user-code  
       return result;  
   }
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
-  public List<Person> listPerson_2(java.lang.String id,  Pageable pageable ) {
+  public List<Person> listPerson(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
       // end-user-code  
-      List<Person> result = repository.listPerson_2(id,  pageable );
+      List<Person> result = repository.listPerson(id,  pageable );
       // begin-user-code
       // end-user-code
       return result;        	  
@@ -337,63 +368,19 @@ public class CampaignBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
-  public int deletePerson_2(java.lang.String instanceId, java.lang.String relationId) {
+  public int deletePerson(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
       // end-user-code  
-      int result = repository.deletePerson_2(instanceId, relationId);
+      int result = repository.deletePerson(instanceId, relationId);
       // begin-user-code
       // end-user-code  
       return result;  
   }
   /**
    * @generated modifiable
-   */  
-  public List<ModuleProperty> listModuleProperty(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<ModuleProperty> result = repository.listModuleProperty(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteModuleProperty(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteModuleProperty(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Resolution> listResolution(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Resolution> result = repository.listResolution(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteResolution(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteResolution(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Region> listRegion(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -406,6 +393,7 @@ public class CampaignBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteRegion(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -417,6 +405,32 @@ public class CampaignBusiness {
   }
   /**
    * @generated modifiable
+   * ManyToMany Relation
+   */  
+  public List<Terminal> listTerminal_2(java.lang.String id,  Pageable pageable ) {
+      // begin-user-code
+      // end-user-code  
+      List<Terminal> result = repository.listTerminal_2(id,  pageable );
+      // begin-user-code
+      // end-user-code
+      return result;        	  
+  }
+  
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
+   */    
+  public int deleteTerminal_2(java.lang.String instanceId, java.lang.String relationId) {
+      // begin-user-code
+      // end-user-code  
+      int result = repository.deleteTerminal_2(instanceId, relationId);
+      // begin-user-code
+      // end-user-code  
+      return result;  
+  }
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Terminal> listTerminal_3(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -429,6 +443,7 @@ public class CampaignBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteTerminal_3(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -438,257 +453,5 @@ public class CampaignBusiness {
       // end-user-code  
       return result;  
   }
-  /**
-   * @generated modifiable
-   */  
-  public List<Terminal> listTerminal_4(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Terminal> result = repository.listTerminal_4(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteTerminal_4(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteTerminal_4(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Address> listAddress(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Address> result = repository.listAddress(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteAddress(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteAddress(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<CampaignBlock> listCampaignBlock_2(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<CampaignBlock> result = repository.listCampaignBlock_2(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCampaignBlock_2(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCampaignBlock_2(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Category> listCategory(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Category> result = repository.listCategory(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCategory(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCategory(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Company> listCompany_2(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany_2(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany_2(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany_2(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Person> listPerson_3(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Person> result = repository.listPerson_3(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deletePerson_3(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deletePerson_3(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Profile> listProfile_5(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Profile> result = repository.listProfile_5(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteProfile_5(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteProfile_5(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Sga> listSga(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Sga> result = repository.listSga(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteSga(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteSga(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Software> listSoftware(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Software> result = repository.listSoftware(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteSoftware(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteSoftware(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<TerminalType> listTerminalType(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<TerminalType> result = repository.listTerminalType(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteTerminalType(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteTerminalType(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<TvType> listTvType(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<TvType> result = repository.listTvType(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteTvType(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteTvType(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

@@ -29,15 +29,97 @@ public class CampaignTerminalBusiness {
     @Qualifier("CampaignTerminalDAO")
     protected CampaignTerminalDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao CampaignTerminalDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public CampaignTerminalDAO getRepository() {
-        return repository;
+    public CampaignTerminal post(final CampaignTerminal entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public CampaignTerminal get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       CampaignTerminal result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public CampaignTerminal put(final CampaignTerminal entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public CampaignTerminal put(final java.lang.String id,final CampaignTerminal entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<CampaignTerminal> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<CampaignTerminal> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
 
 
 }
+

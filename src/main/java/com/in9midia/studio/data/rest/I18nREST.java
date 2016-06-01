@@ -42,7 +42,7 @@ public class I18nREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public I18n post(@Validated @RequestBody final I18n entity) throws Exception {
-        i18nBusiness.getRepository().save(entity);
+        i18nBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class I18nREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        I18n entity = i18nBusiness.getRepository().findOne(id);
+        I18n entity = i18nBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class I18nREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final I18n entity) throws Exception {
-        return ResponseEntity.ok( i18nBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(i18nBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class I18nREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public I18n put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final I18n entity) throws Exception {
-        return i18nBusiness.getRepository().saveAndFlush(entity);
+        return i18nBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class I18nREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         i18nBusiness.getRepository().delete(id);
+        i18nBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class I18nREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<I18n> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return i18nBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return i18nBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

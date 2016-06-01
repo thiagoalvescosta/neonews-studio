@@ -42,7 +42,7 @@ public class ReportCampaignScheduleREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ReportCampaignSchedule post(@Validated @RequestBody final ReportCampaignSchedule entity) throws Exception {
-        reportCampaignScheduleBusiness.getRepository().save(entity);
+        reportCampaignScheduleBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ReportCampaignScheduleREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ReportCampaignSchedule entity = reportCampaignScheduleBusiness.getRepository().findOne(id);
+        ReportCampaignSchedule entity = reportCampaignScheduleBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ReportCampaignScheduleREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ReportCampaignSchedule entity) throws Exception {
-        return ResponseEntity.ok( reportCampaignScheduleBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(reportCampaignScheduleBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ReportCampaignScheduleREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ReportCampaignSchedule put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ReportCampaignSchedule entity) throws Exception {
-        return reportCampaignScheduleBusiness.getRepository().saveAndFlush(entity);
+        return reportCampaignScheduleBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ReportCampaignScheduleREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         reportCampaignScheduleBusiness.getRepository().delete(id);
+        reportCampaignScheduleBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ReportCampaignScheduleREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ReportCampaignSchedule> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return reportCampaignScheduleBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return reportCampaignScheduleBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

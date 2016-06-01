@@ -42,7 +42,7 @@ public class XtraTerminalStatusREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public XtraTerminalStatus post(@Validated @RequestBody final XtraTerminalStatus entity) throws Exception {
-        xtraTerminalStatusBusiness.getRepository().save(entity);
+        xtraTerminalStatusBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class XtraTerminalStatusREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        XtraTerminalStatus entity = xtraTerminalStatusBusiness.getRepository().findOne(id);
+        XtraTerminalStatus entity = xtraTerminalStatusBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class XtraTerminalStatusREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final XtraTerminalStatus entity) throws Exception {
-        return ResponseEntity.ok( xtraTerminalStatusBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(xtraTerminalStatusBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class XtraTerminalStatusREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public XtraTerminalStatus put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final XtraTerminalStatus entity) throws Exception {
-        return xtraTerminalStatusBusiness.getRepository().saveAndFlush(entity);
+        return xtraTerminalStatusBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class XtraTerminalStatusREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         xtraTerminalStatusBusiness.getRepository().delete(id);
+        xtraTerminalStatusBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class XtraTerminalStatusREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<XtraTerminalStatus> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return xtraTerminalStatusBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return xtraTerminalStatusBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

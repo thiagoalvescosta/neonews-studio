@@ -1,0 +1,167 @@
+<h3 class="">Campaigns</h3>
+
+<div class=""></div> 
+<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-763276"> 
+   <datasource name="Campaign" entity="api/rest/com/in9midia/studio/data/Campaign" keys="id" rows-per-page="100" delete-message="Deseja remover?" class=""></datasource> 
+</div> 
+<div class=""></div> 
+<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-button" id="crn-button-564202"> 
+  <button class="btn btn-primary felipe" type="submit" onclick="" ng-click="Campaign.startInserting()" ng-hide="Campaign.inserting || Campaign.editing"><i class="fa fa-user"></i> <span class="">{{"template.crud.new" | translate}}</span></button> 
+</div> 
+<div class=""></div> 
+<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-grid" id="crn-grid-Campaign"> 
+  <div crn-datasource="Campaign" class="" ng-hide="Campaign.editing || Campaign.inserting"> 
+    <table class="table  table-bordered table-hover table-striped"> 
+      <thead> 
+        <tr class="table-header"> 
+          <th class=""> 
+            <div class="">name</div>
+          </th> 
+          <th class=""> 
+          <div class="">{{"template.crud.actions" | translate}}</div>
+          </th> 
+        </tr> 
+      </thead> 
+      <tbody> 
+        <tr class="table-content" ng-repeat="rowData in datasource.data"> 
+          <td class=""> 
+            <div class="">
+
+                  {{rowData.name}}
+        
+            </div>
+          </td> 
+          <td class=""> 
+            <div class=""> 
+              <button class="btn btn-default btn-sm" type="submit" ng-click="datasource.startEditing(rowData)"><i class="fa fa-edit"></i></button> 
+              <button class="btn btn-default btn-sm" type="submit" ng-click="datasource.remove(rowData)"><i class="fa fa-times"></i></button> 
+            </div></td> 
+        </tr> 
+      </tbody> 
+    </table> 
+    <div class="table-footer-controls"> 
+      <button class="btn btn-default btn-block btn-clicked" ng-show="datasource.hasNextPage()" ng-click="datasource.nextPage()">{{"template.crud.load_more" | translate}}...</button> 
+    </div> 
+  </div> 
+</div> 
+<div class=""></div> 
+<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-form" id="crn-form-form-Campaign"> 
+  <div class="form" ng-show="Campaign.editing || Campaign.inserting"> 
+    <form crn-datasource="Campaign" class=""> 
+      <div class="tool-bar" ng-hide="datasource.editing || datasource.inserting"> 
+        <button class="btn btn-primary felipe" ng-click="datasource.startInserting()"><i class="glyphicon glyphicon-plus-sign"></i></button> 
+        <button class="btn btn-success" ng-click="datasource.startEditing()"><i class="glyphicon glyphicon-edit"></i></button> 
+        <button class="btn btn-primary felipe" ng-disabled="!datasource.hasPrevious()" ng-click="datasource.previous()"><i class="glyphicon glyphicon-chevron-left"></i></button> 
+        <button class="btn btn-primary felipe" ng-disabled="!datasource.hasNext()" ng-click="datasource.next()"><i class="glyphicon glyphicon-chevron-right"></i></button> 
+        <button class="btn btn-primary felipe" ng-click="datasource.remove()"><i class="glyphicon glyphicon-trash"></i></button> 
+      </div> 
+      <div class="active-bar" ng-hide="!datasource.editing &amp;&amp; !datasource.inserting"> 
+        <button class="btn btn-success" ng-click="datasource.post()"><i class="glyphicon glyphicon-ok"></i></button> 
+        <button class="btn btn-danger" ng-click="datasource.cancel()"><i class="glyphicon glyphicon-remove"></i></button> 
+      </div> 
+      <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting"> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-id"> 
+          <div class="form-group"> 
+            <label for="textinput-id" class="">id</label> 
+
+        <input type="text" ng-model="Campaign.active.id" class="form-control" id="textinput-id" placeholder="id" required="required"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-log"> 
+          <div class="form-group"> 
+            <label for="textinput-log" class="">log</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.log" id="textinput-log" placeholder="log"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-name"> 
+          <div class="form-group"> 
+            <label for="textinput-name" class="">name</label> 
+
+        <input type="text" ng-model="Campaign.active.name" class="form-control" id="textinput-name" placeholder="name" required="required"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-valFri"> 
+          <div class="form-group"> 
+            <label for="textinput-valFri" class="">valFri</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.valFri" id="textinput-valFri" placeholder="valFri"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-valMon"> 
+          <div class="form-group"> 
+            <label for="textinput-valMon" class="">valMon</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.valMon" id="textinput-valMon" placeholder="valMon"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-valSat"> 
+          <div class="form-group"> 
+            <label for="textinput-valSat" class="">valSat</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.valSat" id="textinput-valSat" placeholder="valSat"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-valSun"> 
+          <div class="form-group"> 
+            <label for="textinput-valSun" class="">valSun</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.valSun" id="textinput-valSun" placeholder="valSun"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-valThu"> 
+          <div class="form-group"> 
+            <label for="textinput-valThu" class="">valThu</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.valThu" id="textinput-valThu" placeholder="valThu"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-valTue"> 
+          <div class="form-group"> 
+            <label for="textinput-valTue" class="">valTue</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.valTue" id="textinput-valTue" placeholder="valTue"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-valWed"> 
+          <div class="form-group"> 
+            <label for="textinput-valWed" class="">valWed</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.valWed" id="textinput-valWed" placeholder="valWed"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-validate"> 
+          <div class="form-group"> 
+            <label for="textinput-validate" class="">validate</label> 
+
+        <input type="checkbox" ng-model="Campaign.active.validate" id="textinput-validate" placeholder="validate"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+      </fieldset> 
+    </form> 
+  </div> 
+</div> 
+<div class=""></div>

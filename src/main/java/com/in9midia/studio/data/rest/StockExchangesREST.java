@@ -42,7 +42,7 @@ public class StockExchangesREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public StockExchanges post(@Validated @RequestBody final StockExchanges entity) throws Exception {
-        stockExchangesBusiness.getRepository().save(entity);
+        stockExchangesBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class StockExchangesREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        StockExchanges entity = stockExchangesBusiness.getRepository().findOne(id);
+        StockExchanges entity = stockExchangesBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class StockExchangesREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final StockExchanges entity) throws Exception {
-        return ResponseEntity.ok( stockExchangesBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(stockExchangesBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class StockExchangesREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public StockExchanges put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final StockExchanges entity) throws Exception {
-        return stockExchangesBusiness.getRepository().saveAndFlush(entity);
+        return stockExchangesBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class StockExchangesREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         stockExchangesBusiness.getRepository().delete(id);
+        stockExchangesBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class StockExchangesREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<StockExchanges> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return stockExchangesBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return stockExchangesBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

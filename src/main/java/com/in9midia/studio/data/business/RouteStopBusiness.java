@@ -29,17 +29,99 @@ public class RouteStopBusiness {
     @Qualifier("RouteStopDAO")
     protected RouteStopDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao RouteStopDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public RouteStopDAO getRepository() {
-        return repository;
+    public RouteStop post(final RouteStop entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public RouteStop get(java.lang.String rouStopId) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       RouteStop result = repository.findOne(rouStopId);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public RouteStop put(final RouteStop entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public RouteStop put(final java.lang.String id,final RouteStop entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String rouStopId) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(rouStopId);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<RouteStop> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<RouteStop> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<TerminalMovementStop> findTerminalMovementStop(java.lang.String rouStopId,  Pageable pageable) {
       // begin-user-code
@@ -54,6 +136,7 @@ public class RouteStopBusiness {
 
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<TerminalMovement> listTerminalMovement(java.lang.String rouStopId,  Pageable pageable ) {
       // begin-user-code
@@ -66,6 +149,7 @@ public class RouteStopBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteTerminalMovement(java.lang.String instanceRouStopId, java.lang.String relationId) {
       // begin-user-code
@@ -76,3 +160,4 @@ public class RouteStopBusiness {
       return result;  
   }
 }
+

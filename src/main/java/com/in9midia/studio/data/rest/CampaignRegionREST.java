@@ -42,7 +42,7 @@ public class CampaignRegionREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public CampaignRegion post(@Validated @RequestBody final CampaignRegion entity) throws Exception {
-        campaignRegionBusiness.getRepository().save(entity);
+        campaignRegionBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class CampaignRegionREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        CampaignRegion entity = campaignRegionBusiness.getRepository().findOne(id);
+        CampaignRegion entity = campaignRegionBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class CampaignRegionREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final CampaignRegion entity) throws Exception {
-        return ResponseEntity.ok( campaignRegionBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(campaignRegionBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class CampaignRegionREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public CampaignRegion put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final CampaignRegion entity) throws Exception {
-        return campaignRegionBusiness.getRepository().saveAndFlush(entity);
+        return campaignRegionBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class CampaignRegionREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         campaignRegionBusiness.getRepository().delete(id);
+        campaignRegionBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class CampaignRegionREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<CampaignRegion> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return campaignRegionBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return campaignRegionBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

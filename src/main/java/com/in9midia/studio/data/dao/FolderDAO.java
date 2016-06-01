@@ -84,21 +84,6 @@ public interface FolderDAO extends JpaRepository<Folder, java.lang.String> {
     @Query("DELETE FROM File entity WHERE entity.folder.id = :instanceId AND entity.company.id = :relationId")
     public int deleteCompany(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM Folder entity WHERE entity.folder.id = :id")
-  public List<Company> listCompany_2(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Folder entity WHERE entity.folder.id = :instanceId AND entity.company.id = :relationId")
-    public int deleteCompany_2(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

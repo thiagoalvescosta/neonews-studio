@@ -84,36 +84,6 @@ public interface ChannelDAO extends JpaRepository<Channel, java.lang.String> {
     @Query("DELETE FROM ChannelPerson entity WHERE entity.channel.id = :instanceId AND entity.person.id = :relationId")
     public int deletePerson(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.file FROM Content entity WHERE entity.channel.id = :id")
-  public List<File> listFile(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Content entity WHERE entity.channel.id = :instanceId AND entity.file.id = :relationId")
-    public int deleteFile(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.template FROM Content entity WHERE entity.channel.id = :id")
-  public List<Template> listTemplate(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Content entity WHERE entity.channel.id = :instanceId AND entity.template.id = :relationId")
-    public int deleteTemplate(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

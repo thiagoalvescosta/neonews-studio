@@ -42,7 +42,7 @@ public class LogREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Log post(@Validated @RequestBody final Log entity) throws Exception {
-        logBusiness.getRepository().save(entity);
+        logBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class LogREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Log entity = logBusiness.getRepository().findOne(id);
+        Log entity = logBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class LogREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Log entity) throws Exception {
-        return ResponseEntity.ok( logBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(logBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class LogREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Log put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Log entity) throws Exception {
-        return logBusiness.getRepository().saveAndFlush(entity);
+        return logBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class LogREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         logBusiness.getRepository().delete(id);
+        logBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class LogREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Log> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return logBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return logBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

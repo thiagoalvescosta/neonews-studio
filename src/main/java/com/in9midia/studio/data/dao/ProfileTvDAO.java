@@ -63,36 +63,6 @@ public interface ProfileTvDAO extends JpaRepository<ProfileTv, java.lang.String>
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.profile FROM CampaignBlock entity WHERE entity.profileTv.id = :id")
-  public List<Profile> listProfile(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignBlock entity WHERE entity.profileTv.id = :instanceId AND entity.profile.id = :relationId")
-    public int deleteProfile(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.schedule FROM CampaignBlock entity WHERE entity.profileTv.id = :id")
-  public List<Schedule> listSchedule(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignBlock entity WHERE entity.profileTv.id = :instanceId AND entity.schedule.id = :relationId")
-    public int deleteSchedule(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

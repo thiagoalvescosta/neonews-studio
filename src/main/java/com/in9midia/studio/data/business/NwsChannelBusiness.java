@@ -29,17 +29,99 @@ public class NwsChannelBusiness {
     @Qualifier("NwsChannelDAO")
     protected NwsChannelDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao NwsChannelDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public NwsChannelDAO getRepository() {
-        return repository;
+    public NwsChannel post(final NwsChannel entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public NwsChannel get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       NwsChannel result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public NwsChannel put(final NwsChannel entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public NwsChannel put(final java.lang.String id,final NwsChannel entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<NwsChannel> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<NwsChannel> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignTemplate> findCampaignTemplate(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,73 +134,5 @@ public class NwsChannelBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<Company> listCompany(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Module> listModule(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Module> result = repository.listModule(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteModule(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteModule(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Theme> listTheme(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Theme> result = repository.listTheme(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteTheme(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteTheme(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

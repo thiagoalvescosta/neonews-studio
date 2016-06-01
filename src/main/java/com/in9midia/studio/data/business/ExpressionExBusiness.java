@@ -29,17 +29,99 @@ public class ExpressionExBusiness {
     @Qualifier("ExpressionExDAO")
     protected ExpressionExDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao ExpressionExDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public ExpressionExDAO getRepository() {
-        return repository;
+    public ExpressionEx post(final ExpressionEx entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public ExpressionEx get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       ExpressionEx result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public ExpressionEx put(final ExpressionEx entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public ExpressionEx put(final java.lang.String id,final ExpressionEx entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<ExpressionEx> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<ExpressionEx> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Agency> findAgency(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,50 +134,5 @@ public class ExpressionExBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<Company> listCompany(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<File> listFile(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<File> result = repository.listFile(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteFile(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteFile(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

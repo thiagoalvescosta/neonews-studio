@@ -29,17 +29,99 @@ public class ProfileTvBusiness {
     @Qualifier("ProfileTvDAO")
     protected ProfileTvDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao ProfileTvDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public ProfileTvDAO getRepository() {
-        return repository;
+    public ProfileTv post(final ProfileTv entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public ProfileTv get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       ProfileTv result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public ProfileTv put(final ProfileTv entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public ProfileTv put(final java.lang.String id,final ProfileTv entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<ProfileTv> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<ProfileTv> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignBlock> findCampaignBlock(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,50 +134,5 @@ public class ProfileTvBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<Profile> listProfile(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Profile> result = repository.listProfile(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteProfile(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteProfile(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Schedule> listSchedule(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Schedule> result = repository.listSchedule(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteSchedule(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteSchedule(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

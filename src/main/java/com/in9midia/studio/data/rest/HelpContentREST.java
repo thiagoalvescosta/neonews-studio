@@ -42,7 +42,7 @@ public class HelpContentREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public HelpContent post(@Validated @RequestBody final HelpContent entity) throws Exception {
-        helpContentBusiness.getRepository().save(entity);
+        helpContentBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class HelpContentREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        HelpContent entity = helpContentBusiness.getRepository().findOne(id);
+        HelpContent entity = helpContentBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class HelpContentREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final HelpContent entity) throws Exception {
-        return ResponseEntity.ok( helpContentBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(helpContentBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class HelpContentREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public HelpContent put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final HelpContent entity) throws Exception {
-        return helpContentBusiness.getRepository().saveAndFlush(entity);
+        return helpContentBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class HelpContentREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         helpContentBusiness.getRepository().delete(id);
+        helpContentBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class HelpContentREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<HelpContent> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return helpContentBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return helpContentBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

@@ -42,7 +42,7 @@ public class ScheduleTimeREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ScheduleTime post(@Validated @RequestBody final ScheduleTime entity) throws Exception {
-        scheduleTimeBusiness.getRepository().save(entity);
+        scheduleTimeBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ScheduleTimeREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ScheduleTime entity = scheduleTimeBusiness.getRepository().findOne(id);
+        ScheduleTime entity = scheduleTimeBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ScheduleTimeREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ScheduleTime entity) throws Exception {
-        return ResponseEntity.ok( scheduleTimeBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(scheduleTimeBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ScheduleTimeREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ScheduleTime put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ScheduleTime entity) throws Exception {
-        return scheduleTimeBusiness.getRepository().saveAndFlush(entity);
+        return scheduleTimeBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ScheduleTimeREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         scheduleTimeBusiness.getRepository().delete(id);
+        scheduleTimeBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ScheduleTimeREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ScheduleTime> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return scheduleTimeBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return scheduleTimeBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

@@ -42,7 +42,7 @@ public class TerminalLogREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public TerminalLog post(@Validated @RequestBody final TerminalLog entity) throws Exception {
-        terminalLogBusiness.getRepository().save(entity);
+        terminalLogBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class TerminalLogREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        TerminalLog entity = terminalLogBusiness.getRepository().findOne(id);
+        TerminalLog entity = terminalLogBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class TerminalLogREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final TerminalLog entity) throws Exception {
-        return ResponseEntity.ok( terminalLogBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(terminalLogBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class TerminalLogREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public TerminalLog put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final TerminalLog entity) throws Exception {
-        return terminalLogBusiness.getRepository().saveAndFlush(entity);
+        return terminalLogBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class TerminalLogREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         terminalLogBusiness.getRepository().delete(id);
+        terminalLogBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class TerminalLogREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<TerminalLog> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return terminalLogBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return terminalLogBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

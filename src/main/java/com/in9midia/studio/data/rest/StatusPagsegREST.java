@@ -42,7 +42,7 @@ public class StatusPagsegREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public StatusPagseg post(@Validated @RequestBody final StatusPagseg entity) throws Exception {
-        statusPagsegBusiness.getRepository().save(entity);
+        statusPagsegBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class StatusPagsegREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.Integer id) throws Exception {
-        StatusPagseg entity = statusPagsegBusiness.getRepository().findOne(id);
+        StatusPagseg entity = statusPagsegBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class StatusPagsegREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final StatusPagseg entity) throws Exception {
-        return ResponseEntity.ok( statusPagsegBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(statusPagsegBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class StatusPagsegREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public StatusPagseg put(@PathVariable("id") final java.lang.Integer id, @Validated @RequestBody final StatusPagseg entity) throws Exception {
-        return statusPagsegBusiness.getRepository().saveAndFlush(entity);
+        return statusPagsegBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class StatusPagsegREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.Integer id) throws Exception {
-         statusPagsegBusiness.getRepository().delete(id);
+        statusPagsegBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class StatusPagsegREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<StatusPagseg> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return statusPagsegBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return statusPagsegBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

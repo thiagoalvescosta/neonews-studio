@@ -54,7 +54,7 @@ public class RouteStopREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public RouteStop post(@Validated @RequestBody final RouteStop entity) throws Exception {
-        routeStopBusiness.getRepository().save(entity);
+        routeStopBusiness.post(entity);
         return entity;
     }
 
@@ -65,7 +65,7 @@ public class RouteStopREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{rouStopId}")
     public ResponseEntity<?> get(@PathVariable("rouStopId") java.lang.String rouStopId) throws Exception {
-        RouteStop entity = routeStopBusiness.getRepository().findOne(rouStopId);
+        RouteStop entity = routeStopBusiness.get(rouStopId);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -76,7 +76,7 @@ public class RouteStopREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final RouteStop entity) throws Exception {
-        return ResponseEntity.ok( routeStopBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(routeStopBusiness.put(entity));
     }
 
     /**
@@ -86,7 +86,7 @@ public class RouteStopREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{rouStopId}")
     public RouteStop put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final RouteStop entity) throws Exception {
-        return routeStopBusiness.getRepository().saveAndFlush(entity);
+        return routeStopBusiness.put(entity);
     }
 
 
@@ -97,7 +97,7 @@ public class RouteStopREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{rouStopId}")
     public void delete(@PathVariable("rouStopId") java.lang.String rouStopId) throws Exception {
-         routeStopBusiness.getRepository().delete(rouStopId);
+        routeStopBusiness.delete(rouStopId);
     }
 
 
@@ -108,7 +108,7 @@ public class RouteStopREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<RouteStop> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return routeStopBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return routeStopBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -129,7 +129,7 @@ public class RouteStopREST {
   , value="/{instanceRouStopId}/TerminalMovementStop/{relationStpId}")    
   public ResponseEntity<?> deleteTerminalMovementStop(@PathVariable("relationStpId") java.lang.String relationStpId) {
       try {
-        this.terminalMovementStopBusiness.getRepository().delete(relationStpId);
+        this.terminalMovementStopBusiness.delete(relationStpId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -154,15 +154,15 @@ public class RouteStopREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceRouStopId}/TerminalMovement")
-  public ResponseEntity<?> postTerminalMovement(@Validated @RequestBody final TerminalMovement entity, @PathVariable("instanceRouStopId") java.lang.String instanceRouStopId) {
+  public ResponseEntity<?> postTerminalMovement(@Validated @RequestBody final TerminalMovement entity, @PathVariable("instanceRouStopId") java.lang.String instanceRouStopId) throws Exception {
       TerminalMovementStop newTerminalMovementStop = new TerminalMovementStop();
 
-      RouteStop instance = this.routeStopBusiness.getRepository().findOne(instanceRouStopId);
+      RouteStop instance = this.routeStopBusiness.get(instanceRouStopId);
 
       newTerminalMovementStop.setTerminalMovement(entity);
       newTerminalMovementStop.setRouteStop(instance);
       
-      this.terminalMovementStopBusiness.getRepository().saveAndFlush(newTerminalMovementStop);
+      this.terminalMovementStopBusiness.post(newTerminalMovementStop);
 
       return ResponseEntity.ok(newTerminalMovementStop.getRouteStop());
   }   

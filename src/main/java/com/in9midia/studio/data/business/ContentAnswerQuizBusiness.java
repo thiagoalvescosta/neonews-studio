@@ -29,17 +29,99 @@ public class ContentAnswerQuizBusiness {
     @Qualifier("ContentAnswerQuizDAO")
     protected ContentAnswerQuizDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao ContentAnswerQuizDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public ContentAnswerQuizDAO getRepository() {
-        return repository;
+    public ContentAnswerQuiz post(final ContentAnswerQuiz entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public ContentAnswerQuiz get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       ContentAnswerQuiz result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public ContentAnswerQuiz put(final ContentAnswerQuiz entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public ContentAnswerQuiz put(final java.lang.String id,final ContentAnswerQuiz entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<ContentAnswerQuiz> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<ContentAnswerQuiz> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ContentAnswerReport> findContentAnswerReport(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -54,6 +136,7 @@ public class ContentAnswerQuizBusiness {
 
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Content> listContent(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -66,6 +149,7 @@ public class ContentAnswerQuizBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteContent(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -76,3 +160,4 @@ public class ContentAnswerQuizBusiness {
       return result;  
   }
 }
+

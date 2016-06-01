@@ -72,7 +72,7 @@ public class SchedulePredicateREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public SchedulePredicate post(@Validated @RequestBody final SchedulePredicate entity) throws Exception {
-        schedulePredicateBusiness.getRepository().save(entity);
+        schedulePredicateBusiness.post(entity);
         return entity;
     }
 
@@ -83,7 +83,7 @@ public class SchedulePredicateREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        SchedulePredicate entity = schedulePredicateBusiness.getRepository().findOne(id);
+        SchedulePredicate entity = schedulePredicateBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -94,7 +94,7 @@ public class SchedulePredicateREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final SchedulePredicate entity) throws Exception {
-        return ResponseEntity.ok( schedulePredicateBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(schedulePredicateBusiness.put(entity));
     }
 
     /**
@@ -104,7 +104,7 @@ public class SchedulePredicateREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public SchedulePredicate put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final SchedulePredicate entity) throws Exception {
-        return schedulePredicateBusiness.getRepository().saveAndFlush(entity);
+        return schedulePredicateBusiness.put(entity);
     }
 
 
@@ -115,7 +115,7 @@ public class SchedulePredicateREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         schedulePredicateBusiness.getRepository().delete(id);
+        schedulePredicateBusiness.delete(id);
     }
 
 
@@ -126,7 +126,7 @@ public class SchedulePredicateREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<SchedulePredicate> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return schedulePredicateBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return schedulePredicateBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -147,7 +147,7 @@ public class SchedulePredicateREST {
   , value="/{instanceId}/SchedulePredicateRegion/{relationId}")    
   public ResponseEntity<?> deleteSchedulePredicateRegion(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.schedulePredicateRegionBusiness.getRepository().delete(relationId);
+        this.schedulePredicateRegionBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -172,7 +172,7 @@ public class SchedulePredicateREST {
   , value="/{instanceId}/SchedulePredicateTerminal/{relationId}")    
   public ResponseEntity<?> deleteSchedulePredicateTerminal(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.schedulePredicateTerminalBusiness.getRepository().delete(relationId);
+        this.schedulePredicateTerminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -197,7 +197,7 @@ public class SchedulePredicateREST {
   , value="/{instanceId}/ScheduleTime/{relationId}")    
   public ResponseEntity<?> deleteScheduleTime(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.scheduleTimeBusiness.getRepository().delete(relationId);
+        this.scheduleTimeBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -222,15 +222,15 @@ public class SchedulePredicateREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Region")
-  public ResponseEntity<?> postRegion(@Validated @RequestBody final Region entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postRegion(@Validated @RequestBody final Region entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       SchedulePredicateRegion newSchedulePredicateRegion = new SchedulePredicateRegion();
 
-      SchedulePredicate instance = this.schedulePredicateBusiness.getRepository().findOne(instanceId);
+      SchedulePredicate instance = this.schedulePredicateBusiness.get(instanceId);
 
       newSchedulePredicateRegion.setRegion(entity);
       newSchedulePredicateRegion.setSchedulePredicate(instance);
       
-      this.schedulePredicateRegionBusiness.getRepository().saveAndFlush(newSchedulePredicateRegion);
+      this.schedulePredicateRegionBusiness.post(newSchedulePredicateRegion);
 
       return ResponseEntity.ok(newSchedulePredicateRegion.getSchedulePredicate());
   }   
@@ -263,15 +263,15 @@ public class SchedulePredicateREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Terminal")
-  public ResponseEntity<?> postTerminal(@Validated @RequestBody final Terminal entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postTerminal(@Validated @RequestBody final Terminal entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       SchedulePredicateTerminal newSchedulePredicateTerminal = new SchedulePredicateTerminal();
 
-      SchedulePredicate instance = this.schedulePredicateBusiness.getRepository().findOne(instanceId);
+      SchedulePredicate instance = this.schedulePredicateBusiness.get(instanceId);
 
       newSchedulePredicateTerminal.setTerminal(entity);
       newSchedulePredicateTerminal.setSchedulePredicate(instance);
       
-      this.schedulePredicateTerminalBusiness.getRepository().saveAndFlush(newSchedulePredicateTerminal);
+      this.schedulePredicateTerminalBusiness.post(newSchedulePredicateTerminal);
 
       return ResponseEntity.ok(newSchedulePredicateTerminal.getSchedulePredicate());
   }   

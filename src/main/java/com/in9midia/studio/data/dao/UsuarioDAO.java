@@ -63,36 +63,6 @@ public interface UsuarioDAO extends JpaRepository<Usuario, java.lang.Integer> {
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.address FROM NeonewsUser entity WHERE entity.usuario.codigo = :codigo")
-  public List<Address> listAddress(@Param(value="codigo") java.lang.Integer codigo,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM NeonewsUser entity WHERE entity.usuario.codigo = :instanceCodigo AND entity.address.id = :relationId")
-    public int deleteAddress(@Param(value="instanceCodigo") java.lang.Integer instanceCodigo, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM NeonewsUser entity WHERE entity.usuario.codigo = :codigo")
-  public List<Company> listCompany(@Param(value="codigo") java.lang.Integer codigo,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM NeonewsUser entity WHERE entity.usuario.codigo = :instanceCodigo AND entity.company.id = :relationId")
-    public int deleteCompany(@Param(value="instanceCodigo") java.lang.Integer instanceCodigo, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

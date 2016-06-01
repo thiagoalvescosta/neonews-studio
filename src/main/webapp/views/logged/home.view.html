@@ -1,22 +1,35 @@
 <div class="component-holder ng-binding ng-scope" data-component="crn-sidebar" id="crn-sidebar-751554"> 
   <div class="nav-side-menu navbar-default"> 
     <div class="brand"> 
-      <img src="img/logo.png" class="" width="" height="30" /> 
+      <img src="img/logo.png" class="" width="" height="30"> 
     </div> 
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> 
     <div class="menu-list"> 
       <ul id="menu-content1" class="menu-content collapse out navbar-nav"> 
         <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-user" class="collapsed component-holder"><a href="javascript:void(0);" class=""><img class="user-avatar" alt="{{session.name}}" ng-src="{{session.picture || 'img/nophoto.png'}}"> <span class="">{{session.name}}</span> <span class="arrow"></span></a> 
           <ul class="sub-menu collapse" id="menu-user"> 
-            <li><a class="component-holder selected-holder" data-toggle="modal" data-target="#modalPassword" data-component="crn-anchor">{{"Home.view.ChangePassword" | translate}}</a></li> 
+            <li><a class="component-holder" data-toggle="modal" data-target="#modalPassword" data-component="crn-anchor">{{"Home.view.ChangePassword" | translate}}</a></li> 
             <li ng-click="logout()"><a href="javascript:void(0);"><span class="">{{"Home.view.Logout" | translate}}</span></a></li> 
-          </ul> </li> 
+          </ul> </li>
+        <div class="component-holder ng-binding ng-scope" data-component="crn-combobox-dynamic" id="crn-combobox-dynamic-272801"> 
+          <div class="form-group"> 
+            <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-973072"> 
+              <datasource name="Company" entity="api/rest/com/in9midia/studio/data/Company" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete=""></datasource> 
+            </div> 
+            <select ng-change="changeTenant(session.tenant.id)" ng-model="session.tenant" class="form-control" id="textinput-company" ng-options="opt as opt.name for opt in Company.data track by opt.id"> <option value="">Nenhuma</option> </select> 
+          </div> 
+        </div> 
         <li data-toggle="collapse" data-target="#menu-sub-1" class="collapsed component-holder" data-component="crn-sidebar-item"> <a href="#/home" class=""><i class="fa fa-lg fa-home"></i> <span class="">{{"Home.view.Home" | translate}}</span> </a> </li> 
         <li ng-if="session.root" data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-5099" class="collapsed component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-users fa-lg"></i> <span class="">{{"Home.view.Admin" | translate}}</span> <span class="arrow"></span></a> 
           <ul class="sub-menu collapse" id="menu-sub-5099"> 
             <li><a href="#/home/admin/users" class="component-holder" data-component="crn-anchor">{{"Home.view.Users" | translate}}</a></li> 
             <li><a href="#/home/admin/roles" class="component-holder" data-component="crn-anchor">{{"Home.view.Roles" | translate}}</a></li> 
             <li><a href="#/home/admin/permission" class="component-holder" data-component="crn-anchor">{{"Home.view.Permission" | translate}}</a></li> 
+          </ul> </li> 
+        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-9685" class="collapsed active component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-users fa-lg"></i> <span class="">Neonews</span> <span class="arrow"></span></a> 
+          <ul class="sub-menu collapse  navbar-nav in" id="menu-sub-9685"> 
+            <li class=""><a href="#/home/logged/terminal" class="component-holder" data-component="crn-anchor">Terminais</a></li> 
+            <li class="active"><a href="#/home/logged/campaign" class="component-holder" data-component="crn-anchor">Campanhas</a></li>
           </ul> </li> 
       </ul> 
     </div> 

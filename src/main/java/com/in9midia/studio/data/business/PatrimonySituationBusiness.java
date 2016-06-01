@@ -29,17 +29,99 @@ public class PatrimonySituationBusiness {
     @Qualifier("PatrimonySituationDAO")
     protected PatrimonySituationDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao PatrimonySituationDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public PatrimonySituationDAO getRepository() {
-        return repository;
+    public PatrimonySituation post(final PatrimonySituation entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public PatrimonySituation get(java.lang.String sitId) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       PatrimonySituation result = repository.findOne(sitId);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public PatrimonySituation put(final PatrimonySituation entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public PatrimonySituation put(final java.lang.String id,final PatrimonySituation entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String sitId) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(sitId);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<PatrimonySituation> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<PatrimonySituation> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Patrimony> findPatrimony(java.lang.String sitId,  Pageable pageable) {
       // begin-user-code
@@ -52,27 +134,5 @@ public class PatrimonySituationBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<PatrimonyType> listPatrimonyType(java.lang.String sitId,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<PatrimonyType> result = repository.listPatrimonyType(sitId,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deletePatrimonyType(java.lang.String instanceSitId, java.lang.String relationTypId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deletePatrimonyType(instanceSitId, relationTypId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

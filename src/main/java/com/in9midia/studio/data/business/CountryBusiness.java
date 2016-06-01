@@ -29,17 +29,99 @@ public class CountryBusiness {
     @Qualifier("CountryDAO")
     protected CountryDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao CountryDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public CountryDAO getRepository() {
-        return repository;
+    public Country post(final Country entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Country get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Country result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Country put(final Country entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Country put(final java.lang.String id,final Country entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Country> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Country> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Address> findAddress(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,11 +134,12 @@ public class CountryBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
-  public List<State> findState_2(java.lang.String id,  Pageable pageable) {
+  public List<State> findState(java.lang.String id,  Pageable pageable) {
       // begin-user-code
       // end-user-code  
-      List<State> result = repository.findState_2(id,  pageable );
+      List<State> result = repository.findState(id,  pageable );
       // begin-user-code  
       // end-user-code        
       return result;	  
@@ -64,50 +147,5 @@ public class CountryBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<City> listCity(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<City> result = repository.listCity(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCity(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCity(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<State> listState(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<State> result = repository.listState(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteState(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteState(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

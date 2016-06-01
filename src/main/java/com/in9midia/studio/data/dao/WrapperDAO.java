@@ -63,36 +63,6 @@ public interface WrapperDAO extends JpaRepository<Wrapper, java.lang.String> {
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.agency FROM NwsChannel entity WHERE entity.wrapper.id = :id")
-  public List<Agency> listAgency(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM NwsChannel entity WHERE entity.wrapper.id = :instanceId AND entity.agency.id = :relationId")
-    public int deleteAgency(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.theme FROM NwsChannel entity WHERE entity.wrapper.id = :id")
-  public List<Theme> listTheme(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM NwsChannel entity WHERE entity.wrapper.id = :instanceId AND entity.theme.id = :relationId")
-    public int deleteTheme(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

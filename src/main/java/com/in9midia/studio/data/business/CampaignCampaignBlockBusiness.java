@@ -29,15 +29,97 @@ public class CampaignCampaignBlockBusiness {
     @Qualifier("CampaignCampaignBlockDAO")
     protected CampaignCampaignBlockDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao CampaignCampaignBlockDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public CampaignCampaignBlockDAO getRepository() {
-        return repository;
+    public CampaignCampaignBlock post(final CampaignCampaignBlock entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public CampaignCampaignBlock get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       CampaignCampaignBlock result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public CampaignCampaignBlock put(final CampaignCampaignBlock entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public CampaignCampaignBlock put(final java.lang.String id,final CampaignCampaignBlock entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<CampaignCampaignBlock> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<CampaignCampaignBlock> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
 
 
 }
+

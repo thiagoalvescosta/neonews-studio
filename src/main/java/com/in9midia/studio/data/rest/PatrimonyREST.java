@@ -48,7 +48,7 @@ public class PatrimonyREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Patrimony post(@Validated @RequestBody final Patrimony entity) throws Exception {
-        patrimonyBusiness.getRepository().save(entity);
+        patrimonyBusiness.post(entity);
         return entity;
     }
 
@@ -59,7 +59,7 @@ public class PatrimonyREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Patrimony entity = patrimonyBusiness.getRepository().findOne(id);
+        Patrimony entity = patrimonyBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -70,7 +70,7 @@ public class PatrimonyREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Patrimony entity) throws Exception {
-        return ResponseEntity.ok( patrimonyBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(patrimonyBusiness.put(entity));
     }
 
     /**
@@ -80,7 +80,7 @@ public class PatrimonyREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Patrimony put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Patrimony entity) throws Exception {
-        return patrimonyBusiness.getRepository().saveAndFlush(entity);
+        return patrimonyBusiness.put(entity);
     }
 
 
@@ -91,7 +91,7 @@ public class PatrimonyREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         patrimonyBusiness.getRepository().delete(id);
+        patrimonyBusiness.delete(id);
     }
 
 
@@ -102,7 +102,7 @@ public class PatrimonyREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Patrimony> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return patrimonyBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return patrimonyBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -123,7 +123,7 @@ public class PatrimonyREST {
   , value="/{instanceId}/PatrimonyRemote/{relationRemId}")    
   public ResponseEntity<?> deletePatrimonyRemote(@PathVariable("relationRemId") java.lang.String relationRemId) {
       try {
-        this.patrimonyRemoteBusiness.getRepository().delete(relationRemId);
+        this.patrimonyRemoteBusiness.delete(relationRemId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();

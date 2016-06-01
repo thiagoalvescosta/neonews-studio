@@ -42,7 +42,7 @@ public class SchedulePredicateTerminalREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public SchedulePredicateTerminal post(@Validated @RequestBody final SchedulePredicateTerminal entity) throws Exception {
-        schedulePredicateTerminalBusiness.getRepository().save(entity);
+        schedulePredicateTerminalBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class SchedulePredicateTerminalREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        SchedulePredicateTerminal entity = schedulePredicateTerminalBusiness.getRepository().findOne(id);
+        SchedulePredicateTerminal entity = schedulePredicateTerminalBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class SchedulePredicateTerminalREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final SchedulePredicateTerminal entity) throws Exception {
-        return ResponseEntity.ok( schedulePredicateTerminalBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(schedulePredicateTerminalBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class SchedulePredicateTerminalREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public SchedulePredicateTerminal put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final SchedulePredicateTerminal entity) throws Exception {
-        return schedulePredicateTerminalBusiness.getRepository().saveAndFlush(entity);
+        return schedulePredicateTerminalBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class SchedulePredicateTerminalREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         schedulePredicateTerminalBusiness.getRepository().delete(id);
+        schedulePredicateTerminalBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class SchedulePredicateTerminalREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<SchedulePredicateTerminal> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return schedulePredicateTerminalBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return schedulePredicateTerminalBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

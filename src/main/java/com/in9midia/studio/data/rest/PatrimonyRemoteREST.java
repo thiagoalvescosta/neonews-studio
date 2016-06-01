@@ -42,7 +42,7 @@ public class PatrimonyRemoteREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public PatrimonyRemote post(@Validated @RequestBody final PatrimonyRemote entity) throws Exception {
-        patrimonyRemoteBusiness.getRepository().save(entity);
+        patrimonyRemoteBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class PatrimonyRemoteREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{remId}")
     public ResponseEntity<?> get(@PathVariable("remId") java.lang.String remId) throws Exception {
-        PatrimonyRemote entity = patrimonyRemoteBusiness.getRepository().findOne(remId);
+        PatrimonyRemote entity = patrimonyRemoteBusiness.get(remId);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class PatrimonyRemoteREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final PatrimonyRemote entity) throws Exception {
-        return ResponseEntity.ok( patrimonyRemoteBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(patrimonyRemoteBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class PatrimonyRemoteREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{remId}")
     public PatrimonyRemote put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final PatrimonyRemote entity) throws Exception {
-        return patrimonyRemoteBusiness.getRepository().saveAndFlush(entity);
+        return patrimonyRemoteBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class PatrimonyRemoteREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{remId}")
     public void delete(@PathVariable("remId") java.lang.String remId) throws Exception {
-         patrimonyRemoteBusiness.getRepository().delete(remId);
+        patrimonyRemoteBusiness.delete(remId);
     }
 
 
@@ -96,7 +96,7 @@ public class PatrimonyRemoteREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<PatrimonyRemote> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return patrimonyRemoteBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return patrimonyRemoteBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

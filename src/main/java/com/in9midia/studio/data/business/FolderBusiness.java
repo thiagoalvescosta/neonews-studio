@@ -29,17 +29,99 @@ public class FolderBusiness {
     @Qualifier("FolderDAO")
     protected FolderDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao FolderDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public FolderDAO getRepository() {
-        return repository;
+    public Folder post(final Folder entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Folder get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Folder result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Folder put(final Folder entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Folder put(final java.lang.String id,final Folder entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Folder> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Folder> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<File> findFile(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,6 +134,7 @@ public class FolderBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Folder> findFolder(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -66,6 +149,7 @@ public class FolderBusiness {
 
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Company> listCompany(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -78,6 +162,7 @@ public class FolderBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteCompany(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -87,27 +172,5 @@ public class FolderBusiness {
       // end-user-code  
       return result;  
   }
-  /**
-   * @generated modifiable
-   */  
-  public List<Company> listCompany_2(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany_2(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany_2(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany_2(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

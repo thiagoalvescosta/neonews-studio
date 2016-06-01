@@ -77,54 +77,9 @@ public interface ModuleDAO extends JpaRepository<Module, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity FROM Theme entity WHERE entity.module.id = :id")
-  public List<Theme> findTheme_2(@Param(value="id") java.lang.String id,  Pageable pageable );
+  public List<Theme> findTheme(@Param(value="id") java.lang.String id,  Pageable pageable );
 
 
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.campaignBlock FROM Campaign entity WHERE entity.module.id = :id")
-  public List<CampaignBlock> listCampaignBlock(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Campaign entity WHERE entity.module.id = :instanceId AND entity.campaignBlock.id = :relationId")
-    public int deleteCampaignBlock(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.campaignCategory FROM Campaign entity WHERE entity.module.id = :id")
-  public List<CampaignCategory> listCampaignCategory(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Campaign entity WHERE entity.module.id = :instanceId AND entity.campaignCategory.id = :relationId")
-    public int deleteCampaignCategory(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM Campaign entity WHERE entity.module.id = :id")
-  public List<Company> listCompany(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Campaign entity WHERE entity.module.id = :instanceId AND entity.company.id = :relationId")
-    public int deleteCompany(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
   /**
    * ManyToOne Relation
@@ -140,51 +95,6 @@ public interface ModuleDAO extends JpaRepository<Module, java.lang.String> {
     @Modifying
     @Query("DELETE FROM ModuleProperty entity WHERE entity.module.id = :instanceId AND entity.propertyType.id = :relationId")
     public int deletePropertyType(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM CampaignTemplate entity WHERE entity.module.id = :id")
-  public List<Company> listCompany_2(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignTemplate entity WHERE entity.module.id = :instanceId AND entity.company.id = :relationId")
-    public int deleteCompany_2(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.nwsChannel FROM CampaignTemplate entity WHERE entity.module.id = :id")
-  public List<NwsChannel> listNwsChannel(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignTemplate entity WHERE entity.module.id = :instanceId AND entity.nwsChannel.id = :relationId")
-    public int deleteNwsChannel(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.theme FROM CampaignTemplate entity WHERE entity.module.id = :id")
-  public List<Theme> listTheme(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignTemplate entity WHERE entity.module.id = :instanceId AND entity.theme.id = :relationId")
-    public int deleteTheme(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
 
 

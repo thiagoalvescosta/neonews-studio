@@ -63,36 +63,6 @@ public interface ModulePropertyDAO extends JpaRepository<ModuleProperty, java.la
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.campaign FROM CampaignProperty entity WHERE entity.moduleProperty.id = :id")
-  public List<Campaign> listCampaign(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignProperty entity WHERE entity.moduleProperty.id = :instanceId AND entity.campaign.id = :relationId")
-    public int deleteCampaign(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.resolution FROM CampaignProperty entity WHERE entity.moduleProperty.id = :id")
-  public List<Resolution> listResolution(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignProperty entity WHERE entity.moduleProperty.id = :instanceId AND entity.resolution.id = :relationId")
-    public int deleteResolution(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

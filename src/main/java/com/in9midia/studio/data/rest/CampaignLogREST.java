@@ -42,7 +42,7 @@ public class CampaignLogREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public CampaignLog post(@Validated @RequestBody final CampaignLog entity) throws Exception {
-        campaignLogBusiness.getRepository().save(entity);
+        campaignLogBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class CampaignLogREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.Long id) throws Exception {
-        CampaignLog entity = campaignLogBusiness.getRepository().findOne(id);
+        CampaignLog entity = campaignLogBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class CampaignLogREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final CampaignLog entity) throws Exception {
-        return ResponseEntity.ok( campaignLogBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(campaignLogBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class CampaignLogREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public CampaignLog put(@PathVariable("id") final java.lang.Long id, @Validated @RequestBody final CampaignLog entity) throws Exception {
-        return campaignLogBusiness.getRepository().saveAndFlush(entity);
+        return campaignLogBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class CampaignLogREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.Long id) throws Exception {
-         campaignLogBusiness.getRepository().delete(id);
+        campaignLogBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class CampaignLogREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<CampaignLog> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return campaignLogBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return campaignLogBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

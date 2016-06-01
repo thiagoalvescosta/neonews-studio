@@ -29,17 +29,99 @@ public class TerminalBusiness {
     @Qualifier("TerminalDAO")
     protected TerminalDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao TerminalDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public TerminalDAO getRepository() {
-        return repository;
+    public Terminal post(final Terminal entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Terminal get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Terminal result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Terminal put(final Terminal entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Terminal put(final java.lang.String id,final Terminal entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Terminal> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Terminal> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Account> findAccount(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,6 +134,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignLog> findCampaignLog(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -64,6 +147,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Command> findCommand(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -76,6 +160,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Commissioned> findCommissioned(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -88,6 +173,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ContentTerminal> findContentTerminal(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -100,6 +186,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ContentUpdate> findContentUpdate(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -112,6 +199,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Log> findLog(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -124,6 +212,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ReportCampaignSchedule> findReportCampaignSchedule(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -136,6 +225,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<SchedulePredicateTerminal> findSchedulePredicateTerminal(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -148,6 +238,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<TerminalAltRoute> findTerminalAltRoute(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -160,6 +251,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<TerminalAudience> findTerminalAudience(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -172,6 +264,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<TerminalLog> findTerminalLog(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -184,6 +277,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<TerminalMovement> findTerminalMovement(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -196,6 +290,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<UserTerminal> findUserTerminal(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -210,6 +305,7 @@ public class TerminalBusiness {
 
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Campaign> listCampaign(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -222,6 +318,7 @@ public class TerminalBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteCampaign(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -233,121 +330,7 @@ public class TerminalBusiness {
   }
   /**
    * @generated modifiable
-   */  
-  public List<Company> listCompany(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Person> listPerson(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Person> result = repository.listPerson(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deletePerson(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deletePerson(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Campaign> listCampaign_2(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Campaign> result = repository.listCampaign_2(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCampaign_2(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCampaign_2(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Company> listCompany_2(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany_2(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany_2(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany_2(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<Person> listPerson_2(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Person> result = repository.listPerson_2(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deletePerson_2(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deletePerson_2(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Content> listContent(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -360,6 +343,7 @@ public class TerminalBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteContent(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -371,6 +355,7 @@ public class TerminalBusiness {
   }
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Profile> listProfile(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -383,6 +368,7 @@ public class TerminalBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteProfile(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -394,6 +380,32 @@ public class TerminalBusiness {
   }
   /**
    * @generated modifiable
+   * ManyToMany Relation
+   */  
+  public List<Campaign> listCampaign_2(java.lang.String id,  Pageable pageable ) {
+      // begin-user-code
+      // end-user-code  
+      List<Campaign> result = repository.listCampaign_2(id,  pageable );
+      // begin-user-code
+      // end-user-code
+      return result;        	  
+  }
+  
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
+   */    
+  public int deleteCampaign_2(java.lang.String instanceId, java.lang.String relationId) {
+      // begin-user-code
+      // end-user-code  
+      int result = repository.deleteCampaign_2(instanceId, relationId);
+      // begin-user-code
+      // end-user-code  
+      return result;  
+  }
+  /**
+   * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Campaign> listCampaign_3(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -406,6 +418,7 @@ public class TerminalBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteCampaign_3(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -417,29 +430,7 @@ public class TerminalBusiness {
   }
   /**
    * @generated modifiable
-   */  
-  public List<Campaign> listCampaign_4(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Campaign> result = repository.listCampaign_4(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCampaign_4(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCampaign_4(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<SchedulePredicate> listSchedulePredicate(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -452,6 +443,7 @@ public class TerminalBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteSchedulePredicate(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -463,6 +455,7 @@ public class TerminalBusiness {
   }
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<File> listFile(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -475,6 +468,7 @@ public class TerminalBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteFile(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -486,6 +480,7 @@ public class TerminalBusiness {
   }
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Employer> listEmployer(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -498,6 +493,7 @@ public class TerminalBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteEmployer(java.lang.String instanceId, java.lang.String relationCard) {
       // begin-user-code
@@ -508,3 +504,4 @@ public class TerminalBusiness {
       return result;  
   }
 }
+

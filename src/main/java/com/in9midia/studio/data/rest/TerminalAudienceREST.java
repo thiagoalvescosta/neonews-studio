@@ -42,7 +42,7 @@ public class TerminalAudienceREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public TerminalAudience post(@Validated @RequestBody final TerminalAudience entity) throws Exception {
-        terminalAudienceBusiness.getRepository().save(entity);
+        terminalAudienceBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class TerminalAudienceREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.Double id) throws Exception {
-        TerminalAudience entity = terminalAudienceBusiness.getRepository().findOne(id);
+        TerminalAudience entity = terminalAudienceBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class TerminalAudienceREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final TerminalAudience entity) throws Exception {
-        return ResponseEntity.ok( terminalAudienceBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(terminalAudienceBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class TerminalAudienceREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public TerminalAudience put(@PathVariable("id") final java.lang.Double id, @Validated @RequestBody final TerminalAudience entity) throws Exception {
-        return terminalAudienceBusiness.getRepository().saveAndFlush(entity);
+        return terminalAudienceBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class TerminalAudienceREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.Double id) throws Exception {
-         terminalAudienceBusiness.getRepository().delete(id);
+        terminalAudienceBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class TerminalAudienceREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<TerminalAudience> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return terminalAudienceBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return terminalAudienceBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

@@ -42,7 +42,7 @@ public class AccountREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Account post(@Validated @RequestBody final Account entity) throws Exception {
-        accountBusiness.getRepository().save(entity);
+        accountBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class AccountREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Account entity = accountBusiness.getRepository().findOne(id);
+        Account entity = accountBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class AccountREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Account entity) throws Exception {
-        return ResponseEntity.ok( accountBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(accountBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class AccountREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Account put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Account entity) throws Exception {
-        return accountBusiness.getRepository().saveAndFlush(entity);
+        return accountBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class AccountREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         accountBusiness.getRepository().delete(id);
+        accountBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class AccountREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Account> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return accountBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return accountBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

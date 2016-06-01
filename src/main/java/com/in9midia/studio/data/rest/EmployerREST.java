@@ -54,7 +54,7 @@ public class EmployerREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Employer post(@Validated @RequestBody final Employer entity) throws Exception {
-        employerBusiness.getRepository().save(entity);
+        employerBusiness.post(entity);
         return entity;
     }
 
@@ -65,7 +65,7 @@ public class EmployerREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{card}")
     public ResponseEntity<?> get(@PathVariable("card") java.lang.String card) throws Exception {
-        Employer entity = employerBusiness.getRepository().findOne(card);
+        Employer entity = employerBusiness.get(card);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -76,7 +76,7 @@ public class EmployerREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Employer entity) throws Exception {
-        return ResponseEntity.ok( employerBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(employerBusiness.put(entity));
     }
 
     /**
@@ -86,7 +86,7 @@ public class EmployerREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{card}")
     public Employer put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Employer entity) throws Exception {
-        return employerBusiness.getRepository().saveAndFlush(entity);
+        return employerBusiness.put(entity);
     }
 
 
@@ -97,7 +97,7 @@ public class EmployerREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{card}")
     public void delete(@PathVariable("card") java.lang.String card) throws Exception {
-         employerBusiness.getRepository().delete(card);
+        employerBusiness.delete(card);
     }
 
 
@@ -108,7 +108,7 @@ public class EmployerREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Employer> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return employerBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return employerBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -129,7 +129,7 @@ public class EmployerREST {
   , value="/{instanceCard}/TerminalAudience/{relationId}")    
   public ResponseEntity<?> deleteTerminalAudience(@PathVariable("relationId") java.lang.Double relationId) {
       try {
-        this.terminalAudienceBusiness.getRepository().delete(relationId);
+        this.terminalAudienceBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -154,15 +154,15 @@ public class EmployerREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceCard}/Terminal")
-  public ResponseEntity<?> postTerminal(@Validated @RequestBody final Terminal entity, @PathVariable("instanceCard") java.lang.String instanceCard) {
+  public ResponseEntity<?> postTerminal(@Validated @RequestBody final Terminal entity, @PathVariable("instanceCard") java.lang.String instanceCard) throws Exception {
       TerminalAudience newTerminalAudience = new TerminalAudience();
 
-      Employer instance = this.employerBusiness.getRepository().findOne(instanceCard);
+      Employer instance = this.employerBusiness.get(instanceCard);
 
       newTerminalAudience.setTerminal(entity);
       newTerminalAudience.setEmployer(instance);
       
-      this.terminalAudienceBusiness.getRepository().saveAndFlush(newTerminalAudience);
+      this.terminalAudienceBusiness.post(newTerminalAudience);
 
       return ResponseEntity.ok(newTerminalAudience.getEmployer());
   }   

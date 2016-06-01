@@ -6,7 +6,6 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 import java.util.Date;
 import org.eclipse.persistence.annotations.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**

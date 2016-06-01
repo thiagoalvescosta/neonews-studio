@@ -63,51 +63,6 @@ public interface NwsChannelDAO extends JpaRepository<NwsChannel, java.lang.Strin
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM CampaignTemplate entity WHERE entity.nwsChannel.id = :id")
-  public List<Company> listCompany(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignTemplate entity WHERE entity.nwsChannel.id = :instanceId AND entity.company.id = :relationId")
-    public int deleteCompany(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.module FROM CampaignTemplate entity WHERE entity.nwsChannel.id = :id")
-  public List<Module> listModule(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignTemplate entity WHERE entity.nwsChannel.id = :instanceId AND entity.module.id = :relationId")
-    public int deleteModule(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.theme FROM CampaignTemplate entity WHERE entity.nwsChannel.id = :id")
-  public List<Theme> listTheme(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignTemplate entity WHERE entity.nwsChannel.id = :instanceId AND entity.theme.id = :relationId")
-    public int deleteTheme(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

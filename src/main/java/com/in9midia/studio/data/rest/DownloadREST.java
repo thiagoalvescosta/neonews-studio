@@ -42,7 +42,7 @@ public class DownloadREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Download post(@Validated @RequestBody final Download entity) throws Exception {
-        downloadBusiness.getRepository().save(entity);
+        downloadBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class DownloadREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Download entity = downloadBusiness.getRepository().findOne(id);
+        Download entity = downloadBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class DownloadREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Download entity) throws Exception {
-        return ResponseEntity.ok( downloadBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(downloadBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class DownloadREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Download put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Download entity) throws Exception {
-        return downloadBusiness.getRepository().saveAndFlush(entity);
+        return downloadBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class DownloadREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         downloadBusiness.getRepository().delete(id);
+        downloadBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class DownloadREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Download> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return downloadBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return downloadBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

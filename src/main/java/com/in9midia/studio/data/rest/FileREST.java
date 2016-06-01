@@ -38,42 +38,6 @@ public class FileREST {
    * @generated
    */
     @Autowired
-    @Qualifier("CompanyBusiness")
-    private CompanyBusiness companyBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("ExpressionExBusiness")
-    private ExpressionExBusiness expressionExBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("AddressBusiness")
-    private AddressBusiness addressBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("ChannelBusiness")
-    private ChannelBusiness channelBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("TemplateBusiness")
-    private TemplateBusiness templateBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("ContentBusiness")
-    private ContentBusiness contentBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("TerminalBusiness")
     private TerminalBusiness terminalBusiness;
   /**
@@ -86,8 +50,20 @@ public class FileREST {
    * @generated
    */
     @Autowired
+    @Qualifier("CompanyBusiness")
+    private CompanyBusiness companyBusiness;
+  /**
+   * @generated
+   */
+    @Autowired
     @Qualifier("ConfigBusiness")
     private ConfigBusiness configBusiness;
+  /**
+   * @generated
+   */
+    @Autowired
+    @Qualifier("ContentBusiness")
+    private ContentBusiness contentBusiness;
   /**
    * @generated
    */
@@ -132,7 +108,7 @@ public class FileREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public File post(@Validated @RequestBody final File entity) throws Exception {
-        fileBusiness.getRepository().save(entity);
+        fileBusiness.post(entity);
         return entity;
     }
 
@@ -143,7 +119,7 @@ public class FileREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        File entity = fileBusiness.getRepository().findOne(id);
+        File entity = fileBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -154,7 +130,7 @@ public class FileREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final File entity) throws Exception {
-        return ResponseEntity.ok( fileBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(fileBusiness.put(entity));
     }
 
     /**
@@ -164,7 +140,7 @@ public class FileREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public File put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final File entity) throws Exception {
-        return fileBusiness.getRepository().saveAndFlush(entity);
+        return fileBusiness.put(entity);
     }
 
 
@@ -175,7 +151,7 @@ public class FileREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         fileBusiness.getRepository().delete(id);
+        fileBusiness.delete(id);
     }
 
 
@@ -186,7 +162,7 @@ public class FileREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<File> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return fileBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return fileBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -207,7 +183,7 @@ public class FileREST {
   , value="/{instanceId}/Agency/{relationId}")    
   public ResponseEntity<?> deleteAgency(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.agencyBusiness.getRepository().delete(relationId);
+        this.agencyBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -219,9 +195,9 @@ public class FileREST {
    * @generated
    */
   @RequestMapping(method = RequestMethod.GET
-  , value="/{instanceId}/Company_2")    
-  public List<Company> findCompany_2(@PathVariable("instanceId") java.lang.String instanceId, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset) {
-    return fileBusiness.findCompany_2(instanceId,  new PageRequest(offset, limit) );
+  , value="/{instanceId}/Company")    
+  public List<Company> findCompany(@PathVariable("instanceId") java.lang.String instanceId, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset) {
+    return fileBusiness.findCompany(instanceId,  new PageRequest(offset, limit) );
   }
 
   /**
@@ -229,10 +205,10 @@ public class FileREST {
    * @generated
    */  
   @RequestMapping(method = RequestMethod.DELETE
-  , value="/{instanceId}/Company_2/{relationId}")    
-  public ResponseEntity<?> deleteCompany_2(@PathVariable("relationId") java.lang.String relationId) {
+  , value="/{instanceId}/Company/{relationId}")    
+  public ResponseEntity<?> deleteCompany(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.companyBusiness.getRepository().delete(relationId);
+        this.companyBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -257,7 +233,7 @@ public class FileREST {
   , value="/{instanceId}/Config/{relationId}")    
   public ResponseEntity<?> deleteConfig(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.configBusiness.getRepository().delete(relationId);
+        this.configBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -282,7 +258,7 @@ public class FileREST {
   , value="/{instanceId}/Content/{relationId}")    
   public ResponseEntity<?> deleteContent(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.contentBusiness.getRepository().delete(relationId);
+        this.contentBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -307,7 +283,7 @@ public class FileREST {
   , value="/{instanceId}/NwsChannel/{relationId}")    
   public ResponseEntity<?> deleteNwsChannel(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.nwsChannelBusiness.getRepository().delete(relationId);
+        this.nwsChannelBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -332,7 +308,7 @@ public class FileREST {
   , value="/{instanceId}/NwsChannel_2/{relationId}")    
   public ResponseEntity<?> deleteNwsChannel_2(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.nwsChannelBusiness.getRepository().delete(relationId);
+        this.nwsChannelBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -357,7 +333,7 @@ public class FileREST {
   , value="/{instanceId}/NwsChannel_3/{relationId}")    
   public ResponseEntity<?> deleteNwsChannel_3(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.nwsChannelBusiness.getRepository().delete(relationId);
+        this.nwsChannelBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -382,7 +358,7 @@ public class FileREST {
   , value="/{instanceId}/NwsChannel_4/{relationId}")    
   public ResponseEntity<?> deleteNwsChannel_4(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.nwsChannelBusiness.getRepository().delete(relationId);
+        this.nwsChannelBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -407,7 +383,7 @@ public class FileREST {
   , value="/{instanceId}/Participant/{relationId}")    
   public ResponseEntity<?> deleteParticipant(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.participantBusiness.getRepository().delete(relationId);
+        this.participantBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -432,7 +408,7 @@ public class FileREST {
   , value="/{instanceId}/Profile/{relationId}")    
   public ResponseEntity<?> deleteProfile(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.profileBusiness.getRepository().delete(relationId);
+        this.profileBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -457,7 +433,7 @@ public class FileREST {
   , value="/{instanceId}/Profile_2/{relationId}")    
   public ResponseEntity<?> deleteProfile_2(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.profileBusiness.getRepository().delete(relationId);
+        this.profileBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -482,7 +458,7 @@ public class FileREST {
   , value="/{instanceId}/Profile_3/{relationId}")    
   public ResponseEntity<?> deleteProfile_3(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.profileBusiness.getRepository().delete(relationId);
+        this.profileBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -507,7 +483,7 @@ public class FileREST {
   , value="/{instanceId}/Profile_4/{relationId}")    
   public ResponseEntity<?> deleteProfile_4(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.profileBusiness.getRepository().delete(relationId);
+        this.profileBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -532,7 +508,7 @@ public class FileREST {
   , value="/{instanceId}/Route/{relationId}")    
   public ResponseEntity<?> deleteRoute(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.routeBusiness.getRepository().delete(relationId);
+        this.routeBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -557,7 +533,7 @@ public class FileREST {
   , value="/{instanceId}/Route_2/{relationId}")    
   public ResponseEntity<?> deleteRoute_2(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.routeBusiness.getRepository().delete(relationId);
+        this.routeBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -582,7 +558,7 @@ public class FileREST {
   , value="/{instanceId}/Route_3/{relationId}")    
   public ResponseEntity<?> deleteRoute_3(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.routeBusiness.getRepository().delete(relationId);
+        this.routeBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -607,7 +583,7 @@ public class FileREST {
   , value="/{instanceId}/Route_4/{relationId}")    
   public ResponseEntity<?> deleteRoute_4(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.routeBusiness.getRepository().delete(relationId);
+        this.routeBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -632,7 +608,7 @@ public class FileREST {
   , value="/{instanceId}/CampaignTemplate/{relationId}")    
   public ResponseEntity<?> deleteCampaignTemplate(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.campaignTemplateBusiness.getRepository().delete(relationId);
+        this.campaignTemplateBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -657,7 +633,7 @@ public class FileREST {
   , value="/{instanceId}/CampaignTemplate_2/{relationId}")    
   public ResponseEntity<?> deleteCampaignTemplate_2(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.campaignTemplateBusiness.getRepository().delete(relationId);
+        this.campaignTemplateBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -682,7 +658,7 @@ public class FileREST {
   , value="/{instanceId}/CampaignTemplate_3/{relationId}")    
   public ResponseEntity<?> deleteCampaignTemplate_3(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.campaignTemplateBusiness.getRepository().delete(relationId);
+        this.campaignTemplateBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -707,7 +683,7 @@ public class FileREST {
   , value="/{instanceId}/CampaignTemplate_4/{relationId}")    
   public ResponseEntity<?> deleteCampaignTemplate_4(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.campaignTemplateBusiness.getRepository().delete(relationId);
+        this.campaignTemplateBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -732,300 +708,13 @@ public class FileREST {
   , value="/{instanceId}/TerminalAltRoute/{relationId}")    
   public ResponseEntity<?> deleteTerminalAltRoute(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalAltRouteBusiness.getRepository().delete(relationId);
+        this.terminalAltRouteBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
       }
   }
 
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Company")
-  public List<Company> listCompany(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return fileBusiness.listCompany(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Company")
-  public ResponseEntity<?> postCompany(@Validated @RequestBody final Company entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Agency newAgency = new Agency();
-
-      File instance = this.fileBusiness.getRepository().findOne(instanceId);
-
-      newAgency.setCompany(entity);
-      newAgency.setFile(instance);
-      
-      this.agencyBusiness.getRepository().saveAndFlush(newAgency);
-
-      return ResponseEntity.ok(newAgency.getFile());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Company/{relationId}")
-  public ResponseEntity<?> deleteCompany(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.fileBusiness.deleteCompany(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/ExpressionEx")
-  public List<ExpressionEx> listExpressionEx(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return fileBusiness.listExpressionEx(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/ExpressionEx")
-  public ResponseEntity<?> postExpressionEx(@Validated @RequestBody final ExpressionEx entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Agency newAgency = new Agency();
-
-      File instance = this.fileBusiness.getRepository().findOne(instanceId);
-
-      newAgency.setExpressionEx(entity);
-      newAgency.setFile(instance);
-      
-      this.agencyBusiness.getRepository().saveAndFlush(newAgency);
-
-      return ResponseEntity.ok(newAgency.getFile());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/ExpressionEx/{relationId}")
-  public ResponseEntity<?> deleteExpressionEx(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.fileBusiness.deleteExpressionEx(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Address")
-  public List<Address> listAddress(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return fileBusiness.listAddress(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Address")
-  public ResponseEntity<?> postAddress(@Validated @RequestBody final Address entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Company newCompany = new Company();
-
-      File instance = this.fileBusiness.getRepository().findOne(instanceId);
-
-      newCompany.setAddress(entity);
-      newCompany.setFile(instance);
-      
-      this.companyBusiness.getRepository().saveAndFlush(newCompany);
-
-      return ResponseEntity.ok(newCompany.getFile());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Address/{relationId}")
-  public ResponseEntity<?> deleteAddress(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.fileBusiness.deleteAddress(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Channel")
-  public List<Channel> listChannel(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return fileBusiness.listChannel(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Channel")
-  public ResponseEntity<?> postChannel(@Validated @RequestBody final Channel entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Content newContent = new Content();
-
-      File instance = this.fileBusiness.getRepository().findOne(instanceId);
-
-      newContent.setChannel(entity);
-      newContent.setFile(instance);
-      
-      this.contentBusiness.getRepository().saveAndFlush(newContent);
-
-      return ResponseEntity.ok(newContent.getFile());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Channel/{relationId}")
-  public ResponseEntity<?> deleteChannel(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.fileBusiness.deleteChannel(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Template")
-  public List<Template> listTemplate(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return fileBusiness.listTemplate(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Template")
-  public ResponseEntity<?> postTemplate(@Validated @RequestBody final Template entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Content newContent = new Content();
-
-      File instance = this.fileBusiness.getRepository().findOne(instanceId);
-
-      newContent.setTemplate(entity);
-      newContent.setFile(instance);
-      
-      this.contentBusiness.getRepository().saveAndFlush(newContent);
-
-      return ResponseEntity.ok(newContent.getFile());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Template/{relationId}")
-  public ResponseEntity<?> deleteTemplate(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.fileBusiness.deleteTemplate(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Company_3")
-  public List<Company> listCompany_3(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return fileBusiness.listCompany_3(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Company_3")
-  public ResponseEntity<?> postCompany_3(@Validated @RequestBody final Company entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Participant newParticipant = new Participant();
-
-      File instance = this.fileBusiness.getRepository().findOne(instanceId);
-
-      newParticipant.setCompany(entity);
-      newParticipant.setFile(instance);
-      
-      this.participantBusiness.getRepository().saveAndFlush(newParticipant);
-
-      return ResponseEntity.ok(newParticipant.getFile());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Company_3/{relationId}")
-  public ResponseEntity<?> deleteCompany_3(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.fileBusiness.deleteCompany_3(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Content_2")
-  public List<Content> listContent_2(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return fileBusiness.listContent_2(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Content_2")
-  public ResponseEntity<?> postContent_2(@Validated @RequestBody final Content entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Participant newParticipant = new Participant();
-
-      File instance = this.fileBusiness.getRepository().findOne(instanceId);
-
-      newParticipant.setContent(entity);
-      newParticipant.setFile(instance);
-      
-      this.participantBusiness.getRepository().saveAndFlush(newParticipant);
-
-      return ResponseEntity.ok(newParticipant.getFile());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Content_2/{relationId}")
-  public ResponseEntity<?> deleteContent_2(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.fileBusiness.deleteContent_2(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
 
 
   /**
@@ -1044,15 +733,15 @@ public class FileREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Terminal")
-  public ResponseEntity<?> postTerminal(@Validated @RequestBody final Terminal entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postTerminal(@Validated @RequestBody final Terminal entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       TerminalAltRoute newTerminalAltRoute = new TerminalAltRoute();
 
-      File instance = this.fileBusiness.getRepository().findOne(instanceId);
+      File instance = this.fileBusiness.get(instanceId);
 
       newTerminalAltRoute.setTerminal(entity);
       newTerminalAltRoute.setFile(instance);
       
-      this.terminalAltRouteBusiness.getRepository().saveAndFlush(newTerminalAltRoute);
+      this.terminalAltRouteBusiness.post(newTerminalAltRoute);
 
       return ResponseEntity.ok(newTerminalAltRoute.getFile());
   }   

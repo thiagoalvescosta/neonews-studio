@@ -38,18 +38,6 @@ public class ProfileTvREST {
    * @generated
    */
     @Autowired
-    @Qualifier("ProfileBusiness")
-    private ProfileBusiness profileBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("ScheduleBusiness")
-    private ScheduleBusiness scheduleBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("CampaignBlockBusiness")
     private CampaignBlockBusiness campaignBlockBusiness;
 
@@ -60,7 +48,7 @@ public class ProfileTvREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ProfileTv post(@Validated @RequestBody final ProfileTv entity) throws Exception {
-        profileTvBusiness.getRepository().save(entity);
+        profileTvBusiness.post(entity);
         return entity;
     }
 
@@ -71,7 +59,7 @@ public class ProfileTvREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ProfileTv entity = profileTvBusiness.getRepository().findOne(id);
+        ProfileTv entity = profileTvBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -82,7 +70,7 @@ public class ProfileTvREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ProfileTv entity) throws Exception {
-        return ResponseEntity.ok( profileTvBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(profileTvBusiness.put(entity));
     }
 
     /**
@@ -92,7 +80,7 @@ public class ProfileTvREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ProfileTv put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ProfileTv entity) throws Exception {
-        return profileTvBusiness.getRepository().saveAndFlush(entity);
+        return profileTvBusiness.put(entity);
     }
 
 
@@ -103,7 +91,7 @@ public class ProfileTvREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         profileTvBusiness.getRepository().delete(id);
+        profileTvBusiness.delete(id);
     }
 
 
@@ -114,7 +102,7 @@ public class ProfileTvREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ProfileTv> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return profileTvBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return profileTvBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -135,95 +123,13 @@ public class ProfileTvREST {
   , value="/{instanceId}/CampaignBlock/{relationId}")    
   public ResponseEntity<?> deleteCampaignBlock(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.campaignBlockBusiness.getRepository().delete(relationId);
+        this.campaignBlockBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
       }
   }
 
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Profile")
-  public List<Profile> listProfile(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return profileTvBusiness.listProfile(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Profile")
-  public ResponseEntity<?> postProfile(@Validated @RequestBody final Profile entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      CampaignBlock newCampaignBlock = new CampaignBlock();
-
-      ProfileTv instance = this.profileTvBusiness.getRepository().findOne(instanceId);
-
-      newCampaignBlock.setProfile(entity);
-      newCampaignBlock.setProfileTv(instance);
-      
-      this.campaignBlockBusiness.getRepository().saveAndFlush(newCampaignBlock);
-
-      return ResponseEntity.ok(newCampaignBlock.getProfileTv());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Profile/{relationId}")
-  public ResponseEntity<?> deleteProfile(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.profileTvBusiness.deleteProfile(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Schedule")
-  public List<Schedule> listSchedule(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return profileTvBusiness.listSchedule(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Schedule")
-  public ResponseEntity<?> postSchedule(@Validated @RequestBody final Schedule entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      CampaignBlock newCampaignBlock = new CampaignBlock();
-
-      ProfileTv instance = this.profileTvBusiness.getRepository().findOne(instanceId);
-
-      newCampaignBlock.setSchedule(entity);
-      newCampaignBlock.setProfileTv(instance);
-      
-      this.campaignBlockBusiness.getRepository().saveAndFlush(newCampaignBlock);
-
-      return ResponseEntity.ok(newCampaignBlock.getProfileTv());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Schedule/{relationId}")
-  public ResponseEntity<?> deleteSchedule(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.profileTvBusiness.deleteSchedule(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
 
 
 

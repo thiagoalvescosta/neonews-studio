@@ -42,7 +42,7 @@ public class CommissionedREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Commissioned post(@Validated @RequestBody final Commissioned entity) throws Exception {
-        commissionedBusiness.getRepository().save(entity);
+        commissionedBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class CommissionedREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Commissioned entity = commissionedBusiness.getRepository().findOne(id);
+        Commissioned entity = commissionedBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class CommissionedREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Commissioned entity) throws Exception {
-        return ResponseEntity.ok( commissionedBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(commissionedBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class CommissionedREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Commissioned put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Commissioned entity) throws Exception {
-        return commissionedBusiness.getRepository().saveAndFlush(entity);
+        return commissionedBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class CommissionedREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         commissionedBusiness.getRepository().delete(id);
+        commissionedBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class CommissionedREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Commissioned> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return commissionedBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return commissionedBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

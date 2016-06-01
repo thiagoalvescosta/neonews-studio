@@ -29,17 +29,99 @@ public class ResolutionBusiness {
     @Qualifier("ResolutionDAO")
     protected ResolutionDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao ResolutionDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public ResolutionDAO getRepository() {
-        return repository;
+    public Resolution post(final Resolution entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Resolution get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Resolution result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Resolution put(final Resolution entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Resolution put(final java.lang.String id,final Resolution entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Resolution> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Resolution> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignProperty> findCampaignProperty(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,6 +134,7 @@ public class ResolutionBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<TvType> findTvType(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -64,50 +147,5 @@ public class ResolutionBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<Campaign> listCampaign(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Campaign> result = repository.listCampaign(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCampaign(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCampaign(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<ModuleProperty> listModuleProperty(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<ModuleProperty> result = repository.listModuleProperty(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteModuleProperty(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteModuleProperty(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

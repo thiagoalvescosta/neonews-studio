@@ -54,7 +54,7 @@ public class PropertyTypeREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public PropertyType post(@Validated @RequestBody final PropertyType entity) throws Exception {
-        propertyTypeBusiness.getRepository().save(entity);
+        propertyTypeBusiness.post(entity);
         return entity;
     }
 
@@ -65,7 +65,7 @@ public class PropertyTypeREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        PropertyType entity = propertyTypeBusiness.getRepository().findOne(id);
+        PropertyType entity = propertyTypeBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -76,7 +76,7 @@ public class PropertyTypeREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final PropertyType entity) throws Exception {
-        return ResponseEntity.ok( propertyTypeBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(propertyTypeBusiness.put(entity));
     }
 
     /**
@@ -86,7 +86,7 @@ public class PropertyTypeREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public PropertyType put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final PropertyType entity) throws Exception {
-        return propertyTypeBusiness.getRepository().saveAndFlush(entity);
+        return propertyTypeBusiness.put(entity);
     }
 
 
@@ -97,7 +97,7 @@ public class PropertyTypeREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         propertyTypeBusiness.getRepository().delete(id);
+        propertyTypeBusiness.delete(id);
     }
 
 
@@ -108,7 +108,7 @@ public class PropertyTypeREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<PropertyType> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return propertyTypeBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return propertyTypeBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -129,7 +129,7 @@ public class PropertyTypeREST {
   , value="/{instanceId}/ModuleProperty/{relationId}")    
   public ResponseEntity<?> deleteModuleProperty(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.modulePropertyBusiness.getRepository().delete(relationId);
+        this.modulePropertyBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -154,15 +154,15 @@ public class PropertyTypeREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Module")
-  public ResponseEntity<?> postModule(@Validated @RequestBody final Module entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postModule(@Validated @RequestBody final Module entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       ModuleProperty newModuleProperty = new ModuleProperty();
 
-      PropertyType instance = this.propertyTypeBusiness.getRepository().findOne(instanceId);
+      PropertyType instance = this.propertyTypeBusiness.get(instanceId);
 
       newModuleProperty.setModule(entity);
       newModuleProperty.setPropertyType(instance);
       
-      this.modulePropertyBusiness.getRepository().saveAndFlush(newModuleProperty);
+      this.modulePropertyBusiness.post(newModuleProperty);
 
       return ResponseEntity.ok(newModuleProperty.getPropertyType());
   }   

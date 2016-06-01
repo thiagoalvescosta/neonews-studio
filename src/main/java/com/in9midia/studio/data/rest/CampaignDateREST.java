@@ -42,7 +42,7 @@ public class CampaignDateREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public CampaignDate post(@Validated @RequestBody final CampaignDate entity) throws Exception {
-        campaignDateBusiness.getRepository().save(entity);
+        campaignDateBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class CampaignDateREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        CampaignDate entity = campaignDateBusiness.getRepository().findOne(id);
+        CampaignDate entity = campaignDateBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class CampaignDateREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final CampaignDate entity) throws Exception {
-        return ResponseEntity.ok( campaignDateBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(campaignDateBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class CampaignDateREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public CampaignDate put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final CampaignDate entity) throws Exception {
-        return campaignDateBusiness.getRepository().saveAndFlush(entity);
+        return campaignDateBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class CampaignDateREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         campaignDateBusiness.getRepository().delete(id);
+        campaignDateBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class CampaignDateREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<CampaignDate> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return campaignDateBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return campaignDateBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

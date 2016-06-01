@@ -42,7 +42,7 @@ public class ChannelPersonREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ChannelPerson post(@Validated @RequestBody final ChannelPerson entity) throws Exception {
-        channelPersonBusiness.getRepository().save(entity);
+        channelPersonBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ChannelPersonREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ChannelPerson entity = channelPersonBusiness.getRepository().findOne(id);
+        ChannelPerson entity = channelPersonBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ChannelPersonREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ChannelPerson entity) throws Exception {
-        return ResponseEntity.ok( channelPersonBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(channelPersonBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ChannelPersonREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ChannelPerson put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ChannelPerson entity) throws Exception {
-        return channelPersonBusiness.getRepository().saveAndFlush(entity);
+        return channelPersonBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ChannelPersonREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         channelPersonBusiness.getRepository().delete(id);
+        channelPersonBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ChannelPersonREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ChannelPerson> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return channelPersonBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return channelPersonBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

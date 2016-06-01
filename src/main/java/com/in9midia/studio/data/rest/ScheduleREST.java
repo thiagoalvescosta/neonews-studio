@@ -38,20 +38,14 @@ public class ScheduleREST {
    * @generated
    */
     @Autowired
-    @Qualifier("ProfileBusiness")
-    private ProfileBusiness profileBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("ProfileTvBusiness")
-    private ProfileTvBusiness profileTvBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("CampaignBlockBusiness")
     private CampaignBlockBusiness campaignBlockBusiness;
+  /**
+   * @generated
+   */
+    @Autowired
+    @Qualifier("ProfileBusiness")
+    private ProfileBusiness profileBusiness;
   /**
    * @generated
    */
@@ -72,7 +66,7 @@ public class ScheduleREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Schedule post(@Validated @RequestBody final Schedule entity) throws Exception {
-        scheduleBusiness.getRepository().save(entity);
+        scheduleBusiness.post(entity);
         return entity;
     }
 
@@ -83,7 +77,7 @@ public class ScheduleREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Schedule entity = scheduleBusiness.getRepository().findOne(id);
+        Schedule entity = scheduleBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -94,7 +88,7 @@ public class ScheduleREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Schedule entity) throws Exception {
-        return ResponseEntity.ok( scheduleBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(scheduleBusiness.put(entity));
     }
 
     /**
@@ -104,7 +98,7 @@ public class ScheduleREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Schedule put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Schedule entity) throws Exception {
-        return scheduleBusiness.getRepository().saveAndFlush(entity);
+        return scheduleBusiness.put(entity);
     }
 
 
@@ -115,7 +109,7 @@ public class ScheduleREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         scheduleBusiness.getRepository().delete(id);
+        scheduleBusiness.delete(id);
     }
 
 
@@ -126,7 +120,7 @@ public class ScheduleREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Schedule> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return scheduleBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return scheduleBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -147,7 +141,32 @@ public class ScheduleREST {
   , value="/{instanceId}/CampaignBlock/{relationId}")    
   public ResponseEntity<?> deleteCampaignBlock(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.campaignBlockBusiness.getRepository().delete(relationId);
+        this.campaignBlockBusiness.delete(relationId);
+        return ResponseEntity.ok().build();
+      } catch (Exception e) {
+        return ResponseEntity.status(404).build();
+      }
+  }
+
+  /**
+   * OneToMany Relationship GET
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET
+  , value="/{instanceId}/Profile")    
+  public List<Profile> findProfile(@PathVariable("instanceId") java.lang.String instanceId, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset) {
+    return scheduleBusiness.findProfile(instanceId,  new PageRequest(offset, limit) );
+  }
+
+  /**
+   * OneToMany Relationship DELETE 
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.DELETE
+  , value="/{instanceId}/Profile/{relationId}")    
+  public ResponseEntity<?> deleteProfile(@PathVariable("relationId") java.lang.String relationId) {
+      try {
+        this.profileBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -172,7 +191,7 @@ public class ScheduleREST {
   , value="/{instanceId}/Profile_2/{relationId}")    
   public ResponseEntity<?> deleteProfile_2(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.profileBusiness.getRepository().delete(relationId);
+        this.profileBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -197,7 +216,7 @@ public class ScheduleREST {
   , value="/{instanceId}/Profile_3/{relationId}")    
   public ResponseEntity<?> deleteProfile_3(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.profileBusiness.getRepository().delete(relationId);
+        this.profileBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -222,32 +241,7 @@ public class ScheduleREST {
   , value="/{instanceId}/Profile_4/{relationId}")    
   public ResponseEntity<?> deleteProfile_4(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.profileBusiness.getRepository().delete(relationId);
-        return ResponseEntity.ok().build();
-      } catch (Exception e) {
-        return ResponseEntity.status(404).build();
-      }
-  }
-
-  /**
-   * OneToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  , value="/{instanceId}/Profile_5")    
-  public List<Profile> findProfile_5(@PathVariable("instanceId") java.lang.String instanceId, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset) {
-    return scheduleBusiness.findProfile_5(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * OneToMany Relationship DELETE 
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  , value="/{instanceId}/Profile_5/{relationId}")    
-  public ResponseEntity<?> deleteProfile_5(@PathVariable("relationId") java.lang.String relationId) {
-      try {
-        this.profileBusiness.getRepository().delete(relationId);
+        this.profileBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -272,7 +266,7 @@ public class ScheduleREST {
   , value="/{instanceId}/SchedulePredicate/{relationId}")    
   public ResponseEntity<?> deleteSchedulePredicate(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.schedulePredicateBusiness.getRepository().delete(relationId);
+        this.schedulePredicateBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -297,7 +291,7 @@ public class ScheduleREST {
   , value="/{instanceId}/Terminal/{relationId}")    
   public ResponseEntity<?> deleteTerminal(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalBusiness.getRepository().delete(relationId);
+        this.terminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -322,7 +316,7 @@ public class ScheduleREST {
   , value="/{instanceId}/Terminal_2/{relationId}")    
   public ResponseEntity<?> deleteTerminal_2(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalBusiness.getRepository().delete(relationId);
+        this.terminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -347,7 +341,7 @@ public class ScheduleREST {
   , value="/{instanceId}/Terminal_3/{relationId}")    
   public ResponseEntity<?> deleteTerminal_3(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalBusiness.getRepository().delete(relationId);
+        this.terminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -372,95 +366,13 @@ public class ScheduleREST {
   , value="/{instanceId}/Terminal_4/{relationId}")    
   public ResponseEntity<?> deleteTerminal_4(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalBusiness.getRepository().delete(relationId);
+        this.terminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
       }
   }
 
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Profile")
-  public List<Profile> listProfile(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return scheduleBusiness.listProfile(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Profile")
-  public ResponseEntity<?> postProfile(@Validated @RequestBody final Profile entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      CampaignBlock newCampaignBlock = new CampaignBlock();
-
-      Schedule instance = this.scheduleBusiness.getRepository().findOne(instanceId);
-
-      newCampaignBlock.setProfile(entity);
-      newCampaignBlock.setSchedule(instance);
-      
-      this.campaignBlockBusiness.getRepository().saveAndFlush(newCampaignBlock);
-
-      return ResponseEntity.ok(newCampaignBlock.getSchedule());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Profile/{relationId}")
-  public ResponseEntity<?> deleteProfile(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.scheduleBusiness.deleteProfile(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/ProfileTv")
-  public List<ProfileTv> listProfileTv(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return scheduleBusiness.listProfileTv(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/ProfileTv")
-  public ResponseEntity<?> postProfileTv(@Validated @RequestBody final ProfileTv entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      CampaignBlock newCampaignBlock = new CampaignBlock();
-
-      Schedule instance = this.scheduleBusiness.getRepository().findOne(instanceId);
-
-      newCampaignBlock.setProfileTv(entity);
-      newCampaignBlock.setSchedule(instance);
-      
-      this.campaignBlockBusiness.getRepository().saveAndFlush(newCampaignBlock);
-
-      return ResponseEntity.ok(newCampaignBlock.getSchedule());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/ProfileTv/{relationId}")
-  public ResponseEntity<?> deleteProfileTv(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.scheduleBusiness.deleteProfileTv(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
 
 
 

@@ -48,7 +48,7 @@ public class TempREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Temp post(@Validated @RequestBody final Temp entity) throws Exception {
-        tempBusiness.getRepository().save(entity);
+        tempBusiness.post(entity);
         return entity;
     }
 
@@ -59,7 +59,7 @@ public class TempREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{conId}")
     public ResponseEntity<?> get(@PathVariable("conId") java.lang.String conId) throws Exception {
-        Temp entity = tempBusiness.getRepository().findOne(conId);
+        Temp entity = tempBusiness.get(conId);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -70,7 +70,7 @@ public class TempREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Temp entity) throws Exception {
-        return ResponseEntity.ok( tempBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(tempBusiness.put(entity));
     }
 
     /**
@@ -80,7 +80,7 @@ public class TempREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{conId}")
     public Temp put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Temp entity) throws Exception {
-        return tempBusiness.getRepository().saveAndFlush(entity);
+        return tempBusiness.put(entity);
     }
 
 
@@ -91,7 +91,7 @@ public class TempREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{conId}")
     public void delete(@PathVariable("conId") java.lang.String conId) throws Exception {
-         tempBusiness.getRepository().delete(conId);
+        tempBusiness.delete(conId);
     }
 
 
@@ -102,7 +102,7 @@ public class TempREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Temp> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return tempBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return tempBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -123,7 +123,7 @@ public class TempREST {
   , value="/{instanceConId}/Channel/{relationId}")    
   public ResponseEntity<?> deleteChannel(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.channelBusiness.getRepository().delete(relationId);
+        this.channelBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();

@@ -38,12 +38,6 @@ public class PatrimonySituationREST {
    * @generated
    */
     @Autowired
-    @Qualifier("PatrimonyTypeBusiness")
-    private PatrimonyTypeBusiness patrimonyTypeBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("PatrimonyBusiness")
     private PatrimonyBusiness patrimonyBusiness;
 
@@ -54,7 +48,7 @@ public class PatrimonySituationREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public PatrimonySituation post(@Validated @RequestBody final PatrimonySituation entity) throws Exception {
-        patrimonySituationBusiness.getRepository().save(entity);
+        patrimonySituationBusiness.post(entity);
         return entity;
     }
 
@@ -65,7 +59,7 @@ public class PatrimonySituationREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{sitId}")
     public ResponseEntity<?> get(@PathVariable("sitId") java.lang.String sitId) throws Exception {
-        PatrimonySituation entity = patrimonySituationBusiness.getRepository().findOne(sitId);
+        PatrimonySituation entity = patrimonySituationBusiness.get(sitId);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -76,7 +70,7 @@ public class PatrimonySituationREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final PatrimonySituation entity) throws Exception {
-        return ResponseEntity.ok( patrimonySituationBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(patrimonySituationBusiness.put(entity));
     }
 
     /**
@@ -86,7 +80,7 @@ public class PatrimonySituationREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{sitId}")
     public PatrimonySituation put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final PatrimonySituation entity) throws Exception {
-        return patrimonySituationBusiness.getRepository().saveAndFlush(entity);
+        return patrimonySituationBusiness.put(entity);
     }
 
 
@@ -97,7 +91,7 @@ public class PatrimonySituationREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{sitId}")
     public void delete(@PathVariable("sitId") java.lang.String sitId) throws Exception {
-         patrimonySituationBusiness.getRepository().delete(sitId);
+        patrimonySituationBusiness.delete(sitId);
     }
 
 
@@ -108,7 +102,7 @@ public class PatrimonySituationREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<PatrimonySituation> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return patrimonySituationBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return patrimonySituationBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -129,54 +123,13 @@ public class PatrimonySituationREST {
   , value="/{instanceSitId}/Patrimony/{relationId}")    
   public ResponseEntity<?> deletePatrimony(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.patrimonyBusiness.getRepository().delete(relationId);
+        this.patrimonyBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
       }
   }
 
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceSitId}/PatrimonyType")
-  public List<PatrimonyType> listPatrimonyType(@PathVariable("instanceSitId") java.lang.String instanceSitId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return patrimonySituationBusiness.listPatrimonyType(instanceSitId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceSitId}/PatrimonyType")
-  public ResponseEntity<?> postPatrimonyType(@Validated @RequestBody final PatrimonyType entity, @PathVariable("instanceSitId") java.lang.String instanceSitId) {
-      Patrimony newPatrimony = new Patrimony();
-
-      PatrimonySituation instance = this.patrimonySituationBusiness.getRepository().findOne(instanceSitId);
-
-      newPatrimony.setPatrimonyType(entity);
-      newPatrimony.setPatrimonySituation(instance);
-      
-      this.patrimonyBusiness.getRepository().saveAndFlush(newPatrimony);
-
-      return ResponseEntity.ok(newPatrimony.getPatrimonySituation());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceSitId}/PatrimonyType/{relationTypId}")
-  public ResponseEntity<?> deletePatrimonyType(@PathVariable("instanceSitId") java.lang.String instanceSitId, @PathVariable("relationTypId") java.lang.String relationTypId) {
-      this.patrimonySituationBusiness.deletePatrimonyType(instanceSitId, relationTypId);
-      return ResponseEntity.ok().build();
-  }  
 
 
 

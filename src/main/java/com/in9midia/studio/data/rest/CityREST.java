@@ -38,18 +38,6 @@ public class CityREST {
    * @generated
    */
     @Autowired
-    @Qualifier("CountryBusiness")
-    private CountryBusiness countryBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("StateBusiness")
-    private StateBusiness stateBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("AddressBusiness")
     private AddressBusiness addressBusiness;
   /**
@@ -66,7 +54,7 @@ public class CityREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public City post(@Validated @RequestBody final City entity) throws Exception {
-        cityBusiness.getRepository().save(entity);
+        cityBusiness.post(entity);
         return entity;
     }
 
@@ -77,7 +65,7 @@ public class CityREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        City entity = cityBusiness.getRepository().findOne(id);
+        City entity = cityBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -88,7 +76,7 @@ public class CityREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final City entity) throws Exception {
-        return ResponseEntity.ok( cityBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(cityBusiness.put(entity));
     }
 
     /**
@@ -98,7 +86,7 @@ public class CityREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public City put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final City entity) throws Exception {
-        return cityBusiness.getRepository().saveAndFlush(entity);
+        return cityBusiness.put(entity);
     }
 
 
@@ -109,7 +97,7 @@ public class CityREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         cityBusiness.getRepository().delete(id);
+        cityBusiness.delete(id);
     }
 
 
@@ -120,7 +108,7 @@ public class CityREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<City> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return cityBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return cityBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -141,7 +129,7 @@ public class CityREST {
   , value="/{instanceId}/Address/{relationId}")    
   public ResponseEntity<?> deleteAddress(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.addressBusiness.getRepository().delete(relationId);
+        this.addressBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -166,7 +154,7 @@ public class CityREST {
   , value="/{instanceId}/OriginDestination/{relationId}")    
   public ResponseEntity<?> deleteOriginDestination(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.originDestinationBusiness.getRepository().delete(relationId);
+        this.originDestinationBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -191,7 +179,7 @@ public class CityREST {
   , value="/{instanceId}/OriginDestination_2/{relationId}")    
   public ResponseEntity<?> deleteOriginDestination_2(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.originDestinationBusiness.getRepository().delete(relationId);
+        this.originDestinationBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -216,7 +204,7 @@ public class CityREST {
   , value="/{instanceId}/OriginDestination_3/{relationId}")    
   public ResponseEntity<?> deleteOriginDestination_3(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.originDestinationBusiness.getRepository().delete(relationId);
+        this.originDestinationBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -241,95 +229,13 @@ public class CityREST {
   , value="/{instanceId}/OriginDestination_4/{relationId}")    
   public ResponseEntity<?> deleteOriginDestination_4(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.originDestinationBusiness.getRepository().delete(relationId);
+        this.originDestinationBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
       }
   }
 
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Country")
-  public List<Country> listCountry(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return cityBusiness.listCountry(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Country")
-  public ResponseEntity<?> postCountry(@Validated @RequestBody final Country entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Address newAddress = new Address();
-
-      City instance = this.cityBusiness.getRepository().findOne(instanceId);
-
-      newAddress.setCountry(entity);
-      newAddress.setCity(instance);
-      
-      this.addressBusiness.getRepository().saveAndFlush(newAddress);
-
-      return ResponseEntity.ok(newAddress.getCity());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Country/{relationId}")
-  public ResponseEntity<?> deleteCountry(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.cityBusiness.deleteCountry(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/State")
-  public List<State> listState(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return cityBusiness.listState(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/State")
-  public ResponseEntity<?> postState(@Validated @RequestBody final State entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Address newAddress = new Address();
-
-      City instance = this.cityBusiness.getRepository().findOne(instanceId);
-
-      newAddress.setState(entity);
-      newAddress.setCity(instance);
-      
-      this.addressBusiness.getRepository().saveAndFlush(newAddress);
-
-      return ResponseEntity.ok(newAddress.getCity());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/State/{relationId}")
-  public ResponseEntity<?> deleteState(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.cityBusiness.deleteState(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
 
 
 

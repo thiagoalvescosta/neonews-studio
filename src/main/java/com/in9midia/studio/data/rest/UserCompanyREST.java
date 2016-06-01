@@ -42,7 +42,7 @@ public class UserCompanyREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public UserCompany post(@Validated @RequestBody final UserCompany entity) throws Exception {
-        userCompanyBusiness.getRepository().save(entity);
+        userCompanyBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class UserCompanyREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        UserCompany entity = userCompanyBusiness.getRepository().findOne(id);
+        UserCompany entity = userCompanyBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class UserCompanyREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final UserCompany entity) throws Exception {
-        return ResponseEntity.ok( userCompanyBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(userCompanyBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class UserCompanyREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public UserCompany put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final UserCompany entity) throws Exception {
-        return userCompanyBusiness.getRepository().saveAndFlush(entity);
+        return userCompanyBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class UserCompanyREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         userCompanyBusiness.getRepository().delete(id);
+        userCompanyBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class UserCompanyREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<UserCompany> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return userCompanyBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return userCompanyBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

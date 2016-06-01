@@ -38,18 +38,6 @@ public class AgencyREST {
    * @generated
    */
     @Autowired
-    @Qualifier("ThemeBusiness")
-    private ThemeBusiness themeBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("WrapperBusiness")
-    private WrapperBusiness wrapperBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("NwsChannelBusiness")
     private NwsChannelBusiness nwsChannelBusiness;
 
@@ -60,7 +48,7 @@ public class AgencyREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Agency post(@Validated @RequestBody final Agency entity) throws Exception {
-        agencyBusiness.getRepository().save(entity);
+        agencyBusiness.post(entity);
         return entity;
     }
 
@@ -71,7 +59,7 @@ public class AgencyREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Agency entity = agencyBusiness.getRepository().findOne(id);
+        Agency entity = agencyBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -82,7 +70,7 @@ public class AgencyREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Agency entity) throws Exception {
-        return ResponseEntity.ok( agencyBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(agencyBusiness.put(entity));
     }
 
     /**
@@ -92,7 +80,7 @@ public class AgencyREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Agency put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Agency entity) throws Exception {
-        return agencyBusiness.getRepository().saveAndFlush(entity);
+        return agencyBusiness.put(entity);
     }
 
 
@@ -103,7 +91,7 @@ public class AgencyREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         agencyBusiness.getRepository().delete(id);
+        agencyBusiness.delete(id);
     }
 
 
@@ -114,7 +102,7 @@ public class AgencyREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Agency> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return agencyBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return agencyBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -135,95 +123,13 @@ public class AgencyREST {
   , value="/{instanceId}/NwsChannel/{relationId}")    
   public ResponseEntity<?> deleteNwsChannel(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.nwsChannelBusiness.getRepository().delete(relationId);
+        this.nwsChannelBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
       }
   }
 
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Theme")
-  public List<Theme> listTheme(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return agencyBusiness.listTheme(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Theme")
-  public ResponseEntity<?> postTheme(@Validated @RequestBody final Theme entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      NwsChannel newNwsChannel = new NwsChannel();
-
-      Agency instance = this.agencyBusiness.getRepository().findOne(instanceId);
-
-      newNwsChannel.setTheme(entity);
-      newNwsChannel.setAgency(instance);
-      
-      this.nwsChannelBusiness.getRepository().saveAndFlush(newNwsChannel);
-
-      return ResponseEntity.ok(newNwsChannel.getAgency());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Theme/{relationId}")
-  public ResponseEntity<?> deleteTheme(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.agencyBusiness.deleteTheme(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Wrapper")
-  public List<Wrapper> listWrapper(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return agencyBusiness.listWrapper(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Wrapper")
-  public ResponseEntity<?> postWrapper(@Validated @RequestBody final Wrapper entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      NwsChannel newNwsChannel = new NwsChannel();
-
-      Agency instance = this.agencyBusiness.getRepository().findOne(instanceId);
-
-      newNwsChannel.setWrapper(entity);
-      newNwsChannel.setAgency(instance);
-      
-      this.nwsChannelBusiness.getRepository().saveAndFlush(newNwsChannel);
-
-      return ResponseEntity.ok(newNwsChannel.getAgency());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Wrapper/{relationId}")
-  public ResponseEntity<?> deleteWrapper(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.agencyBusiness.deleteWrapper(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
 
 
 

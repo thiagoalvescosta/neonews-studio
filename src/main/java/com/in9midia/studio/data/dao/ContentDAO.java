@@ -117,36 +117,6 @@ public interface ContentDAO extends JpaRepository<Content, java.lang.String> {
     @Query("DELETE FROM ContentTerminal entity WHERE entity.content.id = :instanceId AND entity.terminal.id = :relationId")
     public int deleteTerminal(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM Participant entity WHERE entity.content.id = :id")
-  public List<Company> listCompany(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Participant entity WHERE entity.content.id = :instanceId AND entity.company.id = :relationId")
-    public int deleteCompany(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.file FROM Participant entity WHERE entity.content.id = :id")
-  public List<File> listFile(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Participant entity WHERE entity.content.id = :instanceId AND entity.file.id = :relationId")
-    public int deleteFile(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

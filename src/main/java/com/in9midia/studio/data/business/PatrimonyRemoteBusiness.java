@@ -29,15 +29,97 @@ public class PatrimonyRemoteBusiness {
     @Qualifier("PatrimonyRemoteDAO")
     protected PatrimonyRemoteDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao PatrimonyRemoteDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public PatrimonyRemoteDAO getRepository() {
-        return repository;
+    public PatrimonyRemote post(final PatrimonyRemote entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public PatrimonyRemote get(java.lang.String remId) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       PatrimonyRemote result = repository.findOne(remId);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public PatrimonyRemote put(final PatrimonyRemote entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public PatrimonyRemote put(final java.lang.String id,final PatrimonyRemote entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String remId) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(remId);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<PatrimonyRemote> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<PatrimonyRemote> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
 
 
 }
+

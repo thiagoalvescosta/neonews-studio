@@ -69,36 +69,6 @@ public interface ResolutionDAO extends JpaRepository<Resolution, java.lang.Strin
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.campaign FROM CampaignProperty entity WHERE entity.resolution.id = :id")
-  public List<Campaign> listCampaign(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignProperty entity WHERE entity.resolution.id = :instanceId AND entity.campaign.id = :relationId")
-    public int deleteCampaign(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.moduleProperty FROM CampaignProperty entity WHERE entity.resolution.id = :id")
-  public List<ModuleProperty> listModuleProperty(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignProperty entity WHERE entity.resolution.id = :instanceId AND entity.moduleProperty.id = :relationId")
-    public int deleteModuleProperty(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

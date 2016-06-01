@@ -65,39 +65,9 @@ public interface CountryDAO extends JpaRepository<Country, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity FROM State entity WHERE entity.country.id = :id")
-  public List<State> findState_2(@Param(value="id") java.lang.String id,  Pageable pageable );
+  public List<State> findState(@Param(value="id") java.lang.String id,  Pageable pageable );
 
 
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.city FROM Address entity WHERE entity.country.id = :id")
-  public List<City> listCity(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Address entity WHERE entity.country.id = :instanceId AND entity.city.id = :relationId")
-    public int deleteCity(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.state FROM Address entity WHERE entity.country.id = :id")
-  public List<State> listState(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Address entity WHERE entity.country.id = :instanceId AND entity.state.id = :relationId")
-    public int deleteState(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
 
 

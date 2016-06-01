@@ -93,6 +93,27 @@
             $rootScope.session.error = error;
         }
         
+        $scope.changeTenant = function (id) {
+            var selected = { "id": id };
+
+            $http({
+                method: 'POST',
+                url: 'changeTenant',
+                data: $.param(selected),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(changeSuccess).error(changeError);
+            
+            function changeSuccess(data, status, headers, config) {
+              sessionStorage.setItem("_u",JSON.stringify($rootScope.session));
+              Notification.info($translate.instant('Home.view.passwordChanged'));
+            }
+    
+            function changeError(data, status, headers, config) {
+                var error = status >= 401 ? $translate.instant('Home.view.InvalidPassword') : data;
+                Notification.error(error);
+            }    
+        }
+        
         $scope.changePassword = function () {
 
             var user = { oldPassword: oldPassword.value, newPassword: newPassword.value, newPasswordConfirmation: newPasswordConfirmation.value };

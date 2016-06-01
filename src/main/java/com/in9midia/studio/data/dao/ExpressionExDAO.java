@@ -63,36 +63,6 @@ public interface ExpressionExDAO extends JpaRepository<ExpressionEx, java.lang.S
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM Agency entity WHERE entity.expressionEx.id = :id")
-  public List<Company> listCompany(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Agency entity WHERE entity.expressionEx.id = :instanceId AND entity.company.id = :relationId")
-    public int deleteCompany(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.file FROM Agency entity WHERE entity.expressionEx.id = :id")
-  public List<File> listFile(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Agency entity WHERE entity.expressionEx.id = :instanceId AND entity.file.id = :relationId")
-    public int deleteFile(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

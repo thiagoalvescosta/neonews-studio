@@ -29,17 +29,99 @@ public class PatrimonyBusiness {
     @Qualifier("PatrimonyDAO")
     protected PatrimonyDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao PatrimonyDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public PatrimonyDAO getRepository() {
-        return repository;
+    public Patrimony post(final Patrimony entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Patrimony get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Patrimony result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Patrimony put(final Patrimony entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Patrimony put(final java.lang.String id,final Patrimony entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Patrimony> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Patrimony> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<PatrimonyRemote> findPatrimonyRemote(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -53,3 +135,4 @@ public class PatrimonyBusiness {
 
 
 }
+

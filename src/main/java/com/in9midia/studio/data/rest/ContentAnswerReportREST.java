@@ -42,7 +42,7 @@ public class ContentAnswerReportREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ContentAnswerReport post(@Validated @RequestBody final ContentAnswerReport entity) throws Exception {
-        contentAnswerReportBusiness.getRepository().save(entity);
+        contentAnswerReportBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ContentAnswerReportREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ContentAnswerReport entity = contentAnswerReportBusiness.getRepository().findOne(id);
+        ContentAnswerReport entity = contentAnswerReportBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ContentAnswerReportREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ContentAnswerReport entity) throws Exception {
-        return ResponseEntity.ok( contentAnswerReportBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(contentAnswerReportBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ContentAnswerReportREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ContentAnswerReport put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ContentAnswerReport entity) throws Exception {
-        return contentAnswerReportBusiness.getRepository().saveAndFlush(entity);
+        return contentAnswerReportBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ContentAnswerReportREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         contentAnswerReportBusiness.getRepository().delete(id);
+        contentAnswerReportBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ContentAnswerReportREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ContentAnswerReport> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return contentAnswerReportBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return contentAnswerReportBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

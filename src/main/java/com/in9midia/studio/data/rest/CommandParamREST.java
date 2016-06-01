@@ -42,7 +42,7 @@ public class CommandParamREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public CommandParam post(@Validated @RequestBody final CommandParam entity) throws Exception {
-        commandParamBusiness.getRepository().save(entity);
+        commandParamBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class CommandParamREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        CommandParam entity = commandParamBusiness.getRepository().findOne(id);
+        CommandParam entity = commandParamBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class CommandParamREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final CommandParam entity) throws Exception {
-        return ResponseEntity.ok( commandParamBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(commandParamBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class CommandParamREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public CommandParam put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final CommandParam entity) throws Exception {
-        return commandParamBusiness.getRepository().saveAndFlush(entity);
+        return commandParamBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class CommandParamREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         commandParamBusiness.getRepository().delete(id);
+        commandParamBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class CommandParamREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<CommandParam> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return commandParamBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return commandParamBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

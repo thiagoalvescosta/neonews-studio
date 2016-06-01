@@ -44,18 +44,6 @@ public class TerminalREST {
    * @generated
    */
     @Autowired
-    @Qualifier("CompanyBusiness")
-    private CompanyBusiness companyBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("PersonBusiness")
-    private PersonBusiness personBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("ContentBusiness")
     private ContentBusiness contentBusiness;
   /**
@@ -174,7 +162,7 @@ public class TerminalREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Terminal post(@Validated @RequestBody final Terminal entity) throws Exception {
-        terminalBusiness.getRepository().save(entity);
+        terminalBusiness.post(entity);
         return entity;
     }
 
@@ -185,7 +173,7 @@ public class TerminalREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Terminal entity = terminalBusiness.getRepository().findOne(id);
+        Terminal entity = terminalBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -196,7 +184,7 @@ public class TerminalREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Terminal entity) throws Exception {
-        return ResponseEntity.ok( terminalBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(terminalBusiness.put(entity));
     }
 
     /**
@@ -206,7 +194,7 @@ public class TerminalREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Terminal put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Terminal entity) throws Exception {
-        return terminalBusiness.getRepository().saveAndFlush(entity);
+        return terminalBusiness.put(entity);
     }
 
 
@@ -217,7 +205,7 @@ public class TerminalREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         terminalBusiness.getRepository().delete(id);
+        terminalBusiness.delete(id);
     }
 
 
@@ -228,7 +216,7 @@ public class TerminalREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Terminal> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return terminalBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return terminalBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -249,7 +237,7 @@ public class TerminalREST {
   , value="/{instanceId}/Account/{relationId}")    
   public ResponseEntity<?> deleteAccount(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.accountBusiness.getRepository().delete(relationId);
+        this.accountBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -274,7 +262,7 @@ public class TerminalREST {
   , value="/{instanceId}/CampaignLog/{relationId}")    
   public ResponseEntity<?> deleteCampaignLog(@PathVariable("relationId") java.lang.Long relationId) {
       try {
-        this.campaignLogBusiness.getRepository().delete(relationId);
+        this.campaignLogBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -299,7 +287,7 @@ public class TerminalREST {
   , value="/{instanceId}/Command/{relationId}")    
   public ResponseEntity<?> deleteCommand(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.commandBusiness.getRepository().delete(relationId);
+        this.commandBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -324,7 +312,7 @@ public class TerminalREST {
   , value="/{instanceId}/Commissioned/{relationId}")    
   public ResponseEntity<?> deleteCommissioned(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.commissionedBusiness.getRepository().delete(relationId);
+        this.commissionedBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -349,7 +337,7 @@ public class TerminalREST {
   , value="/{instanceId}/ContentTerminal/{relationId}")    
   public ResponseEntity<?> deleteContentTerminal(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.contentTerminalBusiness.getRepository().delete(relationId);
+        this.contentTerminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -374,7 +362,7 @@ public class TerminalREST {
   , value="/{instanceId}/ContentUpdate/{relationId}")    
   public ResponseEntity<?> deleteContentUpdate(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.contentUpdateBusiness.getRepository().delete(relationId);
+        this.contentUpdateBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -399,7 +387,7 @@ public class TerminalREST {
   , value="/{instanceId}/Log/{relationId}")    
   public ResponseEntity<?> deleteLog(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.logBusiness.getRepository().delete(relationId);
+        this.logBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -424,7 +412,7 @@ public class TerminalREST {
   , value="/{instanceId}/ReportCampaignSchedule/{relationId}")    
   public ResponseEntity<?> deleteReportCampaignSchedule(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.reportCampaignScheduleBusiness.getRepository().delete(relationId);
+        this.reportCampaignScheduleBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -449,7 +437,7 @@ public class TerminalREST {
   , value="/{instanceId}/SchedulePredicateTerminal/{relationId}")    
   public ResponseEntity<?> deleteSchedulePredicateTerminal(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.schedulePredicateTerminalBusiness.getRepository().delete(relationId);
+        this.schedulePredicateTerminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -474,7 +462,7 @@ public class TerminalREST {
   , value="/{instanceId}/TerminalAltRoute/{relationId}")    
   public ResponseEntity<?> deleteTerminalAltRoute(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalAltRouteBusiness.getRepository().delete(relationId);
+        this.terminalAltRouteBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -499,7 +487,7 @@ public class TerminalREST {
   , value="/{instanceId}/TerminalAudience/{relationId}")    
   public ResponseEntity<?> deleteTerminalAudience(@PathVariable("relationId") java.lang.Double relationId) {
       try {
-        this.terminalAudienceBusiness.getRepository().delete(relationId);
+        this.terminalAudienceBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -524,7 +512,7 @@ public class TerminalREST {
   , value="/{instanceId}/TerminalLog/{relationId}")    
   public ResponseEntity<?> deleteTerminalLog(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalLogBusiness.getRepository().delete(relationId);
+        this.terminalLogBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -549,7 +537,7 @@ public class TerminalREST {
   , value="/{instanceId}/TerminalMovement/{relationId}")    
   public ResponseEntity<?> deleteTerminalMovement(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalMovementBusiness.getRepository().delete(relationId);
+        this.terminalMovementBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -574,7 +562,7 @@ public class TerminalREST {
   , value="/{instanceId}/UserTerminal/{relationId}")    
   public ResponseEntity<?> deleteUserTerminal(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.userTerminalBusiness.getRepository().delete(relationId);
+        this.userTerminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -599,17 +587,17 @@ public class TerminalREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Campaign")
-  public ResponseEntity<?> postCampaign(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Account newAccount = new Account();
+  public ResponseEntity<?> postCampaign(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
+      CampaignLog newCampaignLog = new CampaignLog();
 
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
+      Terminal instance = this.terminalBusiness.get(instanceId);
 
-      newAccount.setCampaign(entity);
-      newAccount.setTerminal(instance);
+      newCampaignLog.setCampaign(entity);
+      newCampaignLog.setTerminal(instance);
       
-      this.accountBusiness.getRepository().saveAndFlush(newAccount);
+      this.campaignLogBusiness.post(newCampaignLog);
 
-      return ResponseEntity.ok(newAccount.getTerminal());
+      return ResponseEntity.ok(newCampaignLog.getTerminal());
   }   
 
   /**
@@ -620,211 +608,6 @@ public class TerminalREST {
   ,value="/{instanceId}/Campaign/{relationId}")
   public ResponseEntity<?> deleteCampaign(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
       this.terminalBusiness.deleteCampaign(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Company")
-  public List<Company> listCompany(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return terminalBusiness.listCompany(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Company")
-  public ResponseEntity<?> postCompany(@Validated @RequestBody final Company entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Account newAccount = new Account();
-
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
-
-      newAccount.setCompany(entity);
-      newAccount.setTerminal(instance);
-      
-      this.accountBusiness.getRepository().saveAndFlush(newAccount);
-
-      return ResponseEntity.ok(newAccount.getTerminal());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Company/{relationId}")
-  public ResponseEntity<?> deleteCompany(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.terminalBusiness.deleteCompany(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Person")
-  public List<Person> listPerson(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return terminalBusiness.listPerson(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Person")
-  public ResponseEntity<?> postPerson(@Validated @RequestBody final Person entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Account newAccount = new Account();
-
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
-
-      newAccount.setPerson(entity);
-      newAccount.setTerminal(instance);
-      
-      this.accountBusiness.getRepository().saveAndFlush(newAccount);
-
-      return ResponseEntity.ok(newAccount.getTerminal());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Person/{relationId}")
-  public ResponseEntity<?> deletePerson(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.terminalBusiness.deletePerson(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Campaign_2")
-  public List<Campaign> listCampaign_2(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return terminalBusiness.listCampaign_2(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Campaign_2")
-  public ResponseEntity<?> postCampaign_2(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      CampaignLog newCampaignLog = new CampaignLog();
-
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
-
-      newCampaignLog.setCampaign(entity);
-      newCampaignLog.setTerminal(instance);
-      
-      this.campaignLogBusiness.getRepository().saveAndFlush(newCampaignLog);
-
-      return ResponseEntity.ok(newCampaignLog.getTerminal());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Campaign_2/{relationId}")
-  public ResponseEntity<?> deleteCampaign_2(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.terminalBusiness.deleteCampaign_2(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Company_2")
-  public List<Company> listCompany_2(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return terminalBusiness.listCompany_2(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Company_2")
-  public ResponseEntity<?> postCompany_2(@Validated @RequestBody final Company entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Commissioned newCommissioned = new Commissioned();
-
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
-
-      newCommissioned.setCompany(entity);
-      newCommissioned.setTerminal(instance);
-      
-      this.commissionedBusiness.getRepository().saveAndFlush(newCommissioned);
-
-      return ResponseEntity.ok(newCommissioned.getTerminal());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Company_2/{relationId}")
-  public ResponseEntity<?> deleteCompany_2(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.terminalBusiness.deleteCompany_2(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Person_2")
-  public List<Person> listPerson_2(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return terminalBusiness.listPerson_2(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Person_2")
-  public ResponseEntity<?> postPerson_2(@Validated @RequestBody final Person entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Commissioned newCommissioned = new Commissioned();
-
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
-
-      newCommissioned.setPerson(entity);
-      newCommissioned.setTerminal(instance);
-      
-      this.commissionedBusiness.getRepository().saveAndFlush(newCommissioned);
-
-      return ResponseEntity.ok(newCommissioned.getTerminal());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Person_2/{relationId}")
-  public ResponseEntity<?> deletePerson_2(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.terminalBusiness.deletePerson_2(instanceId, relationId);
       return ResponseEntity.ok().build();
   }  
 
@@ -845,15 +628,15 @@ public class TerminalREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Content")
-  public ResponseEntity<?> postContent(@Validated @RequestBody final Content entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postContent(@Validated @RequestBody final Content entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       ContentTerminal newContentTerminal = new ContentTerminal();
 
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
+      Terminal instance = this.terminalBusiness.get(instanceId);
 
       newContentTerminal.setContent(entity);
       newContentTerminal.setTerminal(instance);
       
-      this.contentTerminalBusiness.getRepository().saveAndFlush(newContentTerminal);
+      this.contentTerminalBusiness.post(newContentTerminal);
 
       return ResponseEntity.ok(newContentTerminal.getTerminal());
   }   
@@ -886,15 +669,15 @@ public class TerminalREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Profile")
-  public ResponseEntity<?> postProfile(@Validated @RequestBody final Profile entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postProfile(@Validated @RequestBody final Profile entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       ContentUpdate newContentUpdate = new ContentUpdate();
 
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
+      Terminal instance = this.terminalBusiness.get(instanceId);
 
       newContentUpdate.setProfile(entity);
       newContentUpdate.setTerminal(instance);
       
-      this.contentUpdateBusiness.getRepository().saveAndFlush(newContentUpdate);
+      this.contentUpdateBusiness.post(newContentUpdate);
 
       return ResponseEntity.ok(newContentUpdate.getTerminal());
   }   
@@ -916,6 +699,47 @@ public class TerminalREST {
    * @generated
    */
   @RequestMapping(method = RequestMethod.GET
+  ,value="/{instanceId}/Campaign_2")
+  public List<Campaign> listCampaign_2(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
+    return terminalBusiness.listCampaign_2(instanceId,  new PageRequest(offset, limit) );
+  }
+
+  /**
+   * ManyToMany Relationship POST
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.POST
+  ,value="/{instanceId}/Campaign_2")
+  public ResponseEntity<?> postCampaign_2(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
+      Log newLog = new Log();
+
+      Terminal instance = this.terminalBusiness.get(instanceId);
+
+      newLog.setCampaign(entity);
+      newLog.setTerminal(instance);
+      
+      this.logBusiness.post(newLog);
+
+      return ResponseEntity.ok(newLog.getTerminal());
+  }   
+
+  /**
+   * ManyToMany Relationship DELETE
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.DELETE
+  ,value="/{instanceId}/Campaign_2/{relationId}")
+  public ResponseEntity<?> deleteCampaign_2(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
+      this.terminalBusiness.deleteCampaign_2(instanceId, relationId);
+      return ResponseEntity.ok().build();
+  }  
+
+
+  /**
+   * ManyToMany Relationship GET
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET
   ,value="/{instanceId}/Campaign_3")
   public List<Campaign> listCampaign_3(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
     return terminalBusiness.listCampaign_3(instanceId,  new PageRequest(offset, limit) );
@@ -927,17 +751,17 @@ public class TerminalREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Campaign_3")
-  public ResponseEntity<?> postCampaign_3(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Log newLog = new Log();
+  public ResponseEntity<?> postCampaign_3(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
+      ReportCampaignSchedule newReportCampaignSchedule = new ReportCampaignSchedule();
 
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
+      Terminal instance = this.terminalBusiness.get(instanceId);
 
-      newLog.setCampaign(entity);
-      newLog.setTerminal(instance);
+      newReportCampaignSchedule.setCampaign(entity);
+      newReportCampaignSchedule.setTerminal(instance);
       
-      this.logBusiness.getRepository().saveAndFlush(newLog);
+      this.reportCampaignScheduleBusiness.post(newReportCampaignSchedule);
 
-      return ResponseEntity.ok(newLog.getTerminal());
+      return ResponseEntity.ok(newReportCampaignSchedule.getTerminal());
   }   
 
   /**
@@ -948,47 +772,6 @@ public class TerminalREST {
   ,value="/{instanceId}/Campaign_3/{relationId}")
   public ResponseEntity<?> deleteCampaign_3(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
       this.terminalBusiness.deleteCampaign_3(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Campaign_4")
-  public List<Campaign> listCampaign_4(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return terminalBusiness.listCampaign_4(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Campaign_4")
-  public ResponseEntity<?> postCampaign_4(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      ReportCampaignSchedule newReportCampaignSchedule = new ReportCampaignSchedule();
-
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
-
-      newReportCampaignSchedule.setCampaign(entity);
-      newReportCampaignSchedule.setTerminal(instance);
-      
-      this.reportCampaignScheduleBusiness.getRepository().saveAndFlush(newReportCampaignSchedule);
-
-      return ResponseEntity.ok(newReportCampaignSchedule.getTerminal());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Campaign_4/{relationId}")
-  public ResponseEntity<?> deleteCampaign_4(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.terminalBusiness.deleteCampaign_4(instanceId, relationId);
       return ResponseEntity.ok().build();
   }  
 
@@ -1009,15 +792,15 @@ public class TerminalREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/SchedulePredicate")
-  public ResponseEntity<?> postSchedulePredicate(@Validated @RequestBody final SchedulePredicate entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postSchedulePredicate(@Validated @RequestBody final SchedulePredicate entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       SchedulePredicateTerminal newSchedulePredicateTerminal = new SchedulePredicateTerminal();
 
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
+      Terminal instance = this.terminalBusiness.get(instanceId);
 
       newSchedulePredicateTerminal.setSchedulePredicate(entity);
       newSchedulePredicateTerminal.setTerminal(instance);
       
-      this.schedulePredicateTerminalBusiness.getRepository().saveAndFlush(newSchedulePredicateTerminal);
+      this.schedulePredicateTerminalBusiness.post(newSchedulePredicateTerminal);
 
       return ResponseEntity.ok(newSchedulePredicateTerminal.getTerminal());
   }   
@@ -1050,15 +833,15 @@ public class TerminalREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/File")
-  public ResponseEntity<?> postFile(@Validated @RequestBody final File entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postFile(@Validated @RequestBody final File entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       TerminalAltRoute newTerminalAltRoute = new TerminalAltRoute();
 
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
+      Terminal instance = this.terminalBusiness.get(instanceId);
 
       newTerminalAltRoute.setFile(entity);
       newTerminalAltRoute.setTerminal(instance);
       
-      this.terminalAltRouteBusiness.getRepository().saveAndFlush(newTerminalAltRoute);
+      this.terminalAltRouteBusiness.post(newTerminalAltRoute);
 
       return ResponseEntity.ok(newTerminalAltRoute.getTerminal());
   }   
@@ -1091,15 +874,15 @@ public class TerminalREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Employer")
-  public ResponseEntity<?> postEmployer(@Validated @RequestBody final Employer entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postEmployer(@Validated @RequestBody final Employer entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       TerminalAudience newTerminalAudience = new TerminalAudience();
 
-      Terminal instance = this.terminalBusiness.getRepository().findOne(instanceId);
+      Terminal instance = this.terminalBusiness.get(instanceId);
 
       newTerminalAudience.setEmployer(entity);
       newTerminalAudience.setTerminal(instance);
       
-      this.terminalAudienceBusiness.getRepository().saveAndFlush(newTerminalAudience);
+      this.terminalAudienceBusiness.post(newTerminalAudience);
 
       return ResponseEntity.ok(newTerminalAudience.getTerminal());
   }   

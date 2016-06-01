@@ -42,7 +42,7 @@ public class ChannelTypeCustomREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ChannelTypeCustom post(@Validated @RequestBody final ChannelTypeCustom entity) throws Exception {
-        channelTypeCustomBusiness.getRepository().save(entity);
+        channelTypeCustomBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ChannelTypeCustomREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ChannelTypeCustom entity = channelTypeCustomBusiness.getRepository().findOne(id);
+        ChannelTypeCustom entity = channelTypeCustomBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ChannelTypeCustomREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ChannelTypeCustom entity) throws Exception {
-        return ResponseEntity.ok( channelTypeCustomBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(channelTypeCustomBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ChannelTypeCustomREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ChannelTypeCustom put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ChannelTypeCustom entity) throws Exception {
-        return channelTypeCustomBusiness.getRepository().saveAndFlush(entity);
+        return channelTypeCustomBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ChannelTypeCustomREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         channelTypeCustomBusiness.getRepository().delete(id);
+        channelTypeCustomBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ChannelTypeCustomREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ChannelTypeCustom> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return channelTypeCustomBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return channelTypeCustomBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

@@ -38,18 +38,6 @@ public class ModulePropertyREST {
    * @generated
    */
     @Autowired
-    @Qualifier("CampaignBusiness")
-    private CampaignBusiness campaignBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("ResolutionBusiness")
-    private ResolutionBusiness resolutionBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("CampaignPropertyBusiness")
     private CampaignPropertyBusiness campaignPropertyBusiness;
 
@@ -60,7 +48,7 @@ public class ModulePropertyREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ModuleProperty post(@Validated @RequestBody final ModuleProperty entity) throws Exception {
-        modulePropertyBusiness.getRepository().save(entity);
+        modulePropertyBusiness.post(entity);
         return entity;
     }
 
@@ -71,7 +59,7 @@ public class ModulePropertyREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ModuleProperty entity = modulePropertyBusiness.getRepository().findOne(id);
+        ModuleProperty entity = modulePropertyBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -82,7 +70,7 @@ public class ModulePropertyREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ModuleProperty entity) throws Exception {
-        return ResponseEntity.ok( modulePropertyBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(modulePropertyBusiness.put(entity));
     }
 
     /**
@@ -92,7 +80,7 @@ public class ModulePropertyREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ModuleProperty put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ModuleProperty entity) throws Exception {
-        return modulePropertyBusiness.getRepository().saveAndFlush(entity);
+        return modulePropertyBusiness.put(entity);
     }
 
 
@@ -103,7 +91,7 @@ public class ModulePropertyREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         modulePropertyBusiness.getRepository().delete(id);
+        modulePropertyBusiness.delete(id);
     }
 
 
@@ -114,7 +102,7 @@ public class ModulePropertyREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ModuleProperty> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return modulePropertyBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return modulePropertyBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -135,95 +123,13 @@ public class ModulePropertyREST {
   , value="/{instanceId}/CampaignProperty/{relationId}")    
   public ResponseEntity<?> deleteCampaignProperty(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.campaignPropertyBusiness.getRepository().delete(relationId);
+        this.campaignPropertyBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
       }
   }
 
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Campaign")
-  public List<Campaign> listCampaign(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return modulePropertyBusiness.listCampaign(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Campaign")
-  public ResponseEntity<?> postCampaign(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      CampaignProperty newCampaignProperty = new CampaignProperty();
-
-      ModuleProperty instance = this.modulePropertyBusiness.getRepository().findOne(instanceId);
-
-      newCampaignProperty.setCampaign(entity);
-      newCampaignProperty.setModuleProperty(instance);
-      
-      this.campaignPropertyBusiness.getRepository().saveAndFlush(newCampaignProperty);
-
-      return ResponseEntity.ok(newCampaignProperty.getModuleProperty());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Campaign/{relationId}")
-  public ResponseEntity<?> deleteCampaign(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.modulePropertyBusiness.deleteCampaign(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Resolution")
-  public List<Resolution> listResolution(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return modulePropertyBusiness.listResolution(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Resolution")
-  public ResponseEntity<?> postResolution(@Validated @RequestBody final Resolution entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      CampaignProperty newCampaignProperty = new CampaignProperty();
-
-      ModuleProperty instance = this.modulePropertyBusiness.getRepository().findOne(instanceId);
-
-      newCampaignProperty.setResolution(entity);
-      newCampaignProperty.setModuleProperty(instance);
-      
-      this.campaignPropertyBusiness.getRepository().saveAndFlush(newCampaignProperty);
-
-      return ResponseEntity.ok(newCampaignProperty.getModuleProperty());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Resolution/{relationId}")
-  public ResponseEntity<?> deleteResolution(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.modulePropertyBusiness.deleteResolution(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
 
 
 

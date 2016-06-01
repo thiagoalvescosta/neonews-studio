@@ -42,7 +42,7 @@ public class RssREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Rss post(@Validated @RequestBody final Rss entity) throws Exception {
-        rssBusiness.getRepository().save(entity);
+        rssBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class RssREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Rss entity = rssBusiness.getRepository().findOne(id);
+        Rss entity = rssBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class RssREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Rss entity) throws Exception {
-        return ResponseEntity.ok( rssBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(rssBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class RssREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Rss put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Rss entity) throws Exception {
-        return rssBusiness.getRepository().saveAndFlush(entity);
+        return rssBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class RssREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         rssBusiness.getRepository().delete(id);
+        rssBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class RssREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Rss> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return rssBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return rssBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

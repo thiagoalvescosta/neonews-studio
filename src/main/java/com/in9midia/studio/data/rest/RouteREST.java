@@ -48,7 +48,7 @@ public class RouteREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Route post(@Validated @RequestBody final Route entity) throws Exception {
-        routeBusiness.getRepository().save(entity);
+        routeBusiness.post(entity);
         return entity;
     }
 
@@ -59,7 +59,7 @@ public class RouteREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Route entity = routeBusiness.getRepository().findOne(id);
+        Route entity = routeBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -70,7 +70,7 @@ public class RouteREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Route entity) throws Exception {
-        return ResponseEntity.ok( routeBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(routeBusiness.put(entity));
     }
 
     /**
@@ -80,7 +80,7 @@ public class RouteREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Route put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Route entity) throws Exception {
-        return routeBusiness.getRepository().saveAndFlush(entity);
+        return routeBusiness.put(entity);
     }
 
 
@@ -91,7 +91,7 @@ public class RouteREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         routeBusiness.getRepository().delete(id);
+        routeBusiness.delete(id);
     }
 
 
@@ -102,7 +102,7 @@ public class RouteREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Route> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return routeBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return routeBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -123,7 +123,7 @@ public class RouteREST {
   , value="/{instanceId}/RouteStop/{relationRouStopId}")    
   public ResponseEntity<?> deleteRouteStop(@PathVariable("relationRouStopId") java.lang.String relationRouStopId) {
       try {
-        this.routeStopBusiness.getRepository().delete(relationRouStopId);
+        this.routeStopBusiness.delete(relationRouStopId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();

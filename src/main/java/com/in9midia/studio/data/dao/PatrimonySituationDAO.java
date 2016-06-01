@@ -63,21 +63,6 @@ public interface PatrimonySituationDAO extends JpaRepository<PatrimonySituation,
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.patrimonyType FROM Patrimony entity WHERE entity.patrimonySituation.sitId = :sitId")
-  public List<PatrimonyType> listPatrimonyType(@Param(value="sitId") java.lang.String sitId,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Patrimony entity WHERE entity.patrimonySituation.sitId = :instanceSitId AND entity.patrimonyType.typId = :relationTypId")
-    public int deletePatrimonyType(@Param(value="instanceSitId") java.lang.String instanceSitId, @Param(value="relationTypId") java.lang.String relationTypId);
-
 
 
 

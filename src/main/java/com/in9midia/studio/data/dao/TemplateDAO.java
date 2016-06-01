@@ -63,36 +63,6 @@ public interface TemplateDAO extends JpaRepository<Template, java.lang.String> {
 
 
 
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.channel FROM Content entity WHERE entity.template.id = :id")
-  public List<Channel> listChannel(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Content entity WHERE entity.template.id = :instanceId AND entity.channel.id = :relationId")
-    public int deleteChannel(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.file FROM Content entity WHERE entity.template.id = :id")
-  public List<File> listFile(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Content entity WHERE entity.template.id = :instanceId AND entity.file.id = :relationId")
-    public int deleteFile(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
 
 
 

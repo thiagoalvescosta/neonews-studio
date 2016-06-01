@@ -29,15 +29,97 @@ public class SchedulePredicateRegionBusiness {
     @Qualifier("SchedulePredicateRegionDAO")
     protected SchedulePredicateRegionDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao SchedulePredicateRegionDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public SchedulePredicateRegionDAO getRepository() {
-        return repository;
+    public SchedulePredicateRegion post(final SchedulePredicateRegion entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public SchedulePredicateRegion get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       SchedulePredicateRegion result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public SchedulePredicateRegion put(final SchedulePredicateRegion entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public SchedulePredicateRegion put(final java.lang.String id,final SchedulePredicateRegion entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<SchedulePredicateRegion> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<SchedulePredicateRegion> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
 
 
 }
+

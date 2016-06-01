@@ -48,7 +48,7 @@ public class ParticipantREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Participant post(@Validated @RequestBody final Participant entity) throws Exception {
-        participantBusiness.getRepository().save(entity);
+        participantBusiness.post(entity);
         return entity;
     }
 
@@ -59,7 +59,7 @@ public class ParticipantREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Participant entity = participantBusiness.getRepository().findOne(id);
+        Participant entity = participantBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -70,7 +70,7 @@ public class ParticipantREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Participant entity) throws Exception {
-        return ResponseEntity.ok( participantBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(participantBusiness.put(entity));
     }
 
     /**
@@ -80,7 +80,7 @@ public class ParticipantREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Participant put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Participant entity) throws Exception {
-        return participantBusiness.getRepository().saveAndFlush(entity);
+        return participantBusiness.put(entity);
     }
 
 
@@ -91,7 +91,7 @@ public class ParticipantREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         participantBusiness.getRepository().delete(id);
+        participantBusiness.delete(id);
     }
 
 
@@ -102,7 +102,7 @@ public class ParticipantREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Participant> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return participantBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return participantBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -123,7 +123,7 @@ public class ParticipantREST {
   , value="/{instanceId}/OriginDestination/{relationId}")    
   public ResponseEntity<?> deleteOriginDestination(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.originDestinationBusiness.getRepository().delete(relationId);
+        this.originDestinationBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -148,7 +148,7 @@ public class ParticipantREST {
   , value="/{instanceId}/OriginDestination_2/{relationId}")    
   public ResponseEntity<?> deleteOriginDestination_2(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.originDestinationBusiness.getRepository().delete(relationId);
+        this.originDestinationBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -173,7 +173,7 @@ public class ParticipantREST {
   , value="/{instanceId}/OriginDestination_3/{relationId}")    
   public ResponseEntity<?> deleteOriginDestination_3(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.originDestinationBusiness.getRepository().delete(relationId);
+        this.originDestinationBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -198,7 +198,7 @@ public class ParticipantREST {
   , value="/{instanceId}/OriginDestination_4/{relationId}")    
   public ResponseEntity<?> deleteOriginDestination_4(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.originDestinationBusiness.getRepository().delete(relationId);
+        this.originDestinationBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();

@@ -42,7 +42,7 @@ public class FileExtensionREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public FileExtension post(@Validated @RequestBody final FileExtension entity) throws Exception {
-        fileExtensionBusiness.getRepository().save(entity);
+        fileExtensionBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class FileExtensionREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        FileExtension entity = fileExtensionBusiness.getRepository().findOne(id);
+        FileExtension entity = fileExtensionBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class FileExtensionREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final FileExtension entity) throws Exception {
-        return ResponseEntity.ok( fileExtensionBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(fileExtensionBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class FileExtensionREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public FileExtension put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final FileExtension entity) throws Exception {
-        return fileExtensionBusiness.getRepository().saveAndFlush(entity);
+        return fileExtensionBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class FileExtensionREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         fileExtensionBusiness.getRepository().delete(id);
+        fileExtensionBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class FileExtensionREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<FileExtension> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return fileExtensionBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return fileExtensionBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

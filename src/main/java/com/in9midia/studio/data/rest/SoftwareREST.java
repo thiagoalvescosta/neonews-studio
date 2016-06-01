@@ -38,66 +38,6 @@ public class SoftwareREST {
    * @generated
    */
     @Autowired
-    @Qualifier("AddressBusiness")
-    private AddressBusiness addressBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("CampaignBusiness")
-    private CampaignBusiness campaignBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("CampaignBlockBusiness")
-    private CampaignBlockBusiness campaignBlockBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("CategoryBusiness")
-    private CategoryBusiness categoryBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("CompanyBusiness")
-    private CompanyBusiness companyBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("PersonBusiness")
-    private PersonBusiness personBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("ProfileBusiness")
-    private ProfileBusiness profileBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("SgaBusiness")
-    private SgaBusiness sgaBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("TerminalTypeBusiness")
-    private TerminalTypeBusiness terminalTypeBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("TvTypeBusiness")
-    private TvTypeBusiness tvTypeBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("TerminalBusiness")
     private TerminalBusiness terminalBusiness;
 
@@ -108,7 +48,7 @@ public class SoftwareREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Software post(@Validated @RequestBody final Software entity) throws Exception {
-        softwareBusiness.getRepository().save(entity);
+        softwareBusiness.post(entity);
         return entity;
     }
 
@@ -119,7 +59,7 @@ public class SoftwareREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Software entity = softwareBusiness.getRepository().findOne(id);
+        Software entity = softwareBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -130,7 +70,7 @@ public class SoftwareREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Software entity) throws Exception {
-        return ResponseEntity.ok( softwareBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(softwareBusiness.put(entity));
     }
 
     /**
@@ -140,7 +80,7 @@ public class SoftwareREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Software put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Software entity) throws Exception {
-        return softwareBusiness.getRepository().saveAndFlush(entity);
+        return softwareBusiness.put(entity);
     }
 
 
@@ -151,7 +91,7 @@ public class SoftwareREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         softwareBusiness.getRepository().delete(id);
+        softwareBusiness.delete(id);
     }
 
 
@@ -162,7 +102,7 @@ public class SoftwareREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Software> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return softwareBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return softwareBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -183,423 +123,13 @@ public class SoftwareREST {
   , value="/{instanceId}/Terminal/{relationId}")    
   public ResponseEntity<?> deleteTerminal(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.terminalBusiness.getRepository().delete(relationId);
+        this.terminalBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
       }
   }
 
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Address")
-  public List<Address> listAddress(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listAddress(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Address")
-  public ResponseEntity<?> postAddress(@Validated @RequestBody final Address entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setAddress(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Address/{relationId}")
-  public ResponseEntity<?> deleteAddress(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteAddress(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Campaign")
-  public List<Campaign> listCampaign(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listCampaign(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Campaign")
-  public ResponseEntity<?> postCampaign(@Validated @RequestBody final Campaign entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setCampaign(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Campaign/{relationId}")
-  public ResponseEntity<?> deleteCampaign(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteCampaign(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/CampaignBlock")
-  public List<CampaignBlock> listCampaignBlock(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listCampaignBlock(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/CampaignBlock")
-  public ResponseEntity<?> postCampaignBlock(@Validated @RequestBody final CampaignBlock entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setCampaignBlock(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/CampaignBlock/{relationId}")
-  public ResponseEntity<?> deleteCampaignBlock(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteCampaignBlock(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Category")
-  public List<Category> listCategory(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listCategory(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Category")
-  public ResponseEntity<?> postCategory(@Validated @RequestBody final Category entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setCategory(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Category/{relationId}")
-  public ResponseEntity<?> deleteCategory(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteCategory(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Company")
-  public List<Company> listCompany(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listCompany(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Company")
-  public ResponseEntity<?> postCompany(@Validated @RequestBody final Company entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setCompany(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Company/{relationId}")
-  public ResponseEntity<?> deleteCompany(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteCompany(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Person")
-  public List<Person> listPerson(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listPerson(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Person")
-  public ResponseEntity<?> postPerson(@Validated @RequestBody final Person entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setPerson(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Person/{relationId}")
-  public ResponseEntity<?> deletePerson(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deletePerson(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Profile")
-  public List<Profile> listProfile(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listProfile(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Profile")
-  public ResponseEntity<?> postProfile(@Validated @RequestBody final Profile entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setProfile(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Profile/{relationId}")
-  public ResponseEntity<?> deleteProfile(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteProfile(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Sga")
-  public List<Sga> listSga(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listSga(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Sga")
-  public ResponseEntity<?> postSga(@Validated @RequestBody final Sga entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setSga(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Sga/{relationId}")
-  public ResponseEntity<?> deleteSga(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteSga(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/TerminalType")
-  public List<TerminalType> listTerminalType(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listTerminalType(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/TerminalType")
-  public ResponseEntity<?> postTerminalType(@Validated @RequestBody final TerminalType entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setTerminalType(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/TerminalType/{relationId}")
-  public ResponseEntity<?> deleteTerminalType(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteTerminalType(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/TvType")
-  public List<TvType> listTvType(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return softwareBusiness.listTvType(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/TvType")
-  public ResponseEntity<?> postTvType(@Validated @RequestBody final TvType entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Terminal newTerminal = new Terminal();
-
-      Software instance = this.softwareBusiness.getRepository().findOne(instanceId);
-
-      newTerminal.setTvType(entity);
-      newTerminal.setSoftware(instance);
-      
-      this.terminalBusiness.getRepository().saveAndFlush(newTerminal);
-
-      return ResponseEntity.ok(newTerminal.getSoftware());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/TvType/{relationId}")
-  public ResponseEntity<?> deleteTvType(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.softwareBusiness.deleteTvType(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
 
 
 

@@ -42,7 +42,7 @@ public class ThemesREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Themes post(@Validated @RequestBody final Themes entity) throws Exception {
-        themesBusiness.getRepository().save(entity);
+        themesBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ThemesREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Themes entity = themesBusiness.getRepository().findOne(id);
+        Themes entity = themesBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ThemesREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Themes entity) throws Exception {
-        return ResponseEntity.ok( themesBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(themesBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ThemesREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Themes put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Themes entity) throws Exception {
-        return themesBusiness.getRepository().saveAndFlush(entity);
+        return themesBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ThemesREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         themesBusiness.getRepository().delete(id);
+        themesBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ThemesREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Themes> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return themesBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return themesBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

@@ -42,7 +42,7 @@ public class TerminalAltRouteREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public TerminalAltRoute post(@Validated @RequestBody final TerminalAltRoute entity) throws Exception {
-        terminalAltRouteBusiness.getRepository().save(entity);
+        terminalAltRouteBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class TerminalAltRouteREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        TerminalAltRoute entity = terminalAltRouteBusiness.getRepository().findOne(id);
+        TerminalAltRoute entity = terminalAltRouteBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class TerminalAltRouteREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final TerminalAltRoute entity) throws Exception {
-        return ResponseEntity.ok( terminalAltRouteBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(terminalAltRouteBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class TerminalAltRouteREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public TerminalAltRoute put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final TerminalAltRoute entity) throws Exception {
-        return terminalAltRouteBusiness.getRepository().saveAndFlush(entity);
+        return terminalAltRouteBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class TerminalAltRouteREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         terminalAltRouteBusiness.getRepository().delete(id);
+        terminalAltRouteBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class TerminalAltRouteREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<TerminalAltRoute> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return terminalAltRouteBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return terminalAltRouteBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

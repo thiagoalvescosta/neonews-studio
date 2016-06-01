@@ -29,17 +29,99 @@ public class NeonewsUserBusiness {
     @Qualifier("NeonewsUserDAO")
     protected NeonewsUserDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao NeonewsUserDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public NeonewsUserDAO getRepository() {
-        return repository;
+    public NeonewsUser post(final NeonewsUser entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public NeonewsUser get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       NeonewsUser result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public NeonewsUser put(final NeonewsUser entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public NeonewsUser put(final java.lang.String id,final NeonewsUser entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<NeonewsUser> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<NeonewsUser> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<UserCompany> findUserCompany(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -54,6 +136,7 @@ public class NeonewsUserBusiness {
 
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Company> listCompany(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -66,6 +149,7 @@ public class NeonewsUserBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteCompany(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -76,3 +160,4 @@ public class NeonewsUserBusiness {
       return result;  
   }
 }
+

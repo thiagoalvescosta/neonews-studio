@@ -29,17 +29,99 @@ public class ScheduleBusiness {
     @Qualifier("ScheduleDAO")
     protected ScheduleDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao ScheduleDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public ScheduleDAO getRepository() {
-        return repository;
+    public Schedule post(final Schedule entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Schedule get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Schedule result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Schedule put(final Schedule entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Schedule put(final java.lang.String id,final Schedule entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Schedule> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Schedule> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<CampaignBlock> findCampaignBlock(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,6 +134,20 @@ public class ScheduleBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
+   */  
+  public List<Profile> findProfile(java.lang.String id,  Pageable pageable) {
+      // begin-user-code
+      // end-user-code  
+      List<Profile> result = repository.findProfile(id,  pageable );
+      // begin-user-code  
+      // end-user-code        
+      return result;	  
+  }
+
+  /**
+   * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Profile> findProfile_2(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -64,6 +160,7 @@ public class ScheduleBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Profile> findProfile_3(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -76,6 +173,7 @@ public class ScheduleBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Profile> findProfile_4(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -88,18 +186,7 @@ public class ScheduleBusiness {
 
   /**
    * @generated modifiable
-   */  
-  public List<Profile> findProfile_5(java.lang.String id,  Pageable pageable) {
-      // begin-user-code
-      // end-user-code  
-      List<Profile> result = repository.findProfile_5(id,  pageable );
-      // begin-user-code  
-      // end-user-code        
-      return result;	  
-  }
-
-  /**
-   * @generated modifiable
+   * OneToMany Relation
    */  
   public List<SchedulePredicate> findSchedulePredicate(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -112,6 +199,7 @@ public class ScheduleBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Terminal> findTerminal(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -124,6 +212,7 @@ public class ScheduleBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Terminal> findTerminal_2(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -136,6 +225,7 @@ public class ScheduleBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Terminal> findTerminal_3(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -148,6 +238,7 @@ public class ScheduleBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Terminal> findTerminal_4(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -160,50 +251,5 @@ public class ScheduleBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<Profile> listProfile(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Profile> result = repository.listProfile(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteProfile(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteProfile(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<ProfileTv> listProfileTv(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<ProfileTv> result = repository.listProfileTv(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteProfileTv(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteProfileTv(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

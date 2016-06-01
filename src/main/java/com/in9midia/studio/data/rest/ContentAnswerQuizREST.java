@@ -54,7 +54,7 @@ public class ContentAnswerQuizREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ContentAnswerQuiz post(@Validated @RequestBody final ContentAnswerQuiz entity) throws Exception {
-        contentAnswerQuizBusiness.getRepository().save(entity);
+        contentAnswerQuizBusiness.post(entity);
         return entity;
     }
 
@@ -65,7 +65,7 @@ public class ContentAnswerQuizREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ContentAnswerQuiz entity = contentAnswerQuizBusiness.getRepository().findOne(id);
+        ContentAnswerQuiz entity = contentAnswerQuizBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -76,7 +76,7 @@ public class ContentAnswerQuizREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ContentAnswerQuiz entity) throws Exception {
-        return ResponseEntity.ok( contentAnswerQuizBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(contentAnswerQuizBusiness.put(entity));
     }
 
     /**
@@ -86,7 +86,7 @@ public class ContentAnswerQuizREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ContentAnswerQuiz put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ContentAnswerQuiz entity) throws Exception {
-        return contentAnswerQuizBusiness.getRepository().saveAndFlush(entity);
+        return contentAnswerQuizBusiness.put(entity);
     }
 
 
@@ -97,7 +97,7 @@ public class ContentAnswerQuizREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         contentAnswerQuizBusiness.getRepository().delete(id);
+        contentAnswerQuizBusiness.delete(id);
     }
 
 
@@ -108,7 +108,7 @@ public class ContentAnswerQuizREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ContentAnswerQuiz> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return contentAnswerQuizBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return contentAnswerQuizBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -129,7 +129,7 @@ public class ContentAnswerQuizREST {
   , value="/{instanceId}/ContentAnswerReport/{relationId}")    
   public ResponseEntity<?> deleteContentAnswerReport(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.contentAnswerReportBusiness.getRepository().delete(relationId);
+        this.contentAnswerReportBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -154,15 +154,15 @@ public class ContentAnswerQuizREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Content")
-  public ResponseEntity<?> postContent(@Validated @RequestBody final Content entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postContent(@Validated @RequestBody final Content entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       ContentAnswerReport newContentAnswerReport = new ContentAnswerReport();
 
-      ContentAnswerQuiz instance = this.contentAnswerQuizBusiness.getRepository().findOne(instanceId);
+      ContentAnswerQuiz instance = this.contentAnswerQuizBusiness.get(instanceId);
 
       newContentAnswerReport.setContent(entity);
       newContentAnswerReport.setContentAnswerQuiz(instance);
       
-      this.contentAnswerReportBusiness.getRepository().saveAndFlush(newContentAnswerReport);
+      this.contentAnswerReportBusiness.post(newContentAnswerReport);
 
       return ResponseEntity.ok(newContentAnswerReport.getContentAnswerQuiz());
   }   

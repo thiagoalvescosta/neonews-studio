@@ -54,7 +54,7 @@ public class HelpDocumentREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public HelpDocument post(@Validated @RequestBody final HelpDocument entity) throws Exception {
-        helpDocumentBusiness.getRepository().save(entity);
+        helpDocumentBusiness.post(entity);
         return entity;
     }
 
@@ -65,7 +65,7 @@ public class HelpDocumentREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        HelpDocument entity = helpDocumentBusiness.getRepository().findOne(id);
+        HelpDocument entity = helpDocumentBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -76,7 +76,7 @@ public class HelpDocumentREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final HelpDocument entity) throws Exception {
-        return ResponseEntity.ok( helpDocumentBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(helpDocumentBusiness.put(entity));
     }
 
     /**
@@ -86,7 +86,7 @@ public class HelpDocumentREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public HelpDocument put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final HelpDocument entity) throws Exception {
-        return helpDocumentBusiness.getRepository().saveAndFlush(entity);
+        return helpDocumentBusiness.put(entity);
     }
 
 
@@ -97,7 +97,7 @@ public class HelpDocumentREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         helpDocumentBusiness.getRepository().delete(id);
+        helpDocumentBusiness.delete(id);
     }
 
 
@@ -108,7 +108,7 @@ public class HelpDocumentREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<HelpDocument> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return helpDocumentBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return helpDocumentBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -129,7 +129,7 @@ public class HelpDocumentREST {
   , value="/{instanceId}/HelpContent/{relationId}")    
   public ResponseEntity<?> deleteHelpContent(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.helpContentBusiness.getRepository().delete(relationId);
+        this.helpContentBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -154,15 +154,15 @@ public class HelpDocumentREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/HelpName")
-  public ResponseEntity<?> postHelpName(@Validated @RequestBody final HelpName entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postHelpName(@Validated @RequestBody final HelpName entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       HelpContent newHelpContent = new HelpContent();
 
-      HelpDocument instance = this.helpDocumentBusiness.getRepository().findOne(instanceId);
+      HelpDocument instance = this.helpDocumentBusiness.get(instanceId);
 
       newHelpContent.setHelpName(entity);
       newHelpContent.setHelpDocument(instance);
       
-      this.helpContentBusiness.getRepository().saveAndFlush(newHelpContent);
+      this.helpContentBusiness.post(newHelpContent);
 
       return ResponseEntity.ok(newHelpContent.getHelpDocument());
   }   

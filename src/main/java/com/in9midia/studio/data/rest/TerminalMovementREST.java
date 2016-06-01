@@ -54,7 +54,7 @@ public class TerminalMovementREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public TerminalMovement post(@Validated @RequestBody final TerminalMovement entity) throws Exception {
-        terminalMovementBusiness.getRepository().save(entity);
+        terminalMovementBusiness.post(entity);
         return entity;
     }
 
@@ -65,7 +65,7 @@ public class TerminalMovementREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        TerminalMovement entity = terminalMovementBusiness.getRepository().findOne(id);
+        TerminalMovement entity = terminalMovementBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -76,7 +76,7 @@ public class TerminalMovementREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final TerminalMovement entity) throws Exception {
-        return ResponseEntity.ok( terminalMovementBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(terminalMovementBusiness.put(entity));
     }
 
     /**
@@ -86,7 +86,7 @@ public class TerminalMovementREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public TerminalMovement put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final TerminalMovement entity) throws Exception {
-        return terminalMovementBusiness.getRepository().saveAndFlush(entity);
+        return terminalMovementBusiness.put(entity);
     }
 
 
@@ -97,7 +97,7 @@ public class TerminalMovementREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         terminalMovementBusiness.getRepository().delete(id);
+        terminalMovementBusiness.delete(id);
     }
 
 
@@ -108,7 +108,7 @@ public class TerminalMovementREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<TerminalMovement> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return terminalMovementBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return terminalMovementBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -129,7 +129,7 @@ public class TerminalMovementREST {
   , value="/{instanceId}/TerminalMovementStop/{relationStpId}")    
   public ResponseEntity<?> deleteTerminalMovementStop(@PathVariable("relationStpId") java.lang.String relationStpId) {
       try {
-        this.terminalMovementStopBusiness.getRepository().delete(relationStpId);
+        this.terminalMovementStopBusiness.delete(relationStpId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -154,15 +154,15 @@ public class TerminalMovementREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/RouteStop")
-  public ResponseEntity<?> postRouteStop(@Validated @RequestBody final RouteStop entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postRouteStop(@Validated @RequestBody final RouteStop entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       TerminalMovementStop newTerminalMovementStop = new TerminalMovementStop();
 
-      TerminalMovement instance = this.terminalMovementBusiness.getRepository().findOne(instanceId);
+      TerminalMovement instance = this.terminalMovementBusiness.get(instanceId);
 
       newTerminalMovementStop.setRouteStop(entity);
       newTerminalMovementStop.setTerminalMovement(instance);
       
-      this.terminalMovementStopBusiness.getRepository().saveAndFlush(newTerminalMovementStop);
+      this.terminalMovementStopBusiness.post(newTerminalMovementStop);
 
       return ResponseEntity.ok(newTerminalMovementStop.getTerminalMovement());
   }   

@@ -42,7 +42,7 @@ public class TerminalMovementStopREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public TerminalMovementStop post(@Validated @RequestBody final TerminalMovementStop entity) throws Exception {
-        terminalMovementStopBusiness.getRepository().save(entity);
+        terminalMovementStopBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class TerminalMovementStopREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{stpId}")
     public ResponseEntity<?> get(@PathVariable("stpId") java.lang.String stpId) throws Exception {
-        TerminalMovementStop entity = terminalMovementStopBusiness.getRepository().findOne(stpId);
+        TerminalMovementStop entity = terminalMovementStopBusiness.get(stpId);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class TerminalMovementStopREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final TerminalMovementStop entity) throws Exception {
-        return ResponseEntity.ok( terminalMovementStopBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(terminalMovementStopBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class TerminalMovementStopREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{stpId}")
     public TerminalMovementStop put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final TerminalMovementStop entity) throws Exception {
-        return terminalMovementStopBusiness.getRepository().saveAndFlush(entity);
+        return terminalMovementStopBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class TerminalMovementStopREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{stpId}")
     public void delete(@PathVariable("stpId") java.lang.String stpId) throws Exception {
-         terminalMovementStopBusiness.getRepository().delete(stpId);
+        terminalMovementStopBusiness.delete(stpId);
     }
 
 
@@ -96,7 +96,7 @@ public class TerminalMovementStopREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<TerminalMovementStop> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return terminalMovementStopBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return terminalMovementStopBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

@@ -42,7 +42,7 @@ public class ContentUpdateREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ContentUpdate post(@Validated @RequestBody final ContentUpdate entity) throws Exception {
-        contentUpdateBusiness.getRepository().save(entity);
+        contentUpdateBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ContentUpdateREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ContentUpdate entity = contentUpdateBusiness.getRepository().findOne(id);
+        ContentUpdate entity = contentUpdateBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ContentUpdateREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ContentUpdate entity) throws Exception {
-        return ResponseEntity.ok( contentUpdateBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(contentUpdateBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ContentUpdateREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ContentUpdate put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ContentUpdate entity) throws Exception {
-        return contentUpdateBusiness.getRepository().saveAndFlush(entity);
+        return contentUpdateBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ContentUpdateREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         contentUpdateBusiness.getRepository().delete(id);
+        contentUpdateBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ContentUpdateREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ContentUpdate> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return contentUpdateBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return contentUpdateBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

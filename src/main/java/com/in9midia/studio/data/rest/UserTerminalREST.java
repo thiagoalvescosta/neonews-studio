@@ -42,7 +42,7 @@ public class UserTerminalREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public UserTerminal post(@Validated @RequestBody final UserTerminal entity) throws Exception {
-        userTerminalBusiness.getRepository().save(entity);
+        userTerminalBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class UserTerminalREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        UserTerminal entity = userTerminalBusiness.getRepository().findOne(id);
+        UserTerminal entity = userTerminalBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class UserTerminalREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final UserTerminal entity) throws Exception {
-        return ResponseEntity.ok( userTerminalBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(userTerminalBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class UserTerminalREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public UserTerminal put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final UserTerminal entity) throws Exception {
-        return userTerminalBusiness.getRepository().saveAndFlush(entity);
+        return userTerminalBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class UserTerminalREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         userTerminalBusiness.getRepository().delete(id);
+        userTerminalBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class UserTerminalREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<UserTerminal> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return userTerminalBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return userTerminalBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

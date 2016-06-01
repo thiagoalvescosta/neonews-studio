@@ -48,7 +48,7 @@ public class FileTypeREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public FileType post(@Validated @RequestBody final FileType entity) throws Exception {
-        fileTypeBusiness.getRepository().save(entity);
+        fileTypeBusiness.post(entity);
         return entity;
     }
 
@@ -59,7 +59,7 @@ public class FileTypeREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        FileType entity = fileTypeBusiness.getRepository().findOne(id);
+        FileType entity = fileTypeBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -70,7 +70,7 @@ public class FileTypeREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final FileType entity) throws Exception {
-        return ResponseEntity.ok( fileTypeBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(fileTypeBusiness.put(entity));
     }
 
     /**
@@ -80,7 +80,7 @@ public class FileTypeREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public FileType put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final FileType entity) throws Exception {
-        return fileTypeBusiness.getRepository().saveAndFlush(entity);
+        return fileTypeBusiness.put(entity);
     }
 
 
@@ -91,7 +91,7 @@ public class FileTypeREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         fileTypeBusiness.getRepository().delete(id);
+        fileTypeBusiness.delete(id);
     }
 
 
@@ -102,7 +102,7 @@ public class FileTypeREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<FileType> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return fileTypeBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return fileTypeBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -123,7 +123,7 @@ public class FileTypeREST {
   , value="/{instanceId}/FileExtension/{relationId}")    
   public ResponseEntity<?> deleteFileExtension(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.fileExtensionBusiness.getRepository().delete(relationId);
+        this.fileExtensionBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();

@@ -29,17 +29,99 @@ public class ContentBusiness {
     @Qualifier("ContentDAO")
     protected ContentDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao ContentDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public ContentDAO getRepository() {
-        return repository;
+    public Content post(final Content entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public Content get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       Content result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public Content put(final Content entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public Content put(final java.lang.String id,final Content entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Content> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Content> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ContentAnswerQuiz> findContentAnswerQuiz(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,6 +134,7 @@ public class ContentBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ContentAnswerReport> findContentAnswerReport(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -64,6 +147,7 @@ public class ContentBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<ContentTerminal> findContentTerminal(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -76,6 +160,7 @@ public class ContentBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<OriginDestination> findOriginDestination(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -88,6 +173,7 @@ public class ContentBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Participant> findParticipant(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -102,6 +188,7 @@ public class ContentBusiness {
 
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<ContentAnswerQuiz> listContentAnswerQuiz_2(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -114,6 +201,7 @@ public class ContentBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteContentAnswerQuiz_2(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -125,6 +213,7 @@ public class ContentBusiness {
   }
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */  
   public List<Terminal> listTerminal(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
@@ -137,6 +226,7 @@ public class ContentBusiness {
   
   /**
    * @generated modifiable
+   * ManyToMany Relation
    */    
   public int deleteTerminal(java.lang.String instanceId, java.lang.String relationId) {
       // begin-user-code
@@ -146,50 +236,5 @@ public class ContentBusiness {
       // end-user-code  
       return result;  
   }
-  /**
-   * @generated modifiable
-   */  
-  public List<Company> listCompany(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Company> result = repository.listCompany(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCompany(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCompany(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<File> listFile(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<File> result = repository.listFile(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteFile(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteFile(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

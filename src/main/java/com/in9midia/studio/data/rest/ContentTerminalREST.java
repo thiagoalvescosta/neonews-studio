@@ -42,7 +42,7 @@ public class ContentTerminalREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ContentTerminal post(@Validated @RequestBody final ContentTerminal entity) throws Exception {
-        contentTerminalBusiness.getRepository().save(entity);
+        contentTerminalBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ContentTerminalREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ContentTerminal entity = contentTerminalBusiness.getRepository().findOne(id);
+        ContentTerminal entity = contentTerminalBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ContentTerminalREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ContentTerminal entity) throws Exception {
-        return ResponseEntity.ok( contentTerminalBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(contentTerminalBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ContentTerminalREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ContentTerminal put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ContentTerminal entity) throws Exception {
-        return contentTerminalBusiness.getRepository().saveAndFlush(entity);
+        return contentTerminalBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ContentTerminalREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         contentTerminalBusiness.getRepository().delete(id);
+        contentTerminalBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ContentTerminalREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ContentTerminal> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return contentTerminalBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return contentTerminalBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

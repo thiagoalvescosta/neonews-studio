@@ -42,7 +42,7 @@ public class CampaignCampaignBlockREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public CampaignCampaignBlock post(@Validated @RequestBody final CampaignCampaignBlock entity) throws Exception {
-        campaignCampaignBlockBusiness.getRepository().save(entity);
+        campaignCampaignBlockBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class CampaignCampaignBlockREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        CampaignCampaignBlock entity = campaignCampaignBlockBusiness.getRepository().findOne(id);
+        CampaignCampaignBlock entity = campaignCampaignBlockBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class CampaignCampaignBlockREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final CampaignCampaignBlock entity) throws Exception {
-        return ResponseEntity.ok( campaignCampaignBlockBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(campaignCampaignBlockBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class CampaignCampaignBlockREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public CampaignCampaignBlock put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final CampaignCampaignBlock entity) throws Exception {
-        return campaignCampaignBlockBusiness.getRepository().saveAndFlush(entity);
+        return campaignCampaignBlockBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class CampaignCampaignBlockREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         campaignCampaignBlockBusiness.getRepository().delete(id);
+        campaignCampaignBlockBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class CampaignCampaignBlockREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<CampaignCampaignBlock> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return campaignCampaignBlockBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return campaignCampaignBlockBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

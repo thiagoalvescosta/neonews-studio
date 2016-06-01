@@ -42,7 +42,7 @@ public class ForecastingConstREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ForecastingConst post(@Validated @RequestBody final ForecastingConst entity) throws Exception {
-        forecastingConstBusiness.getRepository().save(entity);
+        forecastingConstBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ForecastingConstREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ForecastingConst entity = forecastingConstBusiness.getRepository().findOne(id);
+        ForecastingConst entity = forecastingConstBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ForecastingConstREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ForecastingConst entity) throws Exception {
-        return ResponseEntity.ok( forecastingConstBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(forecastingConstBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ForecastingConstREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ForecastingConst put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ForecastingConst entity) throws Exception {
-        return forecastingConstBusiness.getRepository().saveAndFlush(entity);
+        return forecastingConstBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ForecastingConstREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         forecastingConstBusiness.getRepository().delete(id);
+        forecastingConstBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ForecastingConstREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ForecastingConst> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return forecastingConstBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return forecastingConstBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

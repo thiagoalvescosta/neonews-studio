@@ -65,25 +65,25 @@ public interface ScheduleDAO extends JpaRepository<Schedule, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity FROM Profile entity WHERE entity.schedule.id = :id")
+  public List<Profile> findProfile(@Param(value="id") java.lang.String id,  Pageable pageable );
+  /**
+   * OneToMany Relation
+   * @generated
+   */
+  @Query("SELECT entity FROM Profile entity WHERE entity.schedule2.id = :id")
   public List<Profile> findProfile_2(@Param(value="id") java.lang.String id,  Pageable pageable );
   /**
    * OneToMany Relation
    * @generated
    */
-  @Query("SELECT entity FROM Profile entity WHERE entity.schedule2.id = :id")
+  @Query("SELECT entity FROM Profile entity WHERE entity.schedule.id = :id")
   public List<Profile> findProfile_3(@Param(value="id") java.lang.String id,  Pageable pageable );
   /**
    * OneToMany Relation
    * @generated
    */
-  @Query("SELECT entity FROM Profile entity WHERE entity.schedule.id = :id")
-  public List<Profile> findProfile_4(@Param(value="id") java.lang.String id,  Pageable pageable );
-  /**
-   * OneToMany Relation
-   * @generated
-   */
   @Query("SELECT entity FROM Profile entity WHERE entity.schedule2.id = :id")
-  public List<Profile> findProfile_5(@Param(value="id") java.lang.String id,  Pageable pageable );
+  public List<Profile> findProfile_4(@Param(value="id") java.lang.String id,  Pageable pageable );
   /**
    * OneToMany Relation
    * @generated
@@ -116,36 +116,6 @@ public interface ScheduleDAO extends JpaRepository<Schedule, java.lang.String> {
   public List<Terminal> findTerminal_4(@Param(value="id") java.lang.String id,  Pageable pageable );
 
 
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.profile FROM CampaignBlock entity WHERE entity.schedule.id = :id")
-  public List<Profile> listProfile(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignBlock entity WHERE entity.schedule.id = :instanceId AND entity.profile.id = :relationId")
-    public int deleteProfile(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.profileTv FROM CampaignBlock entity WHERE entity.schedule.id = :id")
-  public List<ProfileTv> listProfileTv(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM CampaignBlock entity WHERE entity.schedule.id = :instanceId AND entity.profileTv.id = :relationId")
-    public int deleteProfileTv(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
 
 

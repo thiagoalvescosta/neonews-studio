@@ -42,7 +42,7 @@ public class SgaPurchasedREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public SgaPurchased post(@Validated @RequestBody final SgaPurchased entity) throws Exception {
-        sgaPurchasedBusiness.getRepository().save(entity);
+        sgaPurchasedBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class SgaPurchasedREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        SgaPurchased entity = sgaPurchasedBusiness.getRepository().findOne(id);
+        SgaPurchased entity = sgaPurchasedBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class SgaPurchasedREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final SgaPurchased entity) throws Exception {
-        return ResponseEntity.ok( sgaPurchasedBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(sgaPurchasedBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class SgaPurchasedREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public SgaPurchased put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final SgaPurchased entity) throws Exception {
-        return sgaPurchasedBusiness.getRepository().saveAndFlush(entity);
+        return sgaPurchasedBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class SgaPurchasedREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         sgaPurchasedBusiness.getRepository().delete(id);
+        sgaPurchasedBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class SgaPurchasedREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<SgaPurchased> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return sgaPurchasedBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return sgaPurchasedBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

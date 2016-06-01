@@ -145,7 +145,7 @@ public interface TerminalDAO extends JpaRepository<Terminal, java.lang.String> {
    * ManyToOne Relation
    * @generated
    */
-  @Query("SELECT entity.campaign FROM Account entity WHERE entity.terminal.id = :id")
+  @Query("SELECT entity.campaign FROM CampaignLog entity WHERE entity.terminal.id = :id")
   public List<Campaign> listCampaign(@Param(value="id") java.lang.String id,  Pageable pageable);
 
     /**
@@ -153,83 +153,8 @@ public interface TerminalDAO extends JpaRepository<Terminal, java.lang.String> {
      * @generated
      */
     @Modifying
-    @Query("DELETE FROM Account entity WHERE entity.terminal.id = :instanceId AND entity.campaign.id = :relationId")
-    public int deleteCampaign(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM Account entity WHERE entity.terminal.id = :id")
-  public List<Company> listCompany(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Account entity WHERE entity.terminal.id = :instanceId AND entity.company.id = :relationId")
-    public int deleteCompany(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.person FROM Account entity WHERE entity.terminal.id = :id")
-  public List<Person> listPerson(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Account entity WHERE entity.terminal.id = :instanceId AND entity.person.id = :relationId")
-    public int deletePerson(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.campaign FROM CampaignLog entity WHERE entity.terminal.id = :id")
-  public List<Campaign> listCampaign_2(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
     @Query("DELETE FROM CampaignLog entity WHERE entity.terminal.id = :instanceId AND entity.campaign.id = :relationId")
-    public int deleteCampaign_2(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.company FROM Commissioned entity WHERE entity.terminal.id = :id")
-  public List<Company> listCompany_2(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Commissioned entity WHERE entity.terminal.id = :instanceId AND entity.company.id = :relationId")
-    public int deleteCompany_2(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
-
-  /**
-   * ManyToOne Relation
-   * @generated
-   */
-  @Query("SELECT entity.person FROM Commissioned entity WHERE entity.terminal.id = :id")
-  public List<Person> listPerson_2(@Param(value="id") java.lang.String id,  Pageable pageable);
-
-    /**
-     * ManyToOne Relation Delete
-     * @generated
-     */
-    @Modifying
-    @Query("DELETE FROM Commissioned entity WHERE entity.terminal.id = :instanceId AND entity.person.id = :relationId")
-    public int deletePerson_2(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
+    public int deleteCampaign(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
   /**
    * ManyToOne Relation
@@ -266,7 +191,7 @@ public interface TerminalDAO extends JpaRepository<Terminal, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity.campaign FROM Log entity WHERE entity.terminal.id = :id")
-  public List<Campaign> listCampaign_3(@Param(value="id") java.lang.String id,  Pageable pageable);
+  public List<Campaign> listCampaign_2(@Param(value="id") java.lang.String id,  Pageable pageable);
 
     /**
      * ManyToOne Relation Delete
@@ -274,14 +199,14 @@ public interface TerminalDAO extends JpaRepository<Terminal, java.lang.String> {
      */
     @Modifying
     @Query("DELETE FROM Log entity WHERE entity.terminal.id = :instanceId AND entity.campaign.id = :relationId")
-    public int deleteCampaign_3(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
+    public int deleteCampaign_2(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
   /**
    * ManyToOne Relation
    * @generated
    */
   @Query("SELECT entity.campaign FROM ReportCampaignSchedule entity WHERE entity.terminal.id = :id")
-  public List<Campaign> listCampaign_4(@Param(value="id") java.lang.String id,  Pageable pageable);
+  public List<Campaign> listCampaign_3(@Param(value="id") java.lang.String id,  Pageable pageable);
 
     /**
      * ManyToOne Relation Delete
@@ -289,7 +214,7 @@ public interface TerminalDAO extends JpaRepository<Terminal, java.lang.String> {
      */
     @Modifying
     @Query("DELETE FROM ReportCampaignSchedule entity WHERE entity.terminal.id = :instanceId AND entity.campaign.id = :relationId")
-    public int deleteCampaign_4(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
+    public int deleteCampaign_3(@Param(value="instanceId") java.lang.String instanceId, @Param(value="relationId") java.lang.String relationId);
 
   /**
    * ManyToOne Relation

@@ -42,7 +42,7 @@ public class SchedulePredicateRegionREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public SchedulePredicateRegion post(@Validated @RequestBody final SchedulePredicateRegion entity) throws Exception {
-        schedulePredicateRegionBusiness.getRepository().save(entity);
+        schedulePredicateRegionBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class SchedulePredicateRegionREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        SchedulePredicateRegion entity = schedulePredicateRegionBusiness.getRepository().findOne(id);
+        SchedulePredicateRegion entity = schedulePredicateRegionBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class SchedulePredicateRegionREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final SchedulePredicateRegion entity) throws Exception {
-        return ResponseEntity.ok( schedulePredicateRegionBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(schedulePredicateRegionBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class SchedulePredicateRegionREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public SchedulePredicateRegion put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final SchedulePredicateRegion entity) throws Exception {
-        return schedulePredicateRegionBusiness.getRepository().saveAndFlush(entity);
+        return schedulePredicateRegionBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class SchedulePredicateRegionREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         schedulePredicateRegionBusiness.getRepository().delete(id);
+        schedulePredicateRegionBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class SchedulePredicateRegionREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<SchedulePredicateRegion> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return schedulePredicateRegionBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return schedulePredicateRegionBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

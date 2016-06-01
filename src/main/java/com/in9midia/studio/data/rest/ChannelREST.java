@@ -44,18 +44,6 @@ public class ChannelREST {
    * @generated
    */
     @Autowired
-    @Qualifier("FileBusiness")
-    private FileBusiness fileBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
-    @Qualifier("TemplateBusiness")
-    private TemplateBusiness templateBusiness;
-  /**
-   * @generated
-   */
-    @Autowired
     @Qualifier("ChannelPersonBusiness")
     private ChannelPersonBusiness channelPersonBusiness;
   /**
@@ -72,7 +60,7 @@ public class ChannelREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Channel post(@Validated @RequestBody final Channel entity) throws Exception {
-        channelBusiness.getRepository().save(entity);
+        channelBusiness.post(entity);
         return entity;
     }
 
@@ -83,7 +71,7 @@ public class ChannelREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Channel entity = channelBusiness.getRepository().findOne(id);
+        Channel entity = channelBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -94,7 +82,7 @@ public class ChannelREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Channel entity) throws Exception {
-        return ResponseEntity.ok( channelBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(channelBusiness.put(entity));
     }
 
     /**
@@ -104,7 +92,7 @@ public class ChannelREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Channel put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Channel entity) throws Exception {
-        return channelBusiness.getRepository().saveAndFlush(entity);
+        return channelBusiness.put(entity);
     }
 
 
@@ -115,7 +103,7 @@ public class ChannelREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         channelBusiness.getRepository().delete(id);
+        channelBusiness.delete(id);
     }
 
 
@@ -126,7 +114,7 @@ public class ChannelREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Channel> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return channelBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return channelBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -147,7 +135,7 @@ public class ChannelREST {
   , value="/{instanceId}/ChannelPerson/{relationId}")    
   public ResponseEntity<?> deleteChannelPerson(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.channelPersonBusiness.getRepository().delete(relationId);
+        this.channelPersonBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -172,7 +160,7 @@ public class ChannelREST {
   , value="/{instanceId}/Content/{relationId}")    
   public ResponseEntity<?> deleteContent(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.contentBusiness.getRepository().delete(relationId);
+        this.contentBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();
@@ -197,15 +185,15 @@ public class ChannelREST {
    */  
   @RequestMapping(method = RequestMethod.POST
   ,value="/{instanceId}/Person")
-  public ResponseEntity<?> postPerson(@Validated @RequestBody final Person entity, @PathVariable("instanceId") java.lang.String instanceId) {
+  public ResponseEntity<?> postPerson(@Validated @RequestBody final Person entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
       ChannelPerson newChannelPerson = new ChannelPerson();
 
-      Channel instance = this.channelBusiness.getRepository().findOne(instanceId);
+      Channel instance = this.channelBusiness.get(instanceId);
 
       newChannelPerson.setPerson(entity);
       newChannelPerson.setChannel(instance);
       
-      this.channelPersonBusiness.getRepository().saveAndFlush(newChannelPerson);
+      this.channelPersonBusiness.post(newChannelPerson);
 
       return ResponseEntity.ok(newChannelPerson.getChannel());
   }   
@@ -218,88 +206,6 @@ public class ChannelREST {
   ,value="/{instanceId}/Person/{relationId}")
   public ResponseEntity<?> deletePerson(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
       this.channelBusiness.deletePerson(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/File")
-  public List<File> listFile(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return channelBusiness.listFile(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/File")
-  public ResponseEntity<?> postFile(@Validated @RequestBody final File entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Content newContent = new Content();
-
-      Channel instance = this.channelBusiness.getRepository().findOne(instanceId);
-
-      newContent.setFile(entity);
-      newContent.setChannel(instance);
-      
-      this.contentBusiness.getRepository().saveAndFlush(newContent);
-
-      return ResponseEntity.ok(newContent.getChannel());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/File/{relationId}")
-  public ResponseEntity<?> deleteFile(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.channelBusiness.deleteFile(instanceId, relationId);
-      return ResponseEntity.ok().build();
-  }  
-
-
-  /**
-   * ManyToMany Relationship GET
-   * @generated
-   */
-  @RequestMapping(method = RequestMethod.GET
-  ,value="/{instanceId}/Template")
-  public List<Template> listTemplate(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return channelBusiness.listTemplate(instanceId,  new PageRequest(offset, limit) );
-  }
-
-  /**
-   * ManyToMany Relationship POST
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.POST
-  ,value="/{instanceId}/Template")
-  public ResponseEntity<?> postTemplate(@Validated @RequestBody final Template entity, @PathVariable("instanceId") java.lang.String instanceId) {
-      Content newContent = new Content();
-
-      Channel instance = this.channelBusiness.getRepository().findOne(instanceId);
-
-      newContent.setTemplate(entity);
-      newContent.setChannel(instance);
-      
-      this.contentBusiness.getRepository().saveAndFlush(newContent);
-
-      return ResponseEntity.ok(newContent.getChannel());
-  }   
-
-  /**
-   * ManyToMany Relationship DELETE
-   * @generated
-   */  
-  @RequestMapping(method = RequestMethod.DELETE
-  ,value="/{instanceId}/Template/{relationId}")
-  public ResponseEntity<?> deleteTemplate(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
-      this.channelBusiness.deleteTemplate(instanceId, relationId);
       return ResponseEntity.ok().build();
   }  
 

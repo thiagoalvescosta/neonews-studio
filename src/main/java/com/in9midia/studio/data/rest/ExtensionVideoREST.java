@@ -42,7 +42,7 @@ public class ExtensionVideoREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public ExtensionVideo post(@Validated @RequestBody final ExtensionVideo entity) throws Exception {
-        extensionVideoBusiness.getRepository().save(entity);
+        extensionVideoBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class ExtensionVideoREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        ExtensionVideo entity = extensionVideoBusiness.getRepository().findOne(id);
+        ExtensionVideo entity = extensionVideoBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class ExtensionVideoREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final ExtensionVideo entity) throws Exception {
-        return ResponseEntity.ok( extensionVideoBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(extensionVideoBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class ExtensionVideoREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ExtensionVideo put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final ExtensionVideo entity) throws Exception {
-        return extensionVideoBusiness.getRepository().saveAndFlush(entity);
+        return extensionVideoBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class ExtensionVideoREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         extensionVideoBusiness.getRepository().delete(id);
+        extensionVideoBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class ExtensionVideoREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<ExtensionVideo> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return extensionVideoBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return extensionVideoBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

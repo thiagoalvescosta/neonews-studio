@@ -48,7 +48,7 @@ public class CommandREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public Command post(@Validated @RequestBody final Command entity) throws Exception {
-        commandBusiness.getRepository().save(entity);
+        commandBusiness.post(entity);
         return entity;
     }
 
@@ -59,7 +59,7 @@ public class CommandREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        Command entity = commandBusiness.getRepository().findOne(id);
+        Command entity = commandBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -70,7 +70,7 @@ public class CommandREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final Command entity) throws Exception {
-        return ResponseEntity.ok( commandBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(commandBusiness.put(entity));
     }
 
     /**
@@ -80,7 +80,7 @@ public class CommandREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public Command put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Command entity) throws Exception {
-        return commandBusiness.getRepository().saveAndFlush(entity);
+        return commandBusiness.put(entity);
     }
 
 
@@ -91,7 +91,7 @@ public class CommandREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         commandBusiness.getRepository().delete(id);
+        commandBusiness.delete(id);
     }
 
 
@@ -102,7 +102,7 @@ public class CommandREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<Command> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return commandBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return commandBusiness.list(new PageRequest(offset, limit)   );  
   }
 
   /**
@@ -123,7 +123,7 @@ public class CommandREST {
   , value="/{instanceId}/CommandParam/{relationId}")    
   public ResponseEntity<?> deleteCommandParam(@PathVariable("relationId") java.lang.String relationId) {
       try {
-        this.commandParamBusiness.getRepository().delete(relationId);
+        this.commandParamBusiness.delete(relationId);
         return ResponseEntity.ok().build();
       } catch (Exception e) {
         return ResponseEntity.status(404).build();

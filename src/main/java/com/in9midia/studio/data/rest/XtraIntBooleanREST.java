@@ -42,7 +42,7 @@ public class XtraIntBooleanREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public XtraIntBoolean post(@Validated @RequestBody final XtraIntBoolean entity) throws Exception {
-        xtraIntBooleanBusiness.getRepository().save(entity);
+        xtraIntBooleanBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class XtraIntBooleanREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.Integer id) throws Exception {
-        XtraIntBoolean entity = xtraIntBooleanBusiness.getRepository().findOne(id);
+        XtraIntBoolean entity = xtraIntBooleanBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class XtraIntBooleanREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final XtraIntBoolean entity) throws Exception {
-        return ResponseEntity.ok( xtraIntBooleanBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(xtraIntBooleanBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class XtraIntBooleanREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public XtraIntBoolean put(@PathVariable("id") final java.lang.Integer id, @Validated @RequestBody final XtraIntBoolean entity) throws Exception {
-        return xtraIntBooleanBusiness.getRepository().saveAndFlush(entity);
+        return xtraIntBooleanBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class XtraIntBooleanREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.Integer id) throws Exception {
-         xtraIntBooleanBusiness.getRepository().delete(id);
+        xtraIntBooleanBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class XtraIntBooleanREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<XtraIntBoolean> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return xtraIntBooleanBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return xtraIntBooleanBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

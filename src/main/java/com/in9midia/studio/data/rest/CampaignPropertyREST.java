@@ -42,7 +42,7 @@ public class CampaignPropertyREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public CampaignProperty post(@Validated @RequestBody final CampaignProperty entity) throws Exception {
-        campaignPropertyBusiness.getRepository().save(entity);
+        campaignPropertyBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class CampaignPropertyREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        CampaignProperty entity = campaignPropertyBusiness.getRepository().findOne(id);
+        CampaignProperty entity = campaignPropertyBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class CampaignPropertyREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final CampaignProperty entity) throws Exception {
-        return ResponseEntity.ok( campaignPropertyBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(campaignPropertyBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class CampaignPropertyREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public CampaignProperty put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final CampaignProperty entity) throws Exception {
-        return campaignPropertyBusiness.getRepository().saveAndFlush(entity);
+        return campaignPropertyBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class CampaignPropertyREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         campaignPropertyBusiness.getRepository().delete(id);
+        campaignPropertyBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class CampaignPropertyREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<CampaignProperty> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return campaignPropertyBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return campaignPropertyBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 

@@ -29,17 +29,99 @@ public class CityBusiness {
     @Qualifier("CityDAO")
     protected CityDAO repository;
 
+    // CRUD
+
     /**
-     * Método de acesso ao CityDAO
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
      * 
      * @generated
      */
-    public CityDAO getRepository() {
-        return repository;
+    public City post(final City entity) throws Exception {
+      // begin-user-code  
+      // end-user-code  
+      repository.save(entity);
+      // begin-user-code  
+      // end-user-code  
+      return entity;
     }
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public City get(java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+       City result = repository.findOne(id);
+      // begin-user-code  
+      // end-user-code        
+      return result;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    public City put(final City entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    public City put(final java.lang.String id,final City entity) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.saveAndFlush(entity);
+      // begin-user-code  
+      // end-user-code        
+      return entity;
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    public void delete( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.delete(id);
+      // begin-user-code  
+      // end-user-code        
+    }
+
+    // CRUD
+    
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<City> list ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<City> result = repository.list (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
+    
+    
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<Address> findAddress(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -52,6 +134,7 @@ public class CityBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<OriginDestination> findOriginDestination(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -64,6 +147,7 @@ public class CityBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<OriginDestination> findOriginDestination_2(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -76,6 +160,7 @@ public class CityBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<OriginDestination> findOriginDestination_3(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -88,6 +173,7 @@ public class CityBusiness {
 
   /**
    * @generated modifiable
+   * OneToMany Relation
    */  
   public List<OriginDestination> findOriginDestination_4(java.lang.String id,  Pageable pageable) {
       // begin-user-code
@@ -100,50 +186,5 @@ public class CityBusiness {
 
 
 
-  /**
-   * @generated modifiable
-   */  
-  public List<Country> listCountry(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<Country> result = repository.listCountry(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteCountry(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteCountry(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
-  /**
-   * @generated modifiable
-   */  
-  public List<State> listState(java.lang.String id,  Pageable pageable ) {
-      // begin-user-code
-      // end-user-code  
-      List<State> result = repository.listState(id,  pageable );
-      // begin-user-code
-      // end-user-code
-      return result;        	  
-  }
-  
-  /**
-   * @generated modifiable
-   */    
-  public int deleteState(java.lang.String instanceId, java.lang.String relationId) {
-      // begin-user-code
-      // end-user-code  
-      int result = repository.deleteState(instanceId, relationId);
-      // begin-user-code
-      // end-user-code  
-      return result;  
-  }
 }
+

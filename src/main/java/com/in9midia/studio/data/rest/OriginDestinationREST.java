@@ -42,7 +42,7 @@ public class OriginDestinationREST {
      */
     @RequestMapping(method = RequestMethod.POST)
     public OriginDestination post(@Validated @RequestBody final OriginDestination entity) throws Exception {
-        originDestinationBusiness.getRepository().save(entity);
+        originDestinationBusiness.post(entity);
         return entity;
     }
 
@@ -53,7 +53,7 @@ public class OriginDestinationREST {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
-        OriginDestination entity = originDestinationBusiness.getRepository().findOne(id);
+        OriginDestination entity = originDestinationBusiness.get(id);
         return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
     }
 
@@ -64,7 +64,7 @@ public class OriginDestinationREST {
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<?> put(@Validated @RequestBody final OriginDestination entity) throws Exception {
-        return ResponseEntity.ok( originDestinationBusiness.getRepository().saveAndFlush(entity));
+        return ResponseEntity.ok(originDestinationBusiness.put(entity));
     }
 
     /**
@@ -74,7 +74,7 @@ public class OriginDestinationREST {
      */
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public OriginDestination put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final OriginDestination entity) throws Exception {
-        return originDestinationBusiness.getRepository().saveAndFlush(entity);
+        return originDestinationBusiness.put(entity);
     }
 
 
@@ -85,7 +85,7 @@ public class OriginDestinationREST {
      */
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public void delete(@PathVariable("id") java.lang.String id) throws Exception {
-         originDestinationBusiness.getRepository().delete(id);
+        originDestinationBusiness.delete(id);
     }
 
 
@@ -96,7 +96,7 @@ public class OriginDestinationREST {
   @RequestMapping(method = RequestMethod.GET
   )    
   public  List<OriginDestination> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return originDestinationBusiness.getRepository().list(new PageRequest(offset, limit)   );  
+      return originDestinationBusiness.list(new PageRequest(offset, limit)   );  
   }
 
 
