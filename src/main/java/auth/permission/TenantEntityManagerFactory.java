@@ -12,15 +12,10 @@ import javax.persistence.SynchronizationType;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.metamodel.Metamodel;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class TenantEntityManagerFactory implements EntityManagerFactory {
 
 	private final EntityManagerFactory delegate;
 	public static ThreadLocal<String> TENANT = new ThreadLocal<>();
-
-	@Autowired
-	private TenantComponent tenant;
 
 	public TenantEntityManagerFactory(EntityManagerFactory delegate) {
 		this.delegate = delegate;

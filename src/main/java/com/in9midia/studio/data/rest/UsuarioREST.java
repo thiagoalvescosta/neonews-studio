@@ -106,6 +106,16 @@ public class UsuarioREST {
   }
 
   /**
+   * NamedQuery findByLogin
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET
+  , value="/findByLogin/{login}")    
+  public  List<Usuario> findByLoginParams (@PathVariable("login") java.lang.String login, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
+      return usuarioBusiness.findByLogin(login, new PageRequest(offset, limit)   );  
+  }
+
+  /**
    * OneToMany Relationship GET
    * @generated
    */

@@ -26,11 +26,21 @@ public class MultitenantJpaTransactionManager extends JpaTransactionManager {
 	@Override
 	protected void doBegin(Object transaction, TransactionDefinition definition) {
 		super.doBegin(transaction, definition);
-    TenantEntityManagerFactory.TENANT.set(tenant.getId());
+		TenantEntityManagerFactory.TENANT.set(tenant.getId());
+
+		final EntityManagerHolder emHolder = (EntityManagerHolder) TransactionSynchronizationManager
+				.getResource(getEntityManagerFactory());
+		final EntityManager em = emHolder.getEntityManager();
+		final String tenantId = tenant.getId();
+
+		if (tenantId != null) {
+			em.setProperty("multitenancy.tenant-id", tenantId);
+		}
+
 	}
-	
+
 	@Override
- protected EntityManager createEntityManagerForTransaction() {
-   return super.createEntityManagerForTransaction();
- }
+	protected EntityManager createEntityManagerForTransaction() {
+		return super.createEntityManagerForTransaction();
+	}
 }

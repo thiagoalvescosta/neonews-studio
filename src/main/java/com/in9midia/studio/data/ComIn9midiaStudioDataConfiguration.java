@@ -23,15 +23,7 @@ class ComIn9midiaStudioDataConfiguration {
 
 	@Bean(name = "com.in9midia.studio.data-EntityManagerFactory")
 	public LocalEntityManagerFactoryBean entityManagerFactory() {
-		LocalEntityManagerFactoryBean factoryBean = new LocalEntityManagerFactoryBean() {
-
-			@Override
-			protected javax.persistence.EntityManagerFactory createNativeEntityManagerFactory()
-					throws javax.persistence.PersistenceException {
-				return new TenantEntityManagerFactory(super.createNativeEntityManagerFactory());
-			}
-		};
-
+		LocalEntityManagerFactoryBean factoryBean = new LocalEntityManagerFactoryBean();
 		factoryBean.setPersistenceUnitName("com.in9midia.studio.data");
 		return factoryBean;
 	}

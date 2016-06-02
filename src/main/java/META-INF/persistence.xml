@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="security" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>java:comp/env/jdbc/main</jta-data-source>
-        <class>security.entity.Permission</class>
-        <class>security.entity.User</class>
-        <class>security.entity.Role</class>
-        <class>security.entity.UserRole</class>
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <properties>
-            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
-            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:~/f73bedde2dc342a8970e350d5000e62723;DATABASE_TO_UPPER=false;ALIAS_COLUMN_NAME=true;AUTO_SERVER=TRUE"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="root"/>
-        </properties>
-    </persistence-unit>
     <persistence-unit name="com.in9midia.studio.data" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>java:comp/env/jdbc/neonews</jta-data-source>
@@ -121,7 +105,6 @@
             <property name="javax.persistence.jdbc.user" value="sa"/>
             <property name="javax.persistence.jdbc.password" value="sqlserver123br"/>
             <property name="eclipselink.ddl-generation" value="none"/>
-            <!--property name="multitenancy.tenant-id" value="9A59F97E-08E0-40B7-8408-4FCCEBC78C86"/-->
         </properties>
     </persistence-unit>
 </persistence>

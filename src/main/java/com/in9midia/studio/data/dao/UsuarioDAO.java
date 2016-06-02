@@ -53,6 +53,14 @@ public interface UsuarioDAO extends JpaRepository<Usuario, java.lang.Integer> {
   @Query("select u from Usuario u")
   public List<Usuario> list ( Pageable pageable );
   
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  @Query("select u from Usuario u where u.login = :login")
+  public List<Usuario> findByLogin (@Param(value="login") java.lang.String login , Pageable pageable );
+  
 
   /**
    * OneToMany Relation

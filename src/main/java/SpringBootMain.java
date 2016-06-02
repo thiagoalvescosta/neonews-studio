@@ -14,7 +14,6 @@ import org.springframework.context.annotation.*;
  *
  */
 @ComponentScan(basePackages = {
-"security" , 
 "com.in9midia.studio.data"  
 , "auth.permission"
 })

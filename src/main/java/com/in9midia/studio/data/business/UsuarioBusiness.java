@@ -116,6 +116,19 @@ public class UsuarioBusiness {
     // end-user-code        
     return result;
   }
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Usuario> findByLogin ( java.lang.String login , Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Usuario> result = repository.findByLogin ( login ,  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
     
     
 

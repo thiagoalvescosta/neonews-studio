@@ -10,7 +10,7 @@
           <ul class="sub-menu collapse" id="menu-user"> 
             <li><a class="component-holder" data-toggle="modal" data-target="#modalPassword" data-component="crn-anchor">{{"Home.view.ChangePassword" | translate}}</a></li> 
             <li ng-click="logout()"><a href="javascript:void(0);"><span class="">{{"Home.view.Logout" | translate}}</span></a></li> 
-          </ul> </li>
+          </ul> </li> 
         <div class="component-holder ng-binding ng-scope" data-component="crn-combobox-dynamic" id="crn-combobox-dynamic-272801"> 
           <div class="form-group"> 
             <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-973072"> 
@@ -20,16 +20,24 @@
           </div> 
         </div> 
         <li data-toggle="collapse" data-target="#menu-sub-1" class="collapsed component-holder" data-component="crn-sidebar-item"> <a href="#/home" class=""><i class="fa fa-lg fa-home"></i> <span class="">{{"Home.view.Home" | translate}}</span> </a> </li> 
-        <li ng-if="session.root" data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-5099" class="collapsed component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-users fa-lg"></i> <span class="">{{"Home.view.Admin" | translate}}</span> <span class="arrow"></span></a> 
-          <ul class="sub-menu collapse" id="menu-sub-5099"> 
-            <li><a href="#/home/admin/users" class="component-holder" data-component="crn-anchor">{{"Home.view.Users" | translate}}</a></li> 
-            <li><a href="#/home/admin/roles" class="component-holder" data-component="crn-anchor">{{"Home.view.Roles" | translate}}</a></li> 
-            <li><a href="#/home/admin/permission" class="component-holder" data-component="crn-anchor">{{"Home.view.Permission" | translate}}</a></li> 
-          </ul> </li> 
-        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-9685" class="collapsed active component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-users fa-lg"></i> <span class="">Neonews</span> <span class="arrow"></span></a> 
-          <ul class="sub-menu collapse  navbar-nav in" id="menu-sub-9685"> 
+        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-9685" class="collapsed component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-lg fa-university"></i> <span class="">Admin</span> <span class="arrow"></span></a> 
+          <ul class="sub-menu collapse  navbar-nav" id="menu-sub-9685"> 
             <li class=""><a href="#/home/logged/terminal" class="component-holder" data-component="crn-anchor">Terminais</a></li> 
-            <li class="active"><a href="#/home/logged/campaign" class="component-holder" data-component="crn-anchor">Campanhas</a></li>
+            <li class=""><a href="#/home/logged/campaign" class="component-holder" data-component="crn-anchor">Campanhas</a></li> 
+          </ul> </li> 
+        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-8926" class="collapsed component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-lg fa-windows"></i> <span class="">Terminais</span> <span class="arrow"></span></a> 
+          <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-867373"> 
+            <datasource name="Terminal" entity="api/rest/com/in9midia/studio/data/Terminal?tenant={{session.tenant.id}}" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete="" filter="" class=""></datasource> 
+          </div> 
+          <ul class="sub-menu collapse  navbar-nav" id="menu-sub-8926"> 
+            <li ng-repeat="term in Terminal.data"><a href="/#/" class="component-holder" data-component="crn-anchor">{{term.name | limitTo: 25}}{{term.name.length &gt; 25 ? '...' : ''}}</a></li> 
+          </ul> </li> 
+        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-6629" class="collapsed component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-lg fa-youtube-play"></i> <span class="">Campanhas</span> <span class="arrow"></span></a> 
+          <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-8671322"> 
+            <datasource name="Campaign" entity="api/rest/com/in9midia/studio/data/Campaign?tenant={{session.tenant.id}}" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete="" filter="" class=""></datasource> 
+          </div> 
+          <ul class="sub-menu collapse  navbar-nav" id="menu-sub-6629"> 
+            <li ng-repeat="cam in Campaign.data"><a href="/#/" class="component-holder" data-component="crn-anchor">{{cam.name | limitTo: 25}}{{cam.name.length &gt; 25 ? '...' : ''}}</a></li> 
           </ul> </li> 
       </ul> 
     </div> 
