@@ -1,0 +1,40 @@
+<div class="component-holder ng-binding ng-scopes" data-component="crn-datasource" id="crn-datasource-763276"> 
+   <datasource on-load="CampaignTemplate.startEditing()"  name="CampaignTemplate" entity="api/rest/com/in9midia/studio/data/CampaignTemplate" keys="id" rows-per-page="100" delete-message="Deseja remover?" class=""></datasource> 
+</div> 
+
+<div class="x_title">
+  <h2>{{CampaignTemplate.active.name}}</h2>
+  <ul class="nav navbar-right panel_toolbox">
+    <li><a class="dropdown-toggle" ng-click="CampaignTemplate.post()"><i class="fa fa-floppy-o"></i> SALVAR</a>
+    </li>
+  </ul>
+  <div class="clearfix"></div>
+</div>
+
+<div class="component-holder ng-binding ng-scope " data-component="crn-form" id="crn-form-form-CampaignTemplate"> 
+  <div class="form"> 
+    <form crn-datasource="CampaignTemplate" class=""> 
+      <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting"> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope " data-component="crn-textinput" id="crn-textinput-id"> 
+          <div class="form-group"> 
+            <label for="textinput-id" class="">id</label> 
+
+        <input type="text" ng-model="CampaignTemplate.active.id" class="form-control" id="textinput-id" placeholder="id"  required="required"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope " data-component="crn-textinput" id="crn-textinput-name"> 
+          <div class="form-group"> 
+            <label for="textinput-name" class="">name</label> 
+
+        <input type="text" ng-model="CampaignTemplate.active.name" class="form-control" id="textinput-name" placeholder="name"  required="required"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+      </fieldset> 
+    </form> 
+  </div> 
+</div> 
