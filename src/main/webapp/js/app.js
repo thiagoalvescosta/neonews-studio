@@ -55,15 +55,34 @@ var app = (function() {
             controller: 'HomeController',
             templateUrl: 'views/logged/home.view.html'
           })
-
+          
           .state('home.pages', {
-            url: "/{name:.*}",
+            url: "/{folder:[^/]+}/{name:[^/]+}",
             controller: 'PageController',
             templateUrl: function(urlattr){
-                return 'views/'+urlattr.name+'.view.html';
+                return 'views/'+urlattr.folder+'/'+urlattr.name+'.view.html';
             }
           }) 
           
+          .state('home.pagesid', {
+            url: "/{folder:[^/]+}/{name:[^/]+}/{id:.*}",
+            controller: 'PageController',
+            templateUrl: function(urlattr){
+            	var id = "";
+            	if (urlattr.id) {
+            		id = '?id='
+            		ids = urlattr.id.split('/');
+            		for (var i=0;i<ids.length;i++) {
+            			if (i > 0) {
+            				id += '&id'+i+'=';
+            			}
+            			id += ids[i];
+            		}
+            	}
+                return 'views/'+urlattr.folder+'/'+urlattr.name+'.view.html'+id;
+            }
+          }) 
+
           .state('404', {
             url: "/error/404",
             controller: 'PageController',

@@ -1,78 +1,213 @@
-<div class="component-holder ng-binding ng-scope" data-component="crn-sidebar" id="crn-sidebar-751554"> 
-  <div class="nav-side-menu navbar-default"> 
-    <div class="brand"> 
-      <img src="img/logo.png" class="" width="" height="30"> 
-    </div> 
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content1"></i> 
-    <div class="menu-list"> 
-      <ul id="menu-content1" class="menu-content collapse out navbar-nav"> 
-        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-user" class="collapsed component-holder"><a href="javascript:void(0);" class=""><img class="user-avatar" alt="{{session.name}}" ng-src="{{session.picture || 'img/nophoto.png'}}"> <span class="">{{session.name}}</span> <span class="arrow"></span></a> 
-          <ul class="sub-menu collapse" id="menu-user"> 
-            <li><a class="component-holder" data-toggle="modal" data-target="#modalPassword" data-component="crn-anchor">{{"Home.view.ChangePassword" | translate}}</a></li> 
-            <li ng-click="logout()"><a href="javascript:void(0);"><span class="">{{"Home.view.Logout" | translate}}</span></a></li> 
-          </ul> </li> 
-        <div class="component-holder ng-binding ng-scope" data-component="crn-combobox-dynamic" id="crn-combobox-dynamic-272801"> 
-          <div class="form-group"> 
-            <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-973072"> 
-              <datasource name="Company" entity="api/rest/com/in9midia/studio/data/Company" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete=""></datasource> 
-            </div> 
-            <select ng-change="changeTenant(session.tenant.id)" ng-model="session.tenant" class="form-control" id="textinput-company" ng-options="opt as opt.name for opt in Company.data track by opt.id"> <option value="">Nenhuma</option> </select> 
-          </div> 
-        </div> 
-        <li data-toggle="collapse" data-target="#menu-sub-1" class="collapsed component-holder" data-component="crn-sidebar-item"> <a href="#/home" class=""><i class="fa fa-lg fa-home"></i> <span class="">{{"Home.view.Home" | translate}}</span> </a> </li> 
-        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-9685" class="collapsed component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-lg fa-university"></i> <span class="">Admin</span> <span class="arrow"></span></a> 
-          <ul class="sub-menu collapse  navbar-nav" id="menu-sub-9685"> 
-            <li class=""><a href="#/home/logged/terminal" class="component-holder" data-component="crn-anchor">Terminais</a></li> 
-            <li class=""><a href="#/home/logged/campaign" class="component-holder" data-component="crn-anchor">Campanhas</a></li> 
-          </ul> </li> 
-        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-8926" class="collapsed component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-lg fa-windows"></i> <span class="">Terminais</span> <span class="arrow"></span></a> 
-          <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-867373"> 
-            <datasource name="Terminal" entity="api/rest/com/in9midia/studio/data/Terminal?tenant={{session.tenant.id}}" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete="" filter="" class=""></datasource> 
-          </div> 
-          <ul class="sub-menu collapse  navbar-nav" id="menu-sub-8926"> 
-            <li ng-repeat="term in Terminal.data"><a href="/#/" class="component-holder" data-component="crn-anchor">{{term.name | limitTo: 25}}{{term.name.length &gt; 25 ? '...' : ''}}</a></li> 
-          </ul> </li> 
-        <li data-toggle="collapse" data-component="crn-sidebar-item" data-target="#menu-sub-6629" class="collapsed component-holder"><a href="javascript:void(0);" class=""><i class="fa fa-lg fa-youtube-play"></i> <span class="">Campanhas</span> <span class="arrow"></span></a> 
-          <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-8671322"> 
-            <datasource name="Campaign" entity="api/rest/com/in9midia/studio/data/Campaign?tenant={{session.tenant.id}}" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete="" filter="" class=""></datasource> 
-          </div> 
-          <ul class="sub-menu collapse  navbar-nav" id="menu-sub-6629"> 
-            <li ng-repeat="cam in Campaign.data"><a href="/#/" class="component-holder" data-component="crn-anchor">{{cam.name | limitTo: 25}}{{cam.name.length &gt; 25 ? '...' : ''}}</a></li> 
-          </ul> </li> 
-      </ul> 
-    </div> 
-  </div> 
-  <div ui-view="" class="container-fluid main-view"> 
-  </div> 
-</div> 
-<div class="modal fade" id="modalPassword"> 
-  <div class="modal-dialog"> 
-    <div class="modal-content"> 
-      <div class="modal-header"> 
-        <button type="button" class="close" data-dismiss="modal" aria-label="{{'Home.view.Close' | translate}}"><span aria-hidden="true">×</span></button> 
-        <h4 class="modal-title">{{"Home.view.ChangePassword" | translate}}</h4> 
-      </div> 
-      <div class="modal-body"> 
-        <form class="form-validation" autocomplete="off" name="form" role="form"> 
-          <div class="text-danger wrapper text-center" ng-show="authError"> 
-          </div> 
-          <div class="list-group list-group-sm"> 
-            <div class="list-group-item"> 
-              <input type="password" class="form-control no-border" id="oldPassword" placeholder="{{'Home.view.Old Password' | translate}}"> 
-            </div> 
-            <div class="list-group-item"> 
-              <input type="password" class="form-control no-border" id="newPassword" placeholder="{{'Home.view.New Password' | translate}}"> 
-            </div> 
-            <div class="list-group-item"> 
-              <input type="password" class="form-control no-border" id="newPasswordConfirmation" placeholder="{{'Home.view.Confirmation' | translate}}"> 
-            </div> 
-          </div> 
-        </form> 
-      </div> 
-      <div class="modal-footer"> 
-        <button class="btn btn-primary" type="submit" ng-click="changePassword()" ng-disabled="form.$invalid || vm.dataLoading">{{"Home.view.ChangePassword" | translate}}</button> 
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{'Home.view.Close' | translate}}</button> 
-      </div> 
-    </div> 
-  </div> 
+<div class="container body">
+	<div class="main_container">
+		<div class="col-md-3 left_col">
+			<div class="left_col scroll-view">
+				<div class="navbar nav_title" style="border: 0;">
+					<a href="index.html" class="site_title"><i class="fa fa-paw"></i>
+						<span>Neonews Studio</span></a>
+				</div>
+
+				<div class="clearfix"></div>
+
+				<!-- menu profile quick info -->
+				<div class="profile">
+					<div class="profile_pic">
+						<img src="img/user.png" alt="..." class="img-circle profile_img">
+					</div>
+					<div class="profile_info">
+						<span> Bem Vindo (a),</span>
+						<h2>{{session.name}}</h2>
+					</div>
+				</div>
+				<!-- /menu profile quick info -->
+
+				<br />
+
+				<!-- sidebar menu -->
+				<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+					<div class="menu_section">
+						<br />
+						<br />
+						<br />
+						<ul class="nav side-menu">
+							<li><a><i class="fa fa-home"></i> Menu <span
+									class="fa fa-chevron-down"></span></a>
+								<ul class="nav child_menu">
+									<li><a href="#/home/logged/terminal">Terminais</a></li>
+									<li><a href="#/home/logged/campaign">Campaigns</a></li>
+									<li><a href="index3.html">Dashboard3</a></li>
+								</ul></li>
+						</ul>
+					</div>
+					<div class="menu_section">
+						<h3>Objetos</h3>
+						<ul class="nav side-menu">
+							<li><a><i class="fa fa-edit"></i> Terminais <span
+									class="fa fa-chevron-down"></span></a>
+								<div class="component-holder" data-component="crn-datasource"
+									id="crn-datasource-867373">
+									<datasource name="TerminalList"
+										entity="api/rest/com/in9midia/studio/data/Terminal?tenant={{session.tenant.id}}"
+										keys="id" rows-per-page="100" on-before-create=""
+										on-after-create="" on-before-update="" on-after-update=""
+										on-before-delete="" on-after-delete="" filter="" class=""></datasource>
+								</div>
+								<ul class="nav child_menu">
+									<li ng-repeat="obj in TerminalList.data"><a
+										href="#/home/logged/terminal-edit/{{term.id}}">{{obj.name
+											| limitTo: 20}}{{obj.name.length &gt; 20 ? '...' : ''}}</a></li>
+								</ul></li>
+							<li><a><i class="fa fa-desktop"></i> Campanhas <span
+									class="fa fa-chevron-down"></span></a>
+
+								<div class="component-holder" data-component="crn-datasource"
+									id="crn-datasource-8671322">
+									<datasource name="CampaignList"
+										entity="api/rest/com/in9midia/studio/data/Campaign?tenant={{session.tenant.id}}"
+										keys="id" rows-per-page="100" on-before-create=""
+										on-after-create="" on-before-update="" on-after-update=""
+										on-before-delete="" on-after-delete="" filter="" class=""></datasource>
+								</div>
+								<ul class="nav child_menu">
+									<li ng-repeat="obj in CampaignList.data"><a
+										href="general_elements.html">{{obj.name | limitTo:
+											20}}{{obj.name.length &gt; 20 ? '...' : ''}}</a></li>
+								</ul></li>
+
+							<li><a><i class="fa fa-desktop"></i> Templates <span
+									class="fa fa-chevron-down"></span></a>
+
+								<div class="component-holder" data-component="crn-datasource"
+									id="crn-datasource-8671322">
+									<datasource name="TemplateList"
+										entity="api/rest/com/in9midia/studio/data/CampaignTemplate?tenant={{session.tenant.id}}"
+										keys="id" rows-per-page="100" on-before-create=""
+										on-after-create="" on-before-update="" on-after-update=""
+										on-before-delete="" on-after-delete="" filter="" class=""></datasource>
+								</div>
+								<ul class="nav child_menu">
+									<li ng-repeat="obj in TemplateList.data"><a
+										href="general_elements.html">{{obj.name | limitTo:
+											20}}{{obj.name.length &gt; 20 ? '...' : ''}}</a></li>
+								</ul></li>
+						</ul>
+					</div>
+
+				</div>
+				<!-- /sidebar menu -->
+
+				<!-- /menu footer buttons -->
+				<div class="sidebar-footer hidden-small">
+					<a data-toggle="tooltip" data-placement="top" title="Settings">
+						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+					</a> <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+						<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+					</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
+						class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+					</a> <a data-toggle="tooltip" data-placement="top" title="Logout">
+						<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+					</a>
+				</div>
+				<!-- /menu footer buttons -->
+			</div>
+		</div>
+
+		<!-- top navigation -->
+		<div class="top_nav">
+			<div class="nav_menu">
+				<nav class="" role="navigation">
+					<div class="nav toggle">
+						<a id="menu_toggle"><i class="fa fa-bars"></i></a>
+					</div>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li class=""><a href="javascript:;"
+							class="user-profile dropdown-toggle" data-toggle="dropdown"
+							aria-expanded="false"> <img src="img/user.png" alt="">{{session.name}}
+								<span class=" fa fa-angle-down"></span>
+						</a>
+							<ul class="dropdown-menu dropdown-usermenu pull-right">
+								<li><a href="javascript:;"> Profile</a></li>
+								<li><a href="javascript:;"> <span
+										class="badge bg-red pull-right">50%</span> <span>Settings</span>
+								</a></li>
+								<li><a href="javascript:;">Help</a></li>
+								<li><a ng-click="logout()"><i
+										class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+							</ul></li>
+
+						<li role="presentation" class="dropdown"><a
+							class="dropdown-toggle info-number">
+
+								<div class="component-holder ng-binding ng-scope"
+									data-component="crn-datasource" id="crn-datasource-973072">
+									<datasource name="Company"
+										entity="api/rest/com/in9midia/studio/data/Company" keys="id"
+										rows-per-page="100" on-before-create="" on-after-create=""
+										on-before-update="" on-after-update="" on-before-delete=""
+										on-after-delete=""></datasource>
+								</div> <select ng-change="changeTenant(session.tenant.id)"
+								ng-model="session.tenant" class="form-control"
+								id="textinput-company"
+								ng-options="opt as opt.name for opt in Company.data track by opt.id">
+									<option value="">Nenhuma</option>
+							</select>
+
+						</a>
+							<ul id="menu1" class="dropdown-menu list-unstyled msg_list"
+								role="menu">
+								<li><a> <span class="image"><img
+											src="img/user.png" alt="Profile Image" /></span> <span> <span>John
+												Smith</span> <span class="time">3 mins ago</span>
+									</span> <span class="message"> Film festivals used to be
+											do-or-die moments for movie makers. They were where... </span>
+								</a></li>
+								<li><a> <span class="image"><img
+											src="img/user.png" alt="Profile Image" /></span> <span> <span>John
+												Smith</span> <span class="time">3 mins ago</span>
+									</span> <span class="message"> Film festivals used to be
+											do-or-die moments for movie makers. They were where... </span>
+								</a></li>
+								<li><a> <span class="image"><img
+											src="img/user.png" alt="Profile Image" /></span> <span> <span>John
+												Smith</span> <span class="time">3 mins ago</span>
+									</span> <span class="message"> Film festivals used to be
+											do-or-die moments for movie makers. They were where... </span>
+								</a></li>
+								<li><a> <span class="image"><img
+											src="img/user.png" alt="Profile Image" /></span> <span> <span>John
+												Smith</span> <span class="time">3 mins ago</span>
+									</span> <span class="message"> Film festivals used to be
+											do-or-die moments for movie makers. They were where... </span>
+								</a></li>
+								<li>
+									<div class="text-center">
+										<a> <strong>See All Alerts</strong> <i
+											class="fa fa-angle-right"></i>
+										</a>
+									</div>
+								</li>
+							</ul></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- /top navigation -->
+
+		<!-- page content -->
+		<div ui-view="" class="right_col main-view" role="main"></div>
+
+
+		<!-- footer content -->
+		<footer>
+			<div class="pull-right">
+				Gentelella - Bootstrap Admin Template by <a
+					href="https://colorlib.com">Colorlib</a>
+			</div>
+			<div class="clearfix"></div>
+		</footer>
+		<!-- /footer content -->
+	</div>
 </div>
+
+<script src="js/custom.js"></script>

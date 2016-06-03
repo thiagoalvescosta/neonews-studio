@@ -6,7 +6,6 @@ import org.springframework.validation.annotation.*;
 
 import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -172,9 +171,9 @@ public class TerminalREST {
      * @generated
      */
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<?> get(@PathVariable("id") java.lang.String id) throws Exception {
+    public List<Terminal> get(@PathVariable("id") java.lang.String id) throws Exception {
         Terminal entity = terminalBusiness.get(id);
-        return entity == null ? ResponseEntity.status(404).build() : ResponseEntity.ok(entity);
+        return entity != null ? Arrays.asList(entity) : Collections.emptyList();
     }
 
     /**

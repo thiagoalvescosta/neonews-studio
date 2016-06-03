@@ -1,0 +1,83 @@
+<h3>Terminal</h3>
+
+<div class=""></div> 
+<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-763276"> 
+   <datasource on-load="Terminal.startEditing()" name="Terminal" entity="api/rest/com/in9midia/studio/data/Terminal" filter="/{{params.id}}" keys="id" rows-per-page="100" delete-message="Deseja remover?" class=""></datasource> 
+</div> 
+
+
+
+<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-form" id="crn-form-form-Terminal"> 
+  <div class="form" ng-show="Terminal.editing || Terminal.inserting"> 
+    <form crn-datasource="Terminal" class=""> 
+      <div class="active-bar" ng-hide="!datasource.editing &amp;&amp; !datasource.inserting"> 
+        <button class="btn btn-success" ng-click="datasource.post()"><i class="glyphicon glyphicon-ok"></i></button> 
+        <button class="btn btn-danger" ng-click="datasource.cancel()"><i class="glyphicon glyphicon-remove"></i></button> 
+      </div> 
+      <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting"> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-category"> 
+          <div class="form-group"> 
+            <label for="textinput-category" class="">category</label> 
+
+
+    <datasource name="Category" entity="api/rest/com/in9midia/studio/data/Category" keys="id" class=""></datasource> 
+
+    <select ng-model="Terminal.active.category" class="form-control" id="textinput-category" ng-options="opt as opt.children for opt in Category.data track by opt.id" >
+      <option value=''>None</option>
+    </select>
+
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-communicationKey"> 
+          <div class="form-group"> 
+            <label for="textinput-communicationKey" class="">communicationKey</label> 
+
+        <input type="text" ng-model="Terminal.active.communicationKey" class="form-control" id="textinput-communicationKey" placeholder="communicationKey"  required="required"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-description"> 
+          <div class="form-group"> 
+            <label for="textinput-description" class="">description</label> 
+
+        <input type="text" ng-model="Terminal.active.description" class="form-control" id="textinput-description" placeholder="description"  > 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-id"> 
+          <div class="form-group"> 
+            <label for="textinput-id" class="">id</label> 
+
+        <input type="text" ng-model="Terminal.active.id" class="form-control" id="textinput-id" placeholder="id"  required="required"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-name"> 
+          <div class="form-group"> 
+            <label for="textinput-name" class="">name</label> 
+
+        <input type="text" ng-model="Terminal.active.name" class="form-control" id="textinput-name" placeholder="name"  required="required"> 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+        <div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-textinput" id="crn-textinput-notes"> 
+          <div class="form-group"> 
+            <label for="textinput-notes" class="">notes</label> 
+
+        <input type="text" ng-model="Terminal.active.notes" class="form-control" id="textinput-notes" placeholder="notes"  > 
+
+          </div> 
+        </div> 
+        <div class=""></div> 
+      </fieldset> 
+    </form> 
+  </div> 
+</div> 
+<div class=""></div>

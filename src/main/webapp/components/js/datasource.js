@@ -699,6 +699,8 @@ angular.module('datasourcejs', [])
             if(this.autoPost) {
               this.startAutoPost();
             }
+            
+            this.handleAfterCallBack(this.onLoad);
           } 
         }.bind(this);
     };
@@ -848,6 +850,7 @@ angular.module('datasourcejs', [])
       dts.onAfterUpdate  = props.onAfterUpdate;
       dts.onBeforeDelete = props.onBeforeDelete;
       dts.onAfterDelete  = props.onAfterDelete;
+      dts.onLoad  = props.onLoad;
 
       // Check for headers
       if(props.headers && props.headers.length > 0) {
@@ -955,6 +958,7 @@ angular.module('datasourcejs', [])
           onAfterUpdate  : attrs.onAfterUpdate,
           onBeforeDelete : attrs.onBeforeDelete,
           onAfterDelete  : attrs.onAfterDelete,
+          onLoad         : attrs.onLoad,
           defaultNotSpecifiedErrorMessage: $translate.instant('General.ErrorNotSpecified')
         }
         
